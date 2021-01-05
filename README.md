@@ -13,7 +13,6 @@ jre1.8.0_271 64-bit
 
 <h3>Download archive file and run the application:</h3>
 1. Download ZIP -> ASTRO-master.zip</br>
-2. Download CEFLIB.zip from here: https://github.com/BalazsGit/ASTRO/blob/master/target/PROJECT/CEFLIB.zip</br>
-3. Unzip ASTRO-1.0.zip</br>
-4. Unzip CEFLIB.zip and overwrite all to ASTRO-master/target/PROJECT</br>
-5. Run ASTRO-master/target/ASTRO-1.0.jar</br>
+2. Unzip ASTRO-1.0.zip</br>
+3. Unzip ASTRO-master/target/PROJECT/CEFLIB.zip and overwrite all</br>
+4. Run ASTRO-master/target/ASTRO-1.0.jar</br>
