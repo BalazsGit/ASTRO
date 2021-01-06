@@ -82,6 +82,18 @@ public class Main {
 
         //UIManager settings
         try {
+            //set GUI theme
+            switch (theme){
+                case "FlatDarkLaf":
+                    UIManager.setLookAndFeel(new FlatDarkLaf());
+                    break;
+                case "FlatLightLaf":
+                    UIManager.setLookAndFeel(new FlatLightLaf());
+                    break;
+                default:
+                    UIManager.setLookAndFeel(new FlatDarkLaf());
+                    break;
+            }
             UIManager.put( "TabbedPane.showTabSeparators", true );
             UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
             UIManager.put( "TabbedPane.tabsPopupPolicy", "never" );
@@ -146,20 +158,18 @@ public class Main {
         MainFrame astro = new MainFrame("ASTRO");
         //BrowserFrame browserFrame = new BrowserFrame(cefApp, astro, header);
 
-        //set GUI theme
         switch (theme){
             case "FlatDarkLaf":
-                UIManager.setLookAndFeel(new FlatDarkLaf());
                 astro.themeBox.setSelectedIndex(0);
                 astro.themeBox.updateUI();
                 break;
             case "FlatLightLaf":
-                UIManager.setLookAndFeel(new FlatLightLaf());
                 astro.themeBox.setSelectedIndex(1);
                 astro.themeBox.updateUI();
                 break;
             default:
-                UIManager.setLookAndFeel(new FlatDarkLaf());
+                astro.themeBox.setSelectedIndex(0);
+                astro.themeBox.updateUI();
                 break;
         }
 
@@ -178,7 +188,7 @@ public class Main {
                             propertyService.setProperty("theme", "FlatLightLaf");
                             break;
                         default:
-                            UIManager.setLookAndFeel(new FlatDarkLaf());
+                            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
                             break;
                     }
                 }    catch (ClassNotFoundException | InstantiationException
