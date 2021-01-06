@@ -52,12 +52,9 @@ public class Props {
 
     public static final Prop<String> walletURL = new Prop<>("walletURL", "localhost:8125");
     public static final Prop<String> newtab = new Prop<>("newtab", "www.google.com");
-
-
+    public static final Prop<String> searchEngine = new Prop<>("searchEngine", "www.google.com");
+    public static final Prop<String> theme = new Prop<>("theme", "FlatDarkLaf");
     public static final Prop<Boolean> firstRun = new Prop<>("firstrun", false);
-
-
-
     public static final Prop<Long> reload = new Prop<>("reload", 60000l);
   //  public static final Prop<Integer> limit = new Prop<>("limit", 10);
   // public static final Prop<Integer> limitWonBlocks = new Prop<>("limitWonBlocks", 100);

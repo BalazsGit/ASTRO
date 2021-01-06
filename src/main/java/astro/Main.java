@@ -69,33 +69,25 @@ public class Main {
                 Logger logger = LoggerFactory.getLogger(Main.class);
 
  */
-                String propertiesFileName = "astro.properties";
 
+                String propertiesFileName = "astro.properties";
                 propertyService = new PropertyServiceImpl(propertiesFileName);
+                String theme = propertyService.getString(Props.theme);
+
+
 
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, propertiesFileName), 0, propertyService.getLong(Props.reload));
-String theme = "FlatDarkLaf";
 
-    try {
-        switch (theme){
-            case "FlatDarkLaf":
-                UIManager.setLookAndFeel(new FlatDarkLaf());
-                    break;
-            case "FlatLightLaf":
-                UIManager.setLookAndFeel(new FlatLightLaf());
-                break;
 
-            default:
-                UIManager.setLookAndFeel(new FlatDarkLaf());
-                break;
+        //UIManager settings
+        try {
+            UIManager.put( "TabbedPane.showTabSeparators", true );
+            UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
+            UIManager.put( "TabbedPane.tabsPopupPolicy", "never" );
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
-        UIManager.put( "TabbedPane.showTabSeparators", true );
-        UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
-        UIManager.put( "TabbedPane.tabsPopupPolicy", "never" );
-    } catch (Exception ex) {
-        System.err.println("Failed to initialize LaF");
-    }
 
 
 
@@ -154,6 +146,23 @@ String theme = "FlatDarkLaf";
         MainFrame astro = new MainFrame("ASTRO");
         //BrowserFrame browserFrame = new BrowserFrame(cefApp, astro, header);
 
+        //set GUI theme
+        switch (theme){
+            case "FlatDarkLaf":
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+                astro.themeBox.setSelectedIndex(0);
+                astro.themeBox.updateUI();
+                break;
+            case "FlatLightLaf":
+                UIManager.setLookAndFeel(new FlatLightLaf());
+                astro.themeBox.setSelectedIndex(1);
+                astro.themeBox.updateUI();
+                break;
+            default:
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+                break;
+        }
+
         astro.themeBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -162,9 +171,11 @@ String theme = "FlatDarkLaf";
                     switch (astro.themeBox.getSelectedIndex()){
                         case 0:
                             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
+                            propertyService.setProperty("theme", "FlatDarkLaf");
                             break;
                         case 1:
                             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+                            propertyService.setProperty("theme", "FlatLightLaf");
                             break;
                         default:
                             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -201,12 +212,12 @@ String theme = "FlatDarkLaf";
 
         //Browser
         //new browser tab -close tab button- the first tab
-        JButton newBrowserCloseTabButton = new JButton("+");
+        JButton newBrowserTabButton = new JButton("+");
         Component newTab;
 
         //new browser tab
         astro.tabbedBrowserPanel.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
-        astro.tabbedBrowserPanel.setTabComponentAt(astro.tabbedBrowserPanel.getTabCount()-1, newBrowserCloseTabButton);
+        astro.tabbedBrowserPanel.setTabComponentAt(astro.tabbedBrowserPanel.getTabCount()-1, newBrowserTabButton);
         astro.tabbedBrowserPanel.getComponentAt(astro.tabbedBrowserPanel.getTabCount()-1);
 
         //new tab before the close tab
@@ -281,11 +292,11 @@ String theme = "FlatDarkLaf";
 
 
         //add new browser tab with "+" button
-        newBrowserCloseTabButton.addActionListener(new ActionListener() {
+        newBrowserTabButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                createNewBrowserTab(cefApp, astro, null);
+                createNewBrowserTab(cefApp, astro, propertyService.getString(Props.newtab));
 
             }
         });

@@ -1,11 +1,15 @@
 package config;
 
 import burst.kit.entity.BurstAddress;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.PropertiesConfigurationLayout;
+
+import javax.swing.*;
+import java.io.*;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
@@ -13,16 +17,30 @@ public class PropertyServiceImpl implements PropertyService {
     //private static final Logger logger = LoggerFactory.getLogger(PropertyServiceImpl.class);
 
     private final Properties properties;
-    private final String fileName = "";
+    private String fileName = "";
+    private FileInputStream in;
+
+    private PropertiesConfiguration conf;
+    private PropertiesConfigurationLayout layout;
 
     public PropertyServiceImpl(String fileName) {
         properties = new Properties();
-        fileName = fileName;
+        this.fileName = fileName;
         try {
-            properties.load(new FileInputStream("./PROJECT/CONFIG/" + fileName));
+            in = new FileInputStream("./PROJECT/CONFIG/" + fileName);
+            properties.load(in);
+            conf = new PropertiesConfiguration();
+            layout = new PropertiesConfigurationLayout();
+            conf.setLayout(layout);
+            layout.load(conf, new FileReader("./PROJECT/CONFIG/" + fileName));
         } catch (IOException e) {
             //logger.error("Could not load properties from " +  fileName, e);
+       }  catch (ConfigurationException e) {
+            e.printStackTrace();
         }
+
+
+
         //Props.validateProperties(this);
     }
 
@@ -101,4 +119,18 @@ public class PropertyServiceImpl implements PropertyService {
     public BurstAddress getBurstAddress(Prop<BurstAddress> prop) {
         return BurstAddress.fromEither(valueOrDefault(prop));
     }
+
+    @Override
+    public void setProperty(String key, String value) {
+        conf.setProperty(key, value);
+        try {
+            layout.save(conf, new FileWriter("./PROJECT/CONFIG/" + fileName, false));
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -245,7 +245,7 @@ public class BrowserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                createNewBrowserTab(cefApp, mainFrame, "www.google.com");
+                createNewBrowserTab(cefApp, mainFrame, propertyService.getString(Props.searchEngine));
 
             }
         });
@@ -253,7 +253,7 @@ public class BrowserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                createNewBrowserTab(cefApp, mainFrame, null);
+                createNewBrowserTab(cefApp, mainFrame, propertyService.getString(Props.newtab));
 
             }
         });
