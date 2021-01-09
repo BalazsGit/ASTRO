@@ -13,14 +13,12 @@ public class Application extends JFrame{
 
     public JButton applicationBrowser;
     public JPanel applicationPanel;
+    private JTextPane textPane1;
     public Component applicationsTab;
 
     public Application(){
 
         this.add(applicationPanel);
-
-        this.setVisible(true);
-        applicationPanel.setVisible(true);
 
         applicationBrowser.addActionListener(new ActionListener() {
             @Override

@@ -97,6 +97,8 @@ public class Main {
             UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
             UIManager.put( "TabbedPane.tabsPopupPolicy", "never" );
             UIManager.put( "TabbedPane.tabSelectionHeight", 1 );
+            UIManager.put( "Table.showHorizontalLines", true );
+            UIManager.put( "Table.showVerticalLines", true );
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
@@ -201,7 +203,7 @@ public class Main {
 
         astro.pack();
 
-
+        JButton b1=new JButton("1");
         //main page
        /* CefBrowser browser;
         browser = client.createBrowser(propertyService.getString(Props.walletURL), false, false);
