@@ -33,7 +33,6 @@ public class Main {
         BrowserFrame browserFrame = new BrowserFrame(cefApp, astro, header, URL);
 
         astro.tabbedBrowserPanel.insertTab("Loading ...",null, browserFrame.browserPanel,"tooltip", astro.tabbedBrowserPanel.getTabCount()-1);
-        //astro.tabbedBrowserPanel.insertTab("Loading ...",null, browserUI,"tooltip", astro.tabbedBrowserPanel.getTabCount());
         astro.tabbedBrowserPanel.setTabComponentAt(astro.tabbedBrowserPanel.getTabCount()-2, header.headerPanel);
         //the new tab is the selected one
         astro.tabbedBrowserPanel.setSelectedIndex(astro.tabbedBrowserPanel.getTabCount()-2);
@@ -57,28 +56,13 @@ public class Main {
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
-//        if (!CefApp.startup()) {
-//            System.out.println("Startup initialization failed!");
-//            return;
-//        }
-/*
-        if (System.getProperty("log4j.configurationFile") == null) {
-            System.setProperty("log4j.configurationFile", "logging_astro.xml");
-        }
-
-                Logger logger = LoggerFactory.getLogger(Main.class);
-
- */
 
                 String propertiesFileName = "astro.properties";
                 propertyService = new PropertyServiceImpl(propertiesFileName);
                 String theme = propertyService.getString(Props.theme);
 
-
-
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, propertiesFileName), 0, propertyService.getLong(Props.reload));
-
 
         //UIManager settings
         try {
@@ -97,38 +81,12 @@ public class Main {
             UIManager.put( "TabbedPane.showTabSeparators", true );
             UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
             UIManager.put( "TabbedPane.tabsPopupPolicy", "never" );
+            UIManager.put( "TabbedPane.tabSelectionHeight", 1 );
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
 
-
-
-    /*
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.updateComponentTreeUI(frame);
-*/
-        //propertyservice test
-/*
-                if (propertyService.getBoolean(Props.firstRun))
-                {
-                    JOptionPane.showMessageDialog(null,
-                            Props.walletURL,
-                            "Warning",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-
-
- */
-
-
-
-
-//fast up GUI
+        //fast up GUI
         System.setProperty("sun.java2d.noddraw", Boolean.TRUE.toString());
         setDefaultLookAndFeelDecorated(true);
 
@@ -140,23 +98,7 @@ public class Main {
 
         CefApp cefApp = CefApp.getInstance(DEFAULT_SETTINGS);
 
- /*       CefClient client = cefApp.createClient();
-*/
-
-
-                //CefBrowser browser1 = client.createBrowser("https://global.bittrex.com/Market/Index?MarketName=BTC-BURST", false, false);
-                //Component browserUI = browser.getUIComponent();
-                //Component browserUI1 = browser1.getUIComponent();
-
-                //Browser browser = new Browser("http://openburstpool.ddns.net:8126/", useOsr, false);
-                //Browser browser1 = new Browser("http://openburstpool.ddns.net:8125/", useOsr, false);
-
-        //new TabbedPaneTestFrame("http://www.baidu.com");
-
-        //BrowserTabHeader header = new BrowserTabHeader("Loading ...");
-
         MainFrame astro = new MainFrame("ASTRO");
-        //BrowserFrame browserFrame = new BrowserFrame(cefApp, astro, header);
 
         switch (theme){
             case "FlatDarkLaf":
@@ -213,10 +155,6 @@ public class Main {
 
         //new tab before the close tab
         createNewTextEditorTab(astro, null);
-
-
-        //TextEditor textEditor = new TextEditor();
-        //astro.tabbedTextEditor.insertTab("Loading ...",null, textEditor.textEditorPanel,"tooltip", astro.tabbedTextEditor.getTabCount());
 
         astro.pack();
 

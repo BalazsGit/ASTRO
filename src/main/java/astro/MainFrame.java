@@ -68,6 +68,8 @@ public class MainFrame extends JFrame {
     private JPanel browserPanel;
     private JPanel BRSAPIPanel;
     private JPanel BRSAPI;
+    private JPanel applicationsPanel;
+    private JTabbedPane tabbedApplications;
     public String theme;
 
     //public CefBrowser browser;
