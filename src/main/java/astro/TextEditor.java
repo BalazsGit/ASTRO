@@ -200,7 +200,7 @@ public class TextEditor extends JFrame{
                     }
                    // If the user cancelled the operation
                     else {
-                        JOptionPane.showMessageDialog(textPane, "the user cancelled the operation");
+                        JOptionPane.showMessageDialog(textPane, "The user cancelled the operation!");
                     }
                 }
             });

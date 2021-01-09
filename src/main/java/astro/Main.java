@@ -55,6 +55,21 @@ public class Main {
 
     }
 
+    //never be the first tab
+    static void createNewApplicationsTab(MainFrame astro){
+
+        ApplicationsTabHeader header = new ApplicationsTabHeader();
+        ApplicationsFrame applicationsFrame = new ApplicationsFrame(astro, header);
+
+        astro.tabbedApplications.insertTab("Loading ...",null, applicationsFrame.applicationsPanel,"tooltip", astro.tabbedApplications.getTabCount()-1);
+        //astro.tabbedBrowserPanel.insertTab("Loading ...",null, browserUI,"tooltip", astro.tabbedBrowserPanel.getTabCount());
+        astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-2, header.headerPanel);
+        //the new tab is the selected one
+        astro.tabbedApplications.setSelectedIndex(astro.tabbedApplications.getTabCount()-2);
+        applicationsFrame.applicationsTab = astro.tabbedApplications.getSelectedComponent();
+
+    }
+
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
 
                 String propertiesFileName = "astro.properties";
@@ -143,32 +158,45 @@ public class Main {
             }
         });
 
-        //Text Editor
+        //Applications Tab
 
-        //new text editor tab -close tab button- the first tab
-        JButton newTextEditorCloseTabButton = new JButton("+");
+        //add new applicatinsTab button
+        JButton newApplicationsTabButton = new JButton("+");
+        astro.tabbedApplications.insertTab("+",null, null,"tooltip", astro.tabbedApplications.getTabCount());
+        astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-1, newApplicationsTabButton);
+        astro.tabbedApplications.getComponentAt(astro.tabbedApplications.getTabCount()-1);
 
-        //new text editor tab
+        //create new applicationsTab
+        createNewApplicationsTab(astro);
+
+        astro.pack();
+
+
+        //Text Editor Tab
+
+        //add new textEditorTab button
+        JButton newTextEditorTabButton = new JButton("+");
         astro.tabbedTextEditor.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
-        astro.tabbedTextEditor.setTabComponentAt(astro.tabbedTextEditor.getTabCount()-1, newTextEditorCloseTabButton);
+        astro.tabbedTextEditor.setTabComponentAt(astro.tabbedTextEditor.getTabCount()-1, newTextEditorTabButton);
         astro.tabbedTextEditor.getComponentAt(astro.tabbedTextEditor.getTabCount()-1);
 
-        //new tab before the close tab
+        //create new textEditorTab
         createNewTextEditorTab(astro, null);
 
         astro.pack();
 
-        //Browser
-        //new browser tab -close tab button- the first tab
-        JButton newBrowserTabButton = new JButton("+");
-        Component newTab;
 
-        //new browser tab
+        //Browser Tab
+
+        //add new browserTab button
+        JButton newBrowserTabButton = new JButton("+");
+
+        //create new browserTab
         astro.tabbedBrowserPanel.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
         astro.tabbedBrowserPanel.setTabComponentAt(astro.tabbedBrowserPanel.getTabCount()-1, newBrowserTabButton);
         astro.tabbedBrowserPanel.getComponentAt(astro.tabbedBrowserPanel.getTabCount()-1);
 
-        //new tab before the close tab
+        //create new browserTab
         createNewBrowserTab(cefApp, astro, null);
 
         astro.pack();
@@ -250,11 +278,21 @@ public class Main {
         });
 
         //add new text editor tab with "+" button
-        newTextEditorCloseTabButton.addActionListener(new ActionListener() {
+        newTextEditorTabButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 createNewTextEditorTab(astro, null);
+
+            }
+        });
+
+        //add new text editor tab with "+" button
+        newApplicationsTabButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                createNewApplicationsTab(astro);
 
             }
         });

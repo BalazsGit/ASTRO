@@ -54,7 +54,6 @@ public class MainFrame extends JFrame {
     //public JButton forward;
     //public JButton reload;
     //public JButton stopLoad;
-    public JTabbedPane tabbedBrowserPanel;
     //public JPanel browserTab;
     //public JButton load;
     public JButton newTab;
@@ -66,10 +65,11 @@ public class MainFrame extends JFrame {
     public JPanel textEditor1;
     public JTabbedPane tabbedTextEditor;
     private JPanel browserPanel;
+    public JTabbedPane tabbedBrowserPanel;
     private JPanel BRSAPIPanel;
     private JPanel BRSAPI;
     private JPanel applicationsPanel;
-    private JTabbedPane tabbedApplications;
+    public JTabbedPane tabbedApplications;
     public String theme;
 
     //public CefBrowser browser;

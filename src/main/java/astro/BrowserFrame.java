@@ -48,7 +48,7 @@ public class BrowserFrame extends JFrame {
     public Component browserTab;
 
     public int index = -1;
-    public int tableCount = 0;
+    public int tabCount = 0;
 
     public ArrayList browserList = new ArrayList<CefBrowser>();
 
@@ -128,9 +128,9 @@ public class BrowserFrame extends JFrame {
 
                 //if the last close tab is selected, than give the focus to the one left browser panel
                 index = mainFrame.tabbedBrowserPanel.getSelectedIndex();
-                tableCount = mainFrame.tabbedBrowserPanel.getTabCount();
+                tabCount = mainFrame.tabbedBrowserPanel.getTabCount();
 
-                if (index == tableCount - 1) {
+                if (index == tabCount - 1) {
 
                     mainFrame.tabbedBrowserPanel.setSelectedIndex(index - 1);
                     mainFrame.tabbedBrowserPanel.getSelectedComponent().requestFocus();
