@@ -147,9 +147,7 @@ public class ApplicationsFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int confirmDialog = JOptionPane.showConfirmDialog(applicationsPanel, "Deleting this applicaion tab will remove all of your collected applications from the database, " +
-                        "although you can add the applications and new tab later if you want. " +
-                        "Are you sure to delete this tab and containing applications from the database? ", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                int confirmDialog = JOptionPane.showConfirmDialog(applicationsPanel, "Are you sure to delete this tab and containing applications from the database? ", "ATTENTION", JOptionPane.YES_NO_OPTION);
 
                 if (mainFrame.tabbedApplications.getTabCount() > 2 && confirmDialog == JOptionPane.YES_OPTION) {
 
