@@ -34,7 +34,7 @@ public class ApplicationsFrame extends JFrame {
         this.header = header;
 
         createApplicationsTable(rowCount, columnCount);
-        Application application = new Application();
+      //  Application application = new Application();
 
         //JButton b1=new JButton("1");
         //applicationContainer1.add(application.applicationPanel);
@@ -70,7 +70,7 @@ public class ApplicationsFrame extends JFrame {
         JButton b23=new JButton("23");
         JButton b24=new JButton("24");
 
-
+/*
         applicationPanel[0][0].add(b1);
         applicationPanel[1][0].add(b2);
         applicationPanel[0][1].add(application.applicationPanel);
@@ -176,13 +176,21 @@ public class ApplicationsFrame extends JFrame {
 
     private void createApplicationsTable(int rowCount, int columnCount){
 
+        //Hozzáadni az applicationPanel-t  ami többrétegű és fel van konfigurálva mous over ... háttérkép logika
         applicationsPanel.setLayout(new GridLayout(rowCount,columnCount));
-        applicationPanel = new JPanel[rowCount][columnCount];
+        //applicationPanel = new JPanel[rowCount][columnCount];
         for(int i = 0; i < rowCount; i++){
             for(int j = 0; j < columnCount; j++) {
-                applicationPanel[i][j] = new JPanel();
+
+                Application application = new Application();
+                application.row = i;
+                application.column = j;
+                applicationsPanel.add(application.applicationPanel);
+               /* applicationPanel[i][j] = new JPanel();
                 applicationPanel[i][j].setLayout(new CardLayout());
                 applicationsPanel.add(applicationPanel[i][j]);
+
+                */
             }
         }
 
