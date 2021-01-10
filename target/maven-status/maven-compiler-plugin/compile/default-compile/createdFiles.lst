@@ -5,6 +5,7 @@ astro\Main$7.class
 astro\TextEditor$17.class
 astro\TextEditor$6.class
 astro\Reload.class
+astro\Application$4.class
 astro\TextEditor$5.class
 astro\ApplicationsTabHeader.class
 astro\BrowserFrame$10.class
@@ -20,6 +21,7 @@ astro\TextEditor$11.class
 astro\TextEditor$2.class
 astro\TextEditor$1.class
 astro\TextEditor$12.class
+astro\Application$2.class
 astro\BrowserFrame$14.class
 astro\TextEditor$14.class
 astro\TextEditor$3.class
@@ -33,6 +35,7 @@ config\Props.class
 astro\BrowserFrame$6.class
 astro\TextEditor$4.class
 astro\ApplicationsFrame$2.class
+astro\Application$3.class
 astro\TextEditor$7.class
 config\PropertyService.class
 astro\ApplicationsFrame$1.class
