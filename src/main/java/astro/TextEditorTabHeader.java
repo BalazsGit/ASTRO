@@ -1,10 +1,12 @@
 package astro;
 
+import com.formdev.flatlaf.icons.FlatTabbedPaneCloseIcon;
+
 import javax.swing.*;
 
 public class TextEditorTabHeader extends JFrame{
 
-    public JButton xButton;
+    public JLabel xButton;
     public JPanel headerPanel;
     public JLabel jLabel;
 
@@ -13,7 +15,8 @@ public class TextEditorTabHeader extends JFrame{
         this.add(headerPanel);
         headerPanel.setVisible(true);
         jLabel.setText(title);
-        xButton.setText("X");
+        FlatTabbedPaneCloseIcon flatTabbedPaneCloseIcon = new FlatTabbedPaneCloseIcon();
+        xButton.setIcon(flatTabbedPaneCloseIcon);
 
     }
 }

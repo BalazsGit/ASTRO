@@ -274,9 +274,9 @@ public class TextEditor extends JFrame{
                 }
             });
 
-            header.xButton.addActionListener(new ActionListener() {
+            header.xButton.addMouseListener(new MouseAdapter() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
+                public void mousePressed(MouseEvent e) {
 
                     if (mainFrame.tabbedTextEditor.getTabCount() > 2) {
 

@@ -19,13 +19,68 @@ import static javax.swing.JDialog.setDefaultLookAndFeelDecorated;
 
 
 
-
 public class Main {
 
     static boolean browserFocus_ = true;
 
     static PropertyService propertyService;
 
+    //empty play icon
+    static String play1 = "\u25B7"; //OK
+
+    //filled play icon
+    static String play2 = "\u25B6"; //OK
+
+    //empty stop icon
+    static String stop1 = "\u25FB"; //OK
+
+    //filled stop icon
+    static String stop2 = "\u25FC"; //OK
+
+    //settings icon ☰
+    static String settings1 = "\u2630"; //OK
+
+    //settings icon Ⅲ
+    static String settings2 = "\u2162";
+
+    //close icon
+    static String close1 = "\u2715"; //OK
+    static String close2 = "\u274C"; //OK
+
+    //plus icon
+    static String plus1 = "\uFF0B"; //OK
+    static String plus2 = "\uFE62"; //same
+    static String plus3 = "\u2795"; //OK
+    static String plus4 = "\u2795"; //OK very good
+
+    //arrow left "\u276E"
+    static String arrowLeft1 = "\u2770"; //OK
+    static String arrowLeft2 = "\u2770\u2796"; //OK
+
+    //arrow right "\u276F"
+    static String arrowRight1 = "\u2771"; //OK
+    static String arrowRight2 = "\u2796\u25B6"; //OK
+    static String arrowRight3 = "\u279C"; //OK
+    static String arrowRight4 = "\u2794"; //OK
+
+
+
+
+
+/*
+    String s = "\u4E33";
+    Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+        System.out.("Total fonts: \t" + fonts.length);
+    int count = 0;
+        for (Font font : fonts) {
+        if (font.canDisplayUpTo(s) < 0) {
+            count++;
+            System.out.println(font.getName());
+        }
+    }
+        System.out.println("Compatible fonts: \t" + count);
+
+*/
     //never be the first tab
     static void createNewBrowserTab(CefApp cefApp, MainFrame astro, String URL){
 
@@ -163,7 +218,7 @@ public class Main {
         //Applications Tab
 
         //add new applicatinsTab button
-        JButton newApplicationsTabButton = new JButton("+");
+        JLabel newApplicationsTabButton = new JLabel(plus1);
         astro.tabbedApplications.insertTab("+",null, null,"tooltip", astro.tabbedApplications.getTabCount());
         astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-1, newApplicationsTabButton);
         astro.tabbedApplications.getComponentAt(astro.tabbedApplications.getTabCount()-1);
@@ -177,7 +232,7 @@ public class Main {
         //Text Editor Tab
 
         //add new textEditorTab button
-        JButton newTextEditorTabButton = new JButton("+");
+        JLabel newTextEditorTabButton = new JLabel(plus1);
         astro.tabbedTextEditor.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
         astro.tabbedTextEditor.setTabComponentAt(astro.tabbedTextEditor.getTabCount()-1, newTextEditorTabButton);
         astro.tabbedTextEditor.getComponentAt(astro.tabbedTextEditor.getTabCount()-1);
@@ -191,7 +246,7 @@ public class Main {
         //Browser Tab
 
         //add new browserTab button
-        JButton newBrowserTabButton = new JButton("+");
+        JLabel newBrowserTabButton = new JLabel(plus1);
 
         //create new browserTab
         astro.tabbedBrowserPanel.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
@@ -270,9 +325,9 @@ public class Main {
 
 
         //add new browser tab with "+" button
-        newBrowserTabButton.addActionListener(new ActionListener() {
+        newBrowserTabButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 createNewBrowserTab(cefApp, astro, propertyService.getString(Props.newtab));
 
@@ -280,9 +335,9 @@ public class Main {
         });
 
         //add new text editor tab with "+" button
-        newTextEditorTabButton.addActionListener(new ActionListener() {
+        newTextEditorTabButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 createNewTextEditorTab(astro, null);
 
@@ -290,9 +345,9 @@ public class Main {
         });
 
         //add new text editor tab with "+" button
-        newApplicationsTabButton.addActionListener(new ActionListener() {
+        newApplicationsTabButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 createNewApplicationsTab(astro);
 

@@ -1,5 +1,7 @@
 package astro;
 
+import com.formdev.flatlaf.icons.FlatMenuArrowIcon;
+import com.formdev.flatlaf.ui.FlatArrowButton;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import config.Props;
@@ -12,24 +14,30 @@ import org.cef.handler.CefClientHandler;
 import org.cef.handler.CefFocusHandlerAdapter;
 import org.cef.handler.CefLifeSpanHandlerAdapter;
 import org.cef.handler.CefLoadHandlerAdapter;
+import util.MirrorLabel;
+import util.RotateLabel;
 
 import javax.swing.*;
+import javax.swing.Icon;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import static astro.Main.*;
+
 
 public class BrowserFrame extends JFrame {
 
     public JPanel browserPanel;
     public JPanel urlPanel;
     public JTextField urlField;
-    public JButton backward;
-    public JButton forward;
+    public MirrorLabel backward;
+    public JLabel forward;
     public JButton reload;
     public JButton stopLoad;
     public JButton load;
@@ -37,6 +45,8 @@ public class BrowserFrame extends JFrame {
     private JPanel navBar;
     private JButton search;
     private JButton newTab;
+    private JPanel backwardPanel;
+    private JPanel forwardPanel;
 
     public CefBrowser browser;
     public Component browserUI;
@@ -50,9 +60,13 @@ public class BrowserFrame extends JFrame {
     public int index = -1;
     public int tabCount = 0;
 
+
+
     public ArrayList browserList = new ArrayList<CefBrowser>();
 
     //public boolean browserFocus_ = true;
+
+
 
     public BrowserFrame(CefApp cefApp, MainFrame mainFrame, BrowserTabHeader header, String URL) {
 
@@ -61,11 +75,31 @@ public class BrowserFrame extends JFrame {
         client = cefApp.createClient();
 
         //this.client = client;
-        this.add(browserPanel);
+        //this.add(browserPanel);
 
         urlField.setText("Loading ...");
         urlField.setFocusable(true);
         urlField.setVisible(true);
+
+        newTab.setText(plus1);
+
+
+        //setLocationRelativeTo(null);
+        //setVisible(true);
+
+        backward = new MirrorLabel(arrowRight3 + "  ");
+        backwardPanel.add(backward);
+        forward = new JLabel(arrowRight3);
+        forwardPanel.add(forward);
+        //backward.setText(arrowRight3);
+        //Graphics2D g2 = (Graphics2D)backward.getGraphics();
+        //g2.rotate(Math.PI,0,0);
+
+
+        //forward.setFont(forward.getFont().deriveFont(20f));
+
+
+        forward.setText(arrowRight3);
 
         if (URL != null) {
             browser = client.createBrowser(URL, false, false);
@@ -115,9 +149,9 @@ public class BrowserFrame extends JFrame {
             }
         });
 
-        header.xButton.addActionListener(new ActionListener() {
+        header.xButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 if (mainFrame.tabbedBrowserPanel.getTabCount() > 2) {
 
@@ -186,18 +220,18 @@ public class BrowserFrame extends JFrame {
 
         /* END */
 
-        backward.addActionListener(new ActionListener() {
+        backward.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 browser.goBack();
 
             }
         });
 
-        forward.addActionListener(new ActionListener() {
+        forward.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 browser.goForward();
 

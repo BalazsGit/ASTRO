@@ -23,13 +23,13 @@
           <text value="Label"/>
         </properties>
       </component>
-      <component id="bc694" class="javax.swing.JButton" binding="xButton" default-binding="true">
+      <component id="767da" class="javax.swing.JLabel" binding="xButton" default-binding="true">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <opaque value="false"/>
-          <text value="X"/>
+          <text value=""/>
         </properties>
       </component>
     </children>

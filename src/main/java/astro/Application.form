@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="astro.Application">
-  <grid id="27dc6" binding="applicationPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="applicationPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="507" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -15,19 +15,81 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="ce9b5" binding="red" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="c16f3" binding="applicationMenu" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <card name="Card1"/>
+              <card name="Card3"/>
             </constraints>
             <properties>
-              <background color="-900799"/>
               <opaque value="true"/>
             </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <grid id="cafd4" binding="leftMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="fe1f0" class="javax.swing.JLabel" binding="startButton">
+                    <constraints/>
+                    <properties>
+                      <opaque value="false"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="4beca" class="javax.swing.JLabel" binding="stopButton">
+                    <constraints/>
+                    <properties>
+                      <opaque value="false"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="3587a" class="javax.swing.JLabel" binding="settingsButton">
+                    <constraints/>
+                    <properties>
+                      <opaque value="false"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="3ee1e" binding="rightMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="f9655" class="javax.swing.JLabel" binding="addButton">
+                    <constraints/>
+                    <properties>
+                      <alignmentY value="0.0"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <opaque value="false"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="bdfdc" class="javax.swing.JLabel" binding="deleteButton">
+                    <constraints/>
+                    <properties>
+                      <horizontalAlignment value="4"/>
+                      <horizontalTextPosition value="0"/>
+                      <opaque value="false"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
           </grid>
-          <grid id="d37c8" binding="green" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="d37c8" binding="applicationBackground" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card2"/>
@@ -49,51 +111,28 @@
               </component>
             </children>
           </grid>
-          <grid id="c16f3" binding="blue" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="ce9b5" binding="defaultBackground" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <card name="Card3"/>
+              <card name="Card1"/>
             </constraints>
             <properties>
-              <background color="-12305166"/>
+              <opaque value="true"/>
             </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="23abb" class="javax.swing.JLabel" binding="backgroundLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
           </grid>
         </children>
       </grid>
-      <component id="ef797" class="javax.swing.JButton" binding="blueButton" default-binding="true">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="blue"/>
-        </properties>
-      </component>
-      <component id="f50ad" class="javax.swing.JButton" binding="greenButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="green"/>
-        </properties>
-      </component>
-      <component id="55575" class="javax.swing.JButton" binding="redButton" default-binding="true">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="red"/>
-        </properties>
-      </component>
-      <component id="e49bf" class="javax.swing.JButton" binding="applicationBrowser">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
     </children>
   </grid>
 </form>

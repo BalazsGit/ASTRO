@@ -1,5 +1,6 @@
 package astro;
 
+import com.formdev.flatlaf.icons.FlatTabbedPaneCloseIcon;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -11,15 +12,16 @@ import java.awt.event.ActionListener;
 public class BrowserTabHeader extends JFrame {
     public JLabel jLabel;
     public JPanel headerPanel;
-    public JButton xButton;
+    public JLabel xButton;
 
 
     BrowserTabHeader(String title) {
 
-        this.add(headerPanel);
+        //this.add(headerPanel);
         headerPanel.setVisible(true);
         jLabel.setText(title);
-        xButton.setText("X");
+        FlatTabbedPaneCloseIcon flatTabbedPaneCloseIcon = new FlatTabbedPaneCloseIcon();
+        xButton.setIcon(flatTabbedPaneCloseIcon);
 
     }
 

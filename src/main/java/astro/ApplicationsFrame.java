@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ApplicationsFrame extends JFrame {
 
@@ -143,9 +145,9 @@ public class ApplicationsFrame extends JFrame {
             }
         });
 
-        header.xButton.addActionListener(new ActionListener() {
+        header.xButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
                 int confirmDialog = JOptionPane.showConfirmDialog(applicationsPanel, "Are you sure to delete this tab and containing applications from the database? ", "ATTENTION", JOptionPane.YES_NO_OPTION);
 
