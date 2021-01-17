@@ -60,8 +60,11 @@ public class Main {
     //arrow right "\u276F"
     static String arrowRight1 = "\u2771"; //OK
     static String arrowRight2 = "\u2796\u25B6"; //OK
-    static String arrowRight3 = "\u279C"; //OK
+    static String arrowRight3 = "\u279C"; //OK best
     static String arrowRight4 = "\u2794"; //OK
+
+    //vertical separator line
+    static String separator1 = "\u2758"; //OK
 
 
 

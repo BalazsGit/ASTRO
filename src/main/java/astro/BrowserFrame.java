@@ -47,6 +47,9 @@ public class BrowserFrame extends JFrame {
     private JButton newTab;
     private JPanel backwardPanel;
     private JPanel forwardPanel;
+    private JPanel backForwardPanel;
+    private JPanel separatorPanel;
+    private JLabel separatorLabel;
 
     public CefBrowser browser;
     public Component browserUI;
@@ -89,6 +92,7 @@ public class BrowserFrame extends JFrame {
 
         backward = new MirrorLabel(arrowRight3 + "  ");
         backwardPanel.add(backward);
+        separatorLabel.setText(separator1);
         forward = new JLabel(arrowRight3);
         forwardPanel.add(forward);
         //backward.setText(arrowRight3);
