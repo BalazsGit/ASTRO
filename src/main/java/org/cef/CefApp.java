@@ -156,7 +156,8 @@ public class CefApp extends CefAppHandlerAdapter {
             // Other platforms load this library in CefApp.startup().
             SystemBootstrap.loadLibrary("jcef");
         } else if (OS.isLinux()) {
-            SystemBootstrap.loadLibrary("org/cef");
+            //SystemBootstrap.loadLibrary("org/cef");
+            SystemBootstrap.loadLibrary("cef");
         }
         if (appHandler_ == null) {
             appHandler_ = this;
