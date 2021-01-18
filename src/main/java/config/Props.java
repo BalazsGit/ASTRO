@@ -51,7 +51,7 @@ public class Props {
     */
 
     public static final Prop<String> walletURL = new Prop<>("walletURL", "localhost:8125");
-    public static final Prop<String> newtab = new Prop<>("newtab", "www.google.com");
+    public static final Prop<String> newTabURL = new Prop<>("newTabURL", "www.google.com");
     public static final Prop<String> searchEngine = new Prop<>("searchEngine", "www.google.com");
     public static final Prop<String> theme = new Prop<>("theme", "FlatDarkLaf");
     public static final Prop<Boolean> firstRun = new Prop<>("firstrun", false);

@@ -82,7 +82,7 @@
                   <component id="51b0b" class="javax.swing.JLabel" binding="separatorLabel">
                     <constraints/>
                     <properties>
-                      <text value="Label"/>
+                      <text value=""/>
                     </properties>
                   </component>
                 </children>

@@ -1,31 +1,20 @@
 package astro;
 
-import com.formdev.flatlaf.icons.FlatMenuArrowIcon;
-import com.formdev.flatlaf.ui.FlatArrowButton;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
 import config.Props;
 import org.cef.CefApp;
 import org.cef.CefClient;
-import org.cef.CefSettings;
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
-import org.cef.handler.CefClientHandler;
 import org.cef.handler.CefFocusHandlerAdapter;
 import org.cef.handler.CefLifeSpanHandlerAdapter;
 import org.cef.handler.CefLoadHandlerAdapter;
-import util.MirrorLabel;
-import util.RotateLabel;
+import util.VerticalMirrorLabel;
 
 import javax.swing.*;
-import javax.swing.Icon;
-import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import static astro.Main.*;
@@ -36,7 +25,7 @@ public class BrowserFrame extends JFrame {
     public JPanel browserPanel;
     public JPanel urlPanel;
     public JTextField urlField;
-    public MirrorLabel backward;
+    public VerticalMirrorLabel backward;
     public JLabel forward;
     public JButton reload;
     public JButton stopLoad;
@@ -62,6 +51,8 @@ public class BrowserFrame extends JFrame {
 
     public int index = -1;
     public int tabCount = 0;
+
+    public String broserFrameURL;
 
 
 
@@ -90,7 +81,7 @@ public class BrowserFrame extends JFrame {
         //setLocationRelativeTo(null);
         //setVisible(true);
 
-        backward = new MirrorLabel(arrowRight3 + "  ");
+        backward = new VerticalMirrorLabel(arrowRight3 + "  ");
         backwardPanel.add(backward);
         separatorLabel.setText(separator1);
         forward = new JLabel(arrowRight3);
@@ -101,14 +92,15 @@ public class BrowserFrame extends JFrame {
 
 
         //forward.setFont(forward.getFont().deriveFont(20f));
-
-
-        forward.setText(arrowRight3);
+        broserFrameURL = URL;
 
         if (URL != null) {
+            urlField.setText(broserFrameURL);
             browser = client.createBrowser(URL, false, false);
         } else {
-            browser = client.createBrowser(propertyService.getString(Props.walletURL), false, false);
+            broserFrameURL = propertyService.getString(Props.walletURL);
+            urlField.setText(broserFrameURL);
+            browser = client.createBrowser(broserFrameURL, false, false);
         }
         browserUI = browser.getUIComponent();
         browserDisplay.add(browserUI);
@@ -138,16 +130,17 @@ public class BrowserFrame extends JFrame {
                 if (!isLoading) {
                     // The page has finished loading.
                     // Do something with |url|
-                    //set urlField to tab URL
-                    String URL;
-                    //URL = ((CefBrowser) browserFrame.browserList.get(astro.tabbedBrowserPanel.getSelectedIndex())).getURL();
-                    URL = browser.getURL();
-                    urlField.setText(URL);
+                    broserFrameURL = browser.getURL();
+                    //set urlField to the loaded URL
+                    urlField.setText(broserFrameURL);
                     //set tab title to tab URL
                     //mainFrame.tabbedBrowserPanel.setTitleAt(index, URL);
-                    header.jLabel.setText(URL);
+                    header.jLabel.setText(broserFrameURL);
                 } else {
-                    urlField.setText("Loading ...");
+                    //color change later
+                    //set urlField to the entered URL
+                    //urlField.setText(broserFrameURL);
+                    //urlField.setText("Loading ...");
                     header.jLabel.setText("Loading ...");
                 }
             }
@@ -228,7 +221,10 @@ public class BrowserFrame extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
 
+              //browser.replaceMisspelling();
+
                 browser.goBack();
+                //broserFrameURL = browser.getURL();
 
             }
         });
@@ -238,6 +234,7 @@ public class BrowserFrame extends JFrame {
             public void mousePressed(MouseEvent e) {
 
                 browser.goForward();
+                //broserFrameURL = browser.getURL();
 
             }
         });
@@ -291,7 +288,7 @@ public class BrowserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                createNewBrowserTab(cefApp, mainFrame, propertyService.getString(Props.newtab));
+                createNewBrowserTab(cefApp, mainFrame, propertyService.getString(Props.newTabURL));
 
             }
         });

@@ -65,7 +65,7 @@ public interface CefKeyboardHandler {
 
         /**
          * Bit flags describing any pressed modifier keys.
-         * @see CefContextMenuHandler.EventFlags for values.
+         * @see org.cef.handler.CefContextMenuHandler.EventFlags for values.
          */
         public final int modifiers;
 

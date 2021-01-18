@@ -32,12 +32,17 @@ import org.cef.handler.CefLifeSpanHandler;
 import org.cef.handler.CefLoadHandler;
 import org.cef.handler.CefRenderHandler;
 import org.cef.handler.CefRequestHandler;
+import org.cef.handler.CefResourceHandler;
 import org.cef.handler.CefResourceRequestHandler;
 import org.cef.handler.CefScreenInfo;
 import org.cef.handler.CefWindowHandler;
 import org.cef.misc.BoolRef;
+import org.cef.misc.StringRef;
 import org.cef.network.CefRequest;
 import org.cef.network.CefRequest.TransitionType;
+import org.cef.network.CefResponse;
+import org.cef.network.CefURLRequest;
+import org.cef.network.CefWebPluginInfo;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -51,6 +56,8 @@ import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Vector;
+
+import javax.swing.SwingUtilities;
 
 /**
  * Client that owns a browser and renderer.
@@ -92,7 +99,7 @@ public class CefClient extends CefClientHandler
      * The CTOR is only accessible within this package.
      * Use CefApp.createClient() to create an instance of
      * this class.
-     * @see CefApp.createClient()
+     * @see org.cef.CefApp.createClient()
      */
     CefClient() throws UnsatisfiedLinkError {
         super();
@@ -310,6 +317,24 @@ public class CefClient extends CefClientHandler
         if (displayHandler_ != null && browser != null) {
             return displayHandler_.onConsoleMessage(browser, level, message, source, line);
         }
+        return false;
+    }
+
+    @Override
+    public boolean onCursorChange(CefBrowser browser, int cursorType) {
+        if (browser == null) {
+            return false;
+        }
+
+        if (displayHandler_ != null && displayHandler_.onCursorChange(browser, cursorType)) {
+            return true;
+        }
+
+        CefRenderHandler realHandler = browser.getRenderHandler();
+        if (realHandler != null) {
+            return realHandler.onCursorChange(browser, cursorType);
+        }
+
         return false;
     }
 
@@ -668,14 +693,6 @@ public class CefClient extends CefClientHandler
     }
 
     @Override
-    public void onCursorChange(CefBrowser browser, int cursorType) {
-        if (browser == null) return;
-
-        CefRenderHandler realHandler = browser.getRenderHandler();
-        if (realHandler != null) realHandler.onCursorChange(browser, cursorType);
-    }
-
-    @Override
     public boolean startDragging(CefBrowser browser, CefDragData dragData, int mask, int x, int y) {
         if (browser == null) return false;
 
@@ -713,8 +730,8 @@ public class CefClient extends CefClientHandler
     }
 
     @Override
-    public boolean onOpenURLFromTab(CefBrowser browser, CefFrame frame, String target_url,
-            boolean user_gesture) {
+    public boolean onOpenURLFromTab(
+            CefBrowser browser, CefFrame frame, String target_url, boolean user_gesture) {
         if (isDisposed_) return true;
         if (requestHandler_ != null && browser != null)
             return requestHandler_.onOpenURLFromTab(browser, frame, target_url, user_gesture);

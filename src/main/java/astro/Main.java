@@ -332,7 +332,7 @@ public class Main {
             @Override
             public void mousePressed(MouseEvent e) {
 
-                createNewBrowserTab(cefApp, astro, propertyService.getString(Props.newtab));
+                createNewBrowserTab(cefApp, astro, propertyService.getString(Props.newTabURL));
 
             }
         });

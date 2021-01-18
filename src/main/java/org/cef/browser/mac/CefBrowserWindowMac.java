@@ -1,10 +1,10 @@
-package org.cef.browser.mac;// Copyright (c) 2014 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2014 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 /*
-package org.org.cef.browser.mac;
+package org.cef.browser.mac;
 
-import org.org.cef.browser.CefBrowserWindow;
+import org.cef.browser.CefBrowserWindow;
 
 import java.awt.Component;
 import java.awt.peer.ComponentPeer;

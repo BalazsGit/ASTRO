@@ -10,6 +10,7 @@ import org.cef.callback.CefAuthCallback;
 import org.cef.callback.CefRequestCallback;
 import org.cef.misc.BoolRef;
 import org.cef.network.CefRequest;
+import org.cef.network.CefURLRequest;
 
 /**
  * Implement this interface to handle events related to browser requests. The methods of this class

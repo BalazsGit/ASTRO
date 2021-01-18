@@ -165,7 +165,7 @@ public class CefSettings {
 
     /**
      * The fully qualified path for the resources directory. If this value is
-     * empty the org.cef.pak and/or devtools_resources.pak files must be located in
+     * empty the cef.pak and/or devtools_resources.pak files must be located in
      * the module directory on Windows/Linux or the app bundle Resources directory
      * on Mac OS X. Also configurable using the "resources-dir-path" command-line
      * switch.

@@ -364,8 +364,8 @@ public interface CefBrowser {
      * Captures a screenshot-like image of the currently displayed content and returns it.
      * <p>
      * If executed on the AWT Event Thread, this returns an immediately resolved {@link
-     * CompletableFuture}. If executed from another thread, the {@link
-     * CompletableFuture} returned is resolved as soon as the screenshot
+     * java.util.concurrent.CompletableFuture}. If executed from another thread, the {@link
+     * java.util.concurrent.CompletableFuture} returned is resolved as soon as the screenshot 
      * has been taken (which must happen on the event thread).
      * <p>
      * The generated screenshot can either be returned as-is, containing all natively-rendered

@@ -67,7 +67,7 @@ class CefBrowserWr extends CefBrowser_N {
                         delayedUpdate_.restart();
                     } else {
                         // If on Mac, this is needed due to the quirk described below
-                        // (in org.org.cef.browser.CefBrowserWr.CefBrowserWr(...).new JPanel()
+                        // (in org.cef.browser.CefBrowserWr.CefBrowserWr(...).new JPanel()
                         // {...}.paint(Graphics)). If on Linux, this is needed to invoke an
                         // XMoveResizeWindow call shortly after the UI was created. That seems to be
                         // necessary to actually get a windowed renderer to display something.
@@ -331,7 +331,7 @@ class CefBrowserWr extends CefBrowser_N {
     private static long getWindowHandle(Component component) {
         if (OS.isMacintosh()) {
             try {
-                Class<?> cls = Class.forName("org.org.cef.browser.mac.CefBrowserWindowMac");
+                Class<?> cls = Class.forName("org.cef.browser.mac.CefBrowserWindowMac");
                 CefBrowserWindow browserWindow = (CefBrowserWindow) cls.newInstance();
                 if (browserWindow != null) {
                     return browserWindow.getWindowHandle(component);
