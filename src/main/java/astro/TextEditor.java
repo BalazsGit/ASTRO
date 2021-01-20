@@ -47,6 +47,9 @@ public class TextEditor extends JFrame{
     private JButton pasteRelativePath;
     private JButton clearRelativePath;
     private JButton clearAbsolutePath;
+    private JPanel folderPanel;
+    private JPanel pathPanel;
+    private JPanel textPanel;
 
     public Component textEditorTab;
     public MainFrame mainFrame;
@@ -55,8 +58,6 @@ public class TextEditor extends JFrame{
     public int tableCount = 0;
 
         public TextEditor(MainFrame mainFrame, TextEditorTabHeader header) {
-
-            this.add(textEditorPanel);
 
             textPane.addFocusListener(new FocusAdapter() {
                 @Override

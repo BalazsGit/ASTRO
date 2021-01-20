@@ -1,23 +1,7 @@
 package astro;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
-import org.cef.browser.CefBrowser;
-
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.function.BiConsumer;
+import java.awt.event.*;
 
 public class MainFrame extends JFrame {
 
@@ -52,7 +36,6 @@ public class MainFrame extends JFrame {
     public JTabbedPane tabbedPane;
     public JComboBox themeBox;
     public JPanel settingsPanel;
-    public JPanel setting;
     public JPanel textEditorPanel;
     public JPanel textEditor1;
     public JTabbedPane tabbedTextEditor;
@@ -62,7 +45,9 @@ public class MainFrame extends JFrame {
     private JPanel BRSAPI;
     private JPanel applicationsPanel;
     public JTabbedPane tabbedApplications;
-    public String theme;
+    private JLabel nightMode;
+    public JTabbedPane tabbedSettings;
+    public int light = 0;
 
     //public CefBrowser browser;
 
@@ -73,7 +58,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(String title) {
 
-        this.add(mainPanel);
+        //this.add(mainPanel);
 
         //urlField.setText("Loading ...");
         //urlField.setFocusable(true);
@@ -84,12 +69,24 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        textEditorPanel.setVisible(true);
-
         themeBox.addItem("FlatDarkLaf");
         themeBox.addItem("FlatLightLaf");
+        themeBox.addItem("ARC - Orange");
 
 
+        nightMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
+                if (light == 0){
+                    light = 1;
+                }
+                else{
+                    light = 0;
+                }
+
+            }
+        });
     }
 }

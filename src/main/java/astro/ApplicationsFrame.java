@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static astro.Main.*;
+
 public class ApplicationsFrame extends JFrame {
 
     public JPanel applicationsPanel;

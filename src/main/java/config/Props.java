@@ -2,7 +2,11 @@ package config;
 
 import burst.kit.entity.BurstAddress;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Objects;
+
+import static astro.Main.*;
 
 public class Props {
     /*
@@ -50,12 +54,25 @@ public class Props {
     public static final Prop<String> siteFaucetURL = new Prop<>("site.faucet", "http://faucet.burst-alliance.org/");
     */
 
+
+
+
+    public static final Prop<Long> reload = new Prop<>("reload", 60000l);
+    public static final Prop<Boolean> firstRun = new Prop<>("firstrun", false);
     public static final Prop<String> walletURL = new Prop<>("walletURL", "localhost:8125");
     public static final Prop<String> newTabURL = new Prop<>("newTabURL", "www.google.com");
-    public static final Prop<String> searchEngine = new Prop<>("searchEngine", "www.google.com");
+    public static final Prop<String> startPageURL = new Prop<>("startPageURL", "www.google.com");
+    public static final Prop<String> homePageURL = new Prop<>("homePageURL", "www.google.com");
+    public static final Prop<String> searchEngineURL = new Prop<>("searchEngineURL", "www.google.com");
+    //GUI
     public static final Prop<String> theme = new Prop<>("theme", "FlatDarkLaf");
-    public static final Prop<Boolean> firstRun = new Prop<>("firstrun", false);
-    public static final Prop<Long> reload = new Prop<>("reload", 60000l);
+    public static final Prop<String> fontFamily = new Prop<>("fontFamily", defaultFontFamily);
+    public static final Prop<Integer> fontStyle = new Prop<>("fontStyle", defaultFontStyle);
+    public static final Prop<Integer> fontSize = new Prop<>("fontSize", defaultFontSize);
+
+
+
+
   //  public static final Prop<Integer> limit = new Prop<>("limit", 10);
   // public static final Prop<Integer> limitWonBlocks = new Prop<>("limitWonBlocks", 100);
 

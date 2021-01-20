@@ -1,6 +1,10 @@
 package astro;
 
+
+import astro.Settings.GUISettings;
 import com.formdev.flatlaf.*;
+//important to keep it. It is in use, but intellij cannot resolve.
+import com.formdev.flatlaf.intellijthemes.*;
 import config.PropertyService;
 import config.PropertyServiceImpl;
 import config.Props;
@@ -64,7 +68,11 @@ public class Main {
     static String arrowRight4 = "\u2794"; //OK
 
     //vertical separator line
-    static String separator1 = "\u2758"; //OK
+    public static String separator1 = "\u2758"; //OK
+
+    public static String defaultFontFamily;
+    public static int defaultFontSize;
+    public static int defaultFontStyle;
 
 
 
@@ -147,10 +155,25 @@ public class Main {
                 case "FlatLightLaf":
                     UIManager.setLookAndFeel(new FlatLightLaf());
                     break;
+                case "ARC - Orange":
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme");
+                    break;
                 default:
                     UIManager.setLookAndFeel(new FlatDarkLaf());
                     break;
             }
+            //Font defaultFont
+            Font defaultFont = UIManager.getDefaults().getFont("defaultFont");
+            //Segeo UI
+            defaultFontFamily = defaultFont.getFamily();
+            //PLAIN = 0
+            defaultFontStyle = defaultFont.getStyle();
+            //12
+            defaultFontSize = defaultFont.getSize();
+
+            Font userFont = new Font(propertyService.getString(Props.fontFamily), propertyService.getInt(Props.fontStyle), propertyService.getInt(Props.fontSize));
+
+            UIManager.put( "defaultFont", userFont );
             UIManager.put( "TabbedPane.showTabSeparators", true );
             UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
             UIManager.put( "TabbedPane.tabsPopupPolicy", "never" );
@@ -172,8 +195,12 @@ public class Main {
         DEFAULT_SETTINGS.windowless_rendering_enabled = false;
 
         CefApp cefApp = CefApp.getInstance(DEFAULT_SETTINGS);
+        //for Linux and MacOS
+        cefApp.startup(args);
 
         MainFrame astro = new MainFrame("ASTRO");
+
+        astro.add(astro.mainPanel);
 
         switch (theme){
             case "FlatDarkLaf":
@@ -182,6 +209,9 @@ public class Main {
                 break;
             case "FlatLightLaf":
                 astro.themeBox.setSelectedIndex(1);
+                astro.themeBox.updateUI();
+            case "ARC - Orange":
+                astro.themeBox.setSelectedIndex(2);
                 astro.themeBox.updateUI();
                 break;
             default:
@@ -204,6 +234,10 @@ public class Main {
                             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
                             propertyService.setProperty("theme", "FlatLightLaf");
                             break;
+                        case 2:
+                            UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme");
+                            propertyService.setProperty("theme", "ARC - Orange");
+                            break;
                         default:
                             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
                             break;
@@ -218,19 +252,14 @@ public class Main {
             }
         });
 
-        //Applications Tab
 
-        //add new applicatinsTab button
-        JLabel newApplicationsTabButton = new JLabel(plus1);
-        astro.tabbedApplications.insertTab("+",null, null,"tooltip", astro.tabbedApplications.getTabCount());
-        astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-1, newApplicationsTabButton);
-        astro.tabbedApplications.getComponentAt(astro.tabbedApplications.getTabCount()-1);
+        //Settings Tab
 
-        //create new applicationsTab
-        createNewApplicationsTab(astro);
+        //add GUISettings form to GUISettings Panel
+        GUISettings guiSettings = new GUISettings();
+        astro.tabbedSettings.insertTab("GUI",null, guiSettings.GUISettinsPanel,"tooltip", astro.tabbedSettings.getTabCount());
 
-        astro.pack();
-
+        //astro.pack();
 
         //Text Editor Tab
 
@@ -243,8 +272,20 @@ public class Main {
         //create new textEditorTab
         createNewTextEditorTab(astro, null);
 
-        astro.pack();
+        //astro.pack();
 
+        //Applications Tab
+
+        //add new applicatinsTab button
+        JLabel newApplicationsTabButton = new JLabel(plus1);
+        astro.tabbedApplications.insertTab("+",null, null,"tooltip", astro.tabbedApplications.getTabCount());
+        astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-1, newApplicationsTabButton);
+        astro.tabbedApplications.getComponentAt(astro.tabbedApplications.getTabCount()-1);
+
+        //create new applicationsTab
+        createNewApplicationsTab(astro);
+
+        //astro.pack();
 
         //Browser Tab
 

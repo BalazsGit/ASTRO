@@ -98,7 +98,7 @@ public class BrowserFrame extends JFrame {
             urlField.setText(broserFrameURL);
             browser = client.createBrowser(URL, false, false);
         } else {
-            broserFrameURL = propertyService.getString(Props.walletURL);
+            broserFrameURL = propertyService.getString(Props.startPageURL);
             urlField.setText(broserFrameURL);
             browser = client.createBrowser(broserFrameURL, false, false);
         }
@@ -280,7 +280,7 @@ public class BrowserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                createNewBrowserTab(cefApp, mainFrame, propertyService.getString(Props.searchEngine));
+                createNewBrowserTab(cefApp, mainFrame, propertyService.getString(Props.searchEngineURL));
 
             }
         });
