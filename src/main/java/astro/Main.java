@@ -1,10 +1,10 @@
 package astro;
 
-
 import astro.Settings.GUISettings;
 import com.formdev.flatlaf.*;
-//important to keep it. It is in use, but intellij cannot resolve.
 import com.formdev.flatlaf.intellijthemes.*;
+import com.formdev.flatlaf.swingx.*;
+import com.formdev.flatlaf.extras.*;
 import config.PropertyService;
 import config.PropertyServiceImpl;
 import config.Props;
@@ -156,7 +156,7 @@ public class Main {
                     UIManager.setLookAndFeel(new FlatLightLaf());
                     break;
                 case "ARC - Orange":
-                    UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme");
+                    UIManager.setLookAndFeel(new FlatArcOrangeIJTheme());
                     break;
                 default:
                     UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -183,7 +183,6 @@ public class Main {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-
         //fast up GUI
         System.setProperty("sun.java2d.noddraw", Boolean.TRUE.toString());
         setDefaultLookAndFeelDecorated(true);

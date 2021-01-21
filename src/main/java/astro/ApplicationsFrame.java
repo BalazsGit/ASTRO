@@ -160,13 +160,13 @@ public class ApplicationsFrame extends JFrame {
                 }
 
                 //if the last close tab is selected, than give the focus to the one left browser panel
-                index = mainFrame.tabbedBrowserPanel.getSelectedIndex();
-                tabCount = mainFrame.tabbedBrowserPanel.getTabCount();
+                index = mainFrame.tabbedApplications.getSelectedIndex();
+                tabCount = mainFrame.tabbedApplications.getTabCount();
 
                 if (index == tabCount - 1) {
 
-                    mainFrame.tabbedBrowserPanel.setSelectedIndex(index - 1);
-                    mainFrame.tabbedBrowserPanel.getSelectedComponent().requestFocus();
+                    mainFrame.tabbedApplications.setSelectedIndex(index - 1);
+                    mainFrame.tabbedApplications.getSelectedComponent().requestFocus();
 
                 }
 
