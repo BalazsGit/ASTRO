@@ -2,6 +2,7 @@ package astro;
 
 import com.formdev.flatlaf.icons.*;
 import com.formdev.flatlaf.ui.FlatArrowButton;
+import util.FlatTabbedPaneAddIcon;
 import util.RotateLabel;
 
 import javax.swing.*;
@@ -58,7 +59,8 @@ public class Application extends JFrame{
         cardPanel.add(applicationBackground);
         cardPanel.add(applicationMenu);
 
-        backgroundLabel.setText(plus1);
+        FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
+        backgroundLabel.setIcon(flatTabbedPaneAddIcon);
 
         cardPanel.setComponentZOrder(applicationMenu,0);
         cardPanel.setComponentZOrder(applicationBackground,2);

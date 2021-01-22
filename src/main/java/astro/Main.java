@@ -3,13 +3,12 @@ package astro;
 import astro.Settings.GUISettings;
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.intellijthemes.*;
-import com.formdev.flatlaf.swingx.*;
-import com.formdev.flatlaf.extras.*;
 import config.PropertyService;
 import config.PropertyServiceImpl;
 import config.Props;
 import org.cef.CefApp;
 import org.cef.CefSettings;
+import util.FlatTabbedPaneAddIcon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -251,32 +250,28 @@ public class Main {
             }
         });
 
+        FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
 
         //Settings Tab
-
         //add GUISettings form to GUISettings Panel
         GUISettings guiSettings = new GUISettings();
         astro.tabbedSettings.insertTab("GUI",null, guiSettings.GUISettinsPanel,"tooltip", astro.tabbedSettings.getTabCount());
 
-        //astro.pack();
-
         //Text Editor Tab
-
         //add new textEditorTab button
-        JLabel newTextEditorTabButton = new JLabel(plus1);
-        astro.tabbedTextEditor.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
+        JLabel newTextEditorTabButton = new JLabel();
+        newTextEditorTabButton.setIcon(flatTabbedPaneAddIcon);
+        astro.tabbedTextEditor.insertTab("+",null, null,"tooltip", astro.tabbedTextEditor.getTabCount());
         astro.tabbedTextEditor.setTabComponentAt(astro.tabbedTextEditor.getTabCount()-1, newTextEditorTabButton);
         astro.tabbedTextEditor.getComponentAt(astro.tabbedTextEditor.getTabCount()-1);
 
         //create new textEditorTab
         createNewTextEditorTab(astro, null);
 
-        //astro.pack();
-
         //Applications Tab
-
         //add new applicatinsTab button
-        JLabel newApplicationsTabButton = new JLabel(plus1);
+        JLabel newApplicationsTabButton = new JLabel();
+        newApplicationsTabButton.setIcon(flatTabbedPaneAddIcon);
         astro.tabbedApplications.insertTab("+",null, null,"tooltip", astro.tabbedApplications.getTabCount());
         astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-1, newApplicationsTabButton);
         astro.tabbedApplications.getComponentAt(astro.tabbedApplications.getTabCount()-1);
@@ -284,14 +279,11 @@ public class Main {
         //create new applicationsTab
         createNewApplicationsTab(astro);
 
-        //astro.pack();
 
         //Browser Tab
-
         //add new browserTab button
-        JLabel newBrowserTabButton = new JLabel(plus1);
-
-        //create new browserTab
+        JLabel newBrowserTabButton = new JLabel();
+        newBrowserTabButton.setIcon(flatTabbedPaneAddIcon);
         astro.tabbedBrowserPanel.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
         astro.tabbedBrowserPanel.setTabComponentAt(astro.tabbedBrowserPanel.getTabCount()-1, newBrowserTabButton);
         astro.tabbedBrowserPanel.getComponentAt(astro.tabbedBrowserPanel.getTabCount()-1);
