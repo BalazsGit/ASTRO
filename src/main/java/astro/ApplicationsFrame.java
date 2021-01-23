@@ -34,7 +34,7 @@ public class ApplicationsFrame extends JFrame {
 
     public ApplicationsFrame(MainFrame mainFrame, ApplicationsTabHeader header){
 
-        this.add(applicationsPanel);
+        //this.add(applicationsPanel);
         this.header = header;
 
         createApplicationsTable(rowCount, columnCount);
@@ -178,8 +178,8 @@ public class ApplicationsFrame extends JFrame {
 
     private void createApplicationsTable(int rowCount, int columnCount){
 
-        //Hozzáadni az applicationPanel-t  ami többrétegű és fel van konfigurálva mous over ... háttérkép logika
-        applicationsPanel.setLayout(new GridLayout(rowCount,columnCount));
+        GridLayout gridLayout = new GridLayout(rowCount,columnCount);
+        applicationsPanel.setLayout(gridLayout);
         //applicationPanel = new JPanel[rowCount][columnCount];
         for(int i = 0; i < rowCount; i++){
             for(int j = 0; j < columnCount; j++) {

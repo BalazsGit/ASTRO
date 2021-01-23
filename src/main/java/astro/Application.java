@@ -5,6 +5,7 @@ import com.formdev.flatlaf.ui.FlatArrowButton;
 import util.FlatTabbedPaneAddIcon;
 import util.RotateLabel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 import java.util.Scanner;
@@ -35,6 +37,10 @@ public class Application extends JFrame{
     private JPanel leftMenu;
     private JPanel rightMenu;
     private JLabel settingsButton;
+    private JTextPane textPane1;
+    private JLabel applicationLabel;
+    private JLabel img;
+    private JMenu add;
     private JButton closeButton;
     private JMenuItem newMenuItem;
     private JPanel menuPanel;
@@ -46,7 +52,15 @@ public class Application extends JFrame{
 
     private Color color;
 
+    public String applicationName;
     public String applicationURL;
+    public String applicationAbsolutePath;
+    public String applicationRelativePath;
+    public String applicationImagePath = null;
+    public File applicationDefaultImage;
+
+    public int applicationType = 0; //0 = undefined | 1 = runnable | 2 = Console | 3 = text | 4 = web
+    public int state = 3; //0 = not running | 1 = running | 2 = stopped | 3 = empty
 
 
 
@@ -59,13 +73,47 @@ public class Application extends JFrame{
         cardPanel.add(applicationBackground);
         cardPanel.add(applicationMenu);
 
+        ImageIcon imageicon = new ImageIcon();
+        applicationDefaultImage = new File("./PROJECT/CONFIG/images/set_name1.png");
+
+        //ImageIcon imageicon = new ImageIcon();
         FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
         backgroundLabel.setIcon(flatTabbedPaneAddIcon);
 
         cardPanel.setComponentZOrder(applicationMenu,0);
-        cardPanel.setComponentZOrder(applicationBackground,2);
-        cardPanel.setComponentZOrder(defaultBackground,1);
+        cardPanel.setComponentZOrder(applicationBackground,1);
+        cardPanel.setComponentZOrder(defaultBackground,2);
+        if(applicationType == 0){
+            applicationBackground.setVisible(false);
+            applicationLabel.setIcon(imageicon);
+
+            //cardPanel.setComponentZOrder(defaultBackground,1);
+        }
+        else {
+            applicationBackground.setVisible(true);
+            //cardPanel.setComponentZOrder(defaultBackground, 2);
+            //cardPanel.setComponentZOrder(applicationBackground, 1);
+            //Set image later
+
+            if (applicationImagePath == null) {
+                //JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION1", JOptionPane.YES_NO_OPTION);
+                applicationLabel.setIcon(imageicon);
+            }
+            else{
+                //JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION2", JOptionPane.YES_NO_OPTION);
+                applicationLabel.setIcon(imageicon);
+            }
+
+
+        }
+
+
+
+
+        defaultBackground.setVisible(true);
+        //applicationBackground.setVisible(true);
         applicationMenu.setVisible(false);
+
         flatFileChooserHomeFolderIcon = new FlatFileChooserHomeFolderIcon();
         //flatFileChooserHomeFolderIcon.paintIcon(applicationMenu, applicationMenu.getGraphics());
         FlatMenuArrowIcon flatMenuArrowIcon = new FlatMenuArrowIcon();
@@ -84,16 +132,18 @@ public class Application extends JFrame{
         startButton.setText(play1);
         stopButton.setText(stop1);
         settingsButton.setText(settings1);
-        addButton.setText(plus1);
+        addButton.setIcon(flatTabbedPaneAddIcon);
         deleteButton.setIcon(flatTabbedPaneCloseIcon);
 
         color = UIManager.getColor ( "Panel.background" );
+
+
 
         cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                applicationMenu.setBackground(new Color(color.getRed()+10,color.getGreen()+10,color.getBlue()+10,100));
+           /*     applicationMenu.setBackground(new Color(color.getRed()+10,color.getGreen()+10,color.getBlue()+10,100));
                 if(applicationMenu.isVisible()){
                     applicationMenu.setVisible(false);
                 }
@@ -102,13 +152,15 @@ public class Application extends JFrame{
                 }
                 cardPanel.repaint();
                 cardPanel.revalidate();
-            }
+          */  }
+
+
             //defined later?
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                cardPanel.repaint();
-                cardPanel.revalidate();
+               // cardPanel.repaint();
+               // cardPanel.revalidate();
             }
             /*@Override
             public void mouseExited(MouseEvent e) {
@@ -125,25 +177,71 @@ public class Application extends JFrame{
             }
         });
 
-        startButton.addMouseListener(new MouseAdapter() {
+        //click to background + = add new empty application
+        backgroundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                startButton.setText(play2);
-                applicationMenu.setVisible(true);
-                cardPanel.repaint();
-                cardPanel.revalidate();
+
 
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                startButton.setText(play1);
+
+
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                try {
+                    BufferedImage bufferedImage = ImageIO.read(applicationDefaultImage);
+                    imageicon.setImage(bufferedImage);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                //String a =  getClass().getClassLoader().getResource("./PROJECT/CONFIG/images/set_name1.png").toString();
+                //String a = imageicon.getClass().getResource("./").toString();
+
+                //JOptionPane.showConfirmDialog(applicationPanel, a, "ATTENTION", JOptionPane.YES_NO_OPTION);
+
+                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                if(comfirmation == JOptionPane.YES_OPTION){
+                    applicationBackground.setVisible(true);
+                    applicationLabel.setIcon(imageicon);
+                }
+                else{
+                    applicationBackground.setVisible(false);
+                }
+                applicationBackground.setSize(100,100);
+                cardPanel.repaint();
+                cardPanel.revalidate();
+            }
+
+        });
+
+        startButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                startButton.setText(play2);
+               /*
                 applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();
+*/
+            }
 
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                startButton.setText(play1);
+
+              /*  applicationMenu.setVisible(true);
+                cardPanel.repaint();
+                cardPanel.revalidate();
+*/
             }
 
 
@@ -153,10 +251,13 @@ public class Application extends JFrame{
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
+
                 stopButton.setText(stop2);
-                applicationMenu.setVisible(true);
+    /*            applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();
+
+*/
 
             }
 
@@ -164,10 +265,10 @@ public class Application extends JFrame{
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
                 stopButton.setText(stop1);
-                applicationMenu.setVisible(true);
+            /*    applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();
-
+*/
             }
         });
 
@@ -175,45 +276,66 @@ public class Application extends JFrame{
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
+
                 settingsButton.setText(settings2);
-                applicationMenu.setVisible(true);
+               /* applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();
 
+
+                 */
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
+
                 settingsButton.setText(settings1);
-                applicationMenu.setVisible(true);
+               /*  applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();
-
+*/
             }
         });
 
+        //add new application card
         addButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                applicationMenu.setVisible(true);
-                cardPanel.repaint();
-                cardPanel.revalidate();
+                //applicationMenu.setVisible(true);
+                //cardPanel.repaint();
+                //cardPanel.revalidate();
             }
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                applicationMenu.setVisible(true);
-                cardPanel.repaint();
-                cardPanel.revalidate();
+                //applicationMenu.setVisible(true);
+                //cardPanel.repaint();
+                //cardPanel.revalidate();
             }
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                browse();
+                //applicationType 0 = undefined | 1 = runnable | 2 = Terminal | 3 = text  | 4 = web
+                //select type
+                //JOptionPane.showConfirmDialog(applicationPanel, "Are you sure to delete this application from the database?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+
+
+                JOptionPane plainOptionPane = new JOptionPane();
+                JDialog jDialog = plainOptionPane.createDialog(applicationPanel, "New Application");
+                plainOptionPane.setMessage("Select application type:");
+                //here the selectable application types
+                jDialog.show();
+
+                //int confirmDialog = JOptionPane.showInputDialog(applicationPanel, "Are you sure to delete this application from the database?", "SELECT APPLICATION TYPE", JOptionPane.YES_NO_OPTION);
+                //applicationType = 1;
+                browseApplication();
+
             }
         });
+
+
 /*
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -229,21 +351,30 @@ public class Application extends JFrame{
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 //applicationMenu.setBackground(new Color(color.getRed(),color.getGreen(),color.getBlue(),100));
-                applicationMenu.setVisible(true);
-                cardPanel.repaint();
-                cardPanel.revalidate();
+                //applicationMenu.setVisible(true);
+                //cardPanel.repaint();
+                //cardPanel.revalidate();
             }
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                applicationMenu.setVisible(true);
-                cardPanel.repaint();
-                cardPanel.revalidate();
+                //applicationMenu.setVisible(true);
+                //cardPanel.repaint();
+                //cardPanel.revalidate();
             }
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                JOptionPane.showConfirmDialog(applicationPanel, "Are you sure to delete this application from the database?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Are you sure to delete this application from the database?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+
+                if(comfirmation == JOptionPane.YES_OPTION){
+
+                    //If  delete application, than set applicationType = 0
+                    applicationType = 0;
+                    applicationBackground.setVisible(false);
+
+                }
+
             }
         });
 /*
@@ -279,7 +410,7 @@ public class Application extends JFrame{
 
         }
 
-        public void browse(){
+        public void browseApplication() {
 
 /*
             // If the user selects a file
@@ -298,17 +429,25 @@ public class Application extends JFrame{
 
  */
 
-            final JFileChooser fc = new JFileChooser("./");
-            fc.showOpenDialog(null);
+            final JFileChooser jFileChooser = new JFileChooser("./");
+            int r = jFileChooser.showOpenDialog(null);
 
+            // If the user selects a file
+            if (r == javax.swing.JFileChooser.APPROVE_OPTION) {
+                // Set the label to the path of the selected directory
+                applicationAbsolutePath = jFileChooser.getSelectedFile().getAbsolutePath();
 
-            try {
-                // Open an input stream
-                Scanner reader = new Scanner(fc.getSelectedFile());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                String base = "./";
+                applicationRelativePath = new File(base).toURI().relativize(new File(applicationAbsolutePath).toURI()).getPath();
+
+                applicationType = 1;
+                applicationBackground.setVisible(true);
+                //cardPanel.setComponentZOrder(defaultBackground, 2);
+                //cardPanel.setComponentZOrder(applicationBackground, 1);
+                cardPanel.repaint();
+                cardPanel.revalidate();
+
             }
-
         }
 
         public void rename(){
