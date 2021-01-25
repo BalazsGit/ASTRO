@@ -1,5 +1,5 @@
 .idea/*
 lib/*
 target/*
-!target/ASTRO-1.0
+!target/ASTRO-1.0.jar
 !target/PROJECT/*
