@@ -31,14 +31,13 @@ public class Application extends JFrame{
     private JPanel cardPanel;
     private JLabel startButton;
     private JLabel stopButton;
-    private JLabel addButton;
     private JLabel deleteButton;
     private JLabel backgroundLabel;
-    private JPanel leftMenu;
-    private JPanel rightMenu;
+    private JPanel bottomMenu;
     private JLabel settingsButton;
-    private JTextPane textPane1;
-    private JLabel applicationLabel;
+    private JLabel applicationName;
+    private JLabel applicationImage;
+    private JPanel namePanel;
     private JLabel img;
     private JMenu add;
     private JButton closeButton;
@@ -52,7 +51,6 @@ public class Application extends JFrame{
 
     private Color color;
 
-    public String applicationName;
     public String applicationURL;
     public String applicationAbsolutePath;
     public String applicationRelativePath;
@@ -73,8 +71,22 @@ public class Application extends JFrame{
         cardPanel.add(applicationBackground);
         cardPanel.add(applicationMenu);
 
+        //put to class variables?
+        BufferedImage bufferedImage = null;
         ImageIcon imageicon = new ImageIcon();
+
         applicationDefaultImage = new File("./PROJECT/CONFIG/images/set_name1.png");
+        try {
+            bufferedImage = ImageIO.read(applicationDefaultImage);
+            //imageicon.setImage(bufferedImage);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        //Image dimg = bufferedImage.getScaledInstance(applicationImage.getWidth(), applicationImage.getHeight(), Image.SCALE_SMOOTH);
+        //resize image
+        Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        imageicon.setImage(dimg);
 
         //ImageIcon imageicon = new ImageIcon();
         FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
@@ -85,7 +97,8 @@ public class Application extends JFrame{
         cardPanel.setComponentZOrder(defaultBackground,2);
         if(applicationType == 0){
             applicationBackground.setVisible(false);
-            applicationLabel.setIcon(imageicon);
+
+            applicationImage.setIcon(imageicon);
 
             //cardPanel.setComponentZOrder(defaultBackground,1);
         }
@@ -97,11 +110,11 @@ public class Application extends JFrame{
 
             if (applicationImagePath == null) {
                 //JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION1", JOptionPane.YES_NO_OPTION);
-                applicationLabel.setIcon(imageicon);
+                applicationImage.setIcon(imageicon);
             }
             else{
                 //JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION2", JOptionPane.YES_NO_OPTION);
-                applicationLabel.setIcon(imageicon);
+                applicationImage.setIcon(imageicon);
             }
 
 
@@ -132,7 +145,6 @@ public class Application extends JFrame{
         startButton.setText(play1);
         stopButton.setText(stop1);
         settingsButton.setText(settings1);
-        addButton.setIcon(flatTabbedPaneAddIcon);
         deleteButton.setIcon(flatTabbedPaneCloseIcon);
 
         color = UIManager.getColor ( "Panel.background" );
@@ -195,12 +207,6 @@ public class Application extends JFrame{
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                try {
-                    BufferedImage bufferedImage = ImageIO.read(applicationDefaultImage);
-                    imageicon.setImage(bufferedImage);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
                 //String a =  getClass().getClassLoader().getResource("./PROJECT/CONFIG/images/set_name1.png").toString();
                 //String a = imageicon.getClass().getResource("./").toString();
 
@@ -209,12 +215,14 @@ public class Application extends JFrame{
                 int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION", JOptionPane.YES_NO_OPTION);
                 if(comfirmation == JOptionPane.YES_OPTION){
                     applicationBackground.setVisible(true);
-                    applicationLabel.setIcon(imageicon);
+                    defaultBackground.setVisible(false);
+                    applicationImage.setIcon(imageicon);
                 }
                 else{
+                    defaultBackground.setVisible(true);
                     applicationBackground.setVisible(false);
                 }
-                applicationBackground.setSize(100,100);
+                //applicationBackground.setSize(100,100);
                 cardPanel.repaint();
                 cardPanel.revalidate();
             }
@@ -297,7 +305,7 @@ public class Application extends JFrame{
 */
             }
         });
-
+/*
         //add new application card
         addButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -334,7 +342,7 @@ public class Application extends JFrame{
 
             }
         });
-
+*/
 
 /*
         addButton.addActionListener(new ActionListener() {
@@ -372,6 +380,7 @@ public class Application extends JFrame{
                     //If  delete application, than set applicationType = 0
                     applicationType = 0;
                     applicationBackground.setVisible(false);
+                    defaultBackground.setVisible(true);
 
                 }
 
