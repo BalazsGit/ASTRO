@@ -69,13 +69,6 @@ public class Main {
     //vertical separator line
     public static String separator1 = "\u2758"; //OK
 
-    public static String defaultFontFamily;
-    public static int defaultFontSize;
-    public static int defaultFontStyle;
-
-
-
-
 
 /*
     String s = "\u4E33";
@@ -163,12 +156,6 @@ public class Main {
             }
             //Font defaultFont
             Font defaultFont = UIManager.getDefaults().getFont("defaultFont");
-            //Segeo UI
-            defaultFontFamily = defaultFont.getFamily();
-            //PLAIN = 0
-            defaultFontStyle = defaultFont.getStyle();
-            //12
-            defaultFontSize = defaultFont.getSize();
 
             Font userFont = new Font(propertyService.getString(Props.fontFamily), propertyService.getInt(Props.fontStyle), propertyService.getInt(Props.fontSize));
 
