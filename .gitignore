@@ -1,2 +1,5 @@
-.idea
-lib
+.idea/*
+lib/*
+target/*
+!target/ASTRO-1.0
+!target/PROJECT/*
