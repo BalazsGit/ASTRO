@@ -57,6 +57,9 @@ public class Application extends JFrame{
     public String applicationImagePath = null;
     public File applicationDefaultImage;
 
+    public BufferedImage bufferedImage = null;
+    public ImageIcon imageicon = null;
+
     public int applicationType = 0; //0 = undefined | 1 = runnable | 2 = Console | 3 = text | 4 = web
     public int state = 3; //0 = not running | 1 = running | 2 = stopped | 3 = empty
 
@@ -72,10 +75,12 @@ public class Application extends JFrame{
         cardPanel.add(applicationMenu);
 
         //put to class variables?
-        BufferedImage bufferedImage = null;
-        ImageIcon imageicon = new ImageIcon();
+        //BufferedImage bufferedImage = null;
+        //ImageIcon imageicon = new ImageIcon();
+        //imageicon = null;
+        imageicon = new ImageIcon();
 
-        applicationDefaultImage = new File("./PROJECT/CONFIG/images/set_name1.png");
+        applicationDefaultImage = new File("./PROJECT/CONFIG/images/applicationImage.png");
         try {
             bufferedImage = ImageIO.read(applicationDefaultImage);
             //imageicon.setImage(bufferedImage);
@@ -85,8 +90,14 @@ public class Application extends JFrame{
 
         //Image dimg = bufferedImage.getScaledInstance(applicationImage.getWidth(), applicationImage.getHeight(), Image.SCALE_SMOOTH);
         //resize image
-        Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
-        imageicon.setImage(dimg);
+        if(bufferedImage != null) {
+            Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+            imageicon.setImage(dimg);
+        }
+        else{
+            imageicon = null;
+        }
+
 
         //ImageIcon imageicon = new ImageIcon();
         FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
