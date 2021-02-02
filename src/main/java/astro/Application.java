@@ -1,5 +1,7 @@
 package astro;
 
+import astro.Settings.applicationSettings;
+import astro.ApplicationsFrame;
 import com.formdev.flatlaf.icons.*;
 import com.formdev.flatlaf.ui.FlatArrowButton;
 import util.FlatTabbedPaneAddIcon;
@@ -44,7 +46,7 @@ public class Application extends JFrame{
     private JMenuItem newMenuItem;
     private JPanel menuPanel;
     private JLayeredPane jLayeredPanel;
-    public Component applicationsTab;
+    private Component applicationsPanel;
     public int row;
     public int column;
     public FlatFileChooserHomeFolderIcon flatFileChooserHomeFolderIcon;
@@ -67,12 +69,14 @@ public class Application extends JFrame{
 
 
 
-    public Application(){
+    public Application(Component applicationsPanel){
 
         this.add(applicationPanel);
         cardPanel.add(defaultBackground);
         cardPanel.add(applicationBackground);
         cardPanel.add(applicationMenu);
+
+        this.applicationsPanel = applicationsPanel;
 
         //put to class variables?
         //BufferedImage bufferedImage = null;
@@ -310,6 +314,27 @@ public class Application extends JFrame{
                 super.mouseExited(e);
 
                 settingsButton.setText(settings1);
+               /*  applicationMenu.setVisible(true);
+                cardPanel.repaint();
+                cardPanel.revalidate();
+*/
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mouseExited(e);
+
+                applicationSettings applicationSettings = new applicationSettings();
+
+                settingsButton.setText(settings1);
+                int comfirmation = JOptionPane.showConfirmDialog(applicationsPanel, applicationSettings.applicationSettings, "Settings", JOptionPane.OK_CANCEL_OPTION);
+                /*
+                if(comfirmation == JOptionPane.YES_OPTION){
+                    applicationBackground.setVisible(true);
+                    defaultBackground.setVisible(false);
+                    applicationImage.setIcon(imageicon);
+                }
+
+                 */
                /*  applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();

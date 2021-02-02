@@ -184,7 +184,7 @@ public class ApplicationsFrame extends JFrame {
         for(int i = 0; i < rowCount; i++){
             for(int j = 0; j < columnCount; j++) {
 
-                Application application = new Application();
+                Application application = new Application(applicationsPanel);
                 application.row = i;
                 application.column = j;
                 applicationsPanel.add(application.applicationPanel);
