@@ -166,6 +166,7 @@ public class Main {
             UIManager.put( "TabbedPane.tabSelectionHeight", 1 );
             UIManager.put( "Table.showHorizontalLines", true );
             UIManager.put( "Table.showVerticalLines", true );
+            UIManager.put( "SplitPaneDivider.gripDotCount", 0 );
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
