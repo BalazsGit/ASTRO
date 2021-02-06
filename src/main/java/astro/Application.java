@@ -1,25 +1,19 @@
 package astro;
 
-import astro.Settings.applicationSettings;
-import astro.ApplicationsFrame;
+import astro.Settings.ApplicationSettings;
 import com.formdev.flatlaf.icons.*;
 import com.formdev.flatlaf.ui.FlatArrowButton;
 import util.FlatTabbedPaneAddIcon;
-import util.RotateLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import java.util.Scanner;
+import java.time.LocalDateTime;
 
 import static astro.Main.*;
 
@@ -49,15 +43,21 @@ public class Application extends JFrame{
     private Component applicationsPanel;
     public int row;
     public int column;
+    public int tab;
     public FlatFileChooserHomeFolderIcon flatFileChooserHomeFolderIcon;
 
     private Color color;
 
     public String applicationURL;
-    public String applicationAbsolutePath;
-    public String applicationRelativePath;
-    public String applicationImagePath = null;
+    public String applicationAbsolutePath = null;
+    public String applicationRelativePath = null;
+    public File applicationFile = null;
+    public String applicationImageRelativePath = null;
+    public String applicationImageAbsolutePath = null;
+    public String applicationDefaultImagePath = null;
     public File applicationDefaultImage;
+    public String applicationID;
+    public ApplicationSettings applicationSettings;
 
     public BufferedImage bufferedImage = null;
     public ImageIcon imageicon = null;
@@ -65,9 +65,29 @@ public class Application extends JFrame{
     public int applicationType = 0; //0 = undefined | 1 = runnable | 2 = Console | 3 = text | 4 = web
     public int state = 3; //0 = not running | 1 = running | 2 = stopped | 3 = empty
 
+    public void repaintSettingsPane(){
 
+        this.repaint();
 
+    }
+private void setApplicationIcon() {
+    applicationDefaultImage = new File(applicationImageRelativePath);
+    try {
+        bufferedImage = ImageIO.read(applicationDefaultImage);
+        //imageicon.setImage(bufferedImage);
+    } catch (IOException ioException) {
+        ioException.printStackTrace();
+    }
 
+    //Image dimg = bufferedImage.getScaledInstance(applicationImage.getWidth(), applicationImage.getHeight(), Image.SCALE_SMOOTH);
+    //resize image
+    if (bufferedImage != null) {
+        Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        imageicon.setImage(dimg);
+    } else {
+        imageicon = null;
+    }
+}
 
     public Application(Component applicationsPanel){
 
@@ -75,6 +95,7 @@ public class Application extends JFrame{
         cardPanel.add(defaultBackground);
         cardPanel.add(applicationBackground);
         cardPanel.add(applicationMenu);
+        applicationID = LocalDateTime.now().toString();
 
         this.applicationsPanel = applicationsPanel;
 
@@ -83,24 +104,9 @@ public class Application extends JFrame{
         //ImageIcon imageicon = new ImageIcon();
         //imageicon = null;
         imageicon = new ImageIcon();
-
-        applicationDefaultImage = new File("./PROJECT/CONFIG/images/applicationImage.png");
-        try {
-            bufferedImage = ImageIO.read(applicationDefaultImage);
-            //imageicon.setImage(bufferedImage);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-
-        //Image dimg = bufferedImage.getScaledInstance(applicationImage.getWidth(), applicationImage.getHeight(), Image.SCALE_SMOOTH);
-        //resize image
-        if(bufferedImage != null) {
-            Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
-            imageicon.setImage(dimg);
-        }
-        else{
-            imageicon = null;
-        }
+        applicationImageRelativePath = "./PROJECT/CONFIG/images/applicationImage.png";
+        applicationDefaultImage = new File(applicationImageRelativePath);
+        setApplicationIcon();
 
 
         //ImageIcon imageicon = new ImageIcon();
@@ -123,7 +129,7 @@ public class Application extends JFrame{
             //cardPanel.setComponentZOrder(applicationBackground, 1);
             //Set image later
 
-            if (applicationImagePath == null) {
+            if (applicationImageRelativePath == null) {
                 //JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION1", JOptionPane.YES_NO_OPTION);
                 applicationImage.setIcon(imageicon);
             }
@@ -135,7 +141,7 @@ public class Application extends JFrame{
 
         }
 
-
+        applicationSettings = new ApplicationSettings(this);
 
 
         defaultBackground.setVisible(true);
@@ -249,13 +255,13 @@ public class Application extends JFrame{
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 startButton.setText(play2);
+
                /*
                 applicationMenu.setVisible(true);
                 cardPanel.repaint();
                 cardPanel.revalidate();
 */
             }
-
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
@@ -266,8 +272,34 @@ public class Application extends JFrame{
                 cardPanel.revalidate();
 */
             }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Settings", JOptionPane.CLOSED_OPTION);
+                //JOptionPane.showMessageDialog(applicationsPanel, applicationRelativePath, "Settings", JOptionPane.CLOSED_OPTION);
 
+                if(applicationRelativePath != null) {
 
+                    applicationFile = new File(applicationRelativePath);
+                    Desktop desktop = Desktop.getDesktop();
+                    try {
+
+                        desktop.open(applicationFile);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+                else{
+                    int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "There is no application path added!\nWould you like to set the application path?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                    if(comfirmation == JOptionPane.YES_OPTION){
+                        JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
+                        setApplicationIcon();
+                        cardPanel.repaint();
+                        cardPanel.revalidate();
+                    }
+                    else{
+                    }
+                }
+            }
         });
 
         stopButton.addMouseListener(new MouseAdapter() {
@@ -323,10 +355,12 @@ public class Application extends JFrame{
             public void mousePressed(MouseEvent e) {
                 super.mouseExited(e);
 
-                applicationSettings applicationSettings = new applicationSettings();
-
                 settingsButton.setText(settings1);
-                int comfirmation = JOptionPane.showConfirmDialog(applicationsPanel, applicationSettings.applicationSettings, "Settings", JOptionPane.OK_CANCEL_OPTION);
+                JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
+                //save datas to database
+                setApplicationIcon();
+                cardPanel.repaint();
+                cardPanel.revalidate();
                 /*
                 if(comfirmation == JOptionPane.YES_OPTION){
                     applicationBackground.setVisible(true);

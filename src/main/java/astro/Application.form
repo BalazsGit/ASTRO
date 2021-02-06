@@ -87,7 +87,7 @@
                 <properties>
                   <opaque value="false"/>
                 </properties>
-                <border type="none"/>
+                <border type="line"/>
                 <children>
                   <component id="fe1f0" class="javax.swing.JLabel" binding="startButton">
                     <constraints>
