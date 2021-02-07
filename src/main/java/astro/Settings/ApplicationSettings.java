@@ -5,11 +5,10 @@ import com.formdev.flatlaf.icons.FlatCapsLockIcon;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 
-public class ApplicationSettings extends JFrame{
+public class ApplicationSettings extends JFrame {
     public JPanel applicationSettings;
     private JTextField applicationRelativePath;
     private JTextField applicationAbsolutePath;
@@ -19,15 +18,16 @@ public class ApplicationSettings extends JFrame{
     private JPanel applicationImage;
     private JLabel browseApplication;
     private JLabel browseImage;
+    private JComboBox applicationTypeBox;
     public Application application;
 
-    void repaintSettingsPane(){
+    void repaintSettingsPane() {
 
         this.repaint();
 
     }
 
-    public ApplicationSettings(Application application){
+    public ApplicationSettings(Application application) {
 
         this.application = application;
 
@@ -37,6 +37,23 @@ public class ApplicationSettings extends JFrame{
 
         browseApplication.setIcon(flatCapsLockIcon);
         browseImage.setIcon(flatCapsLockIcon);
+
+        //applicationType = 0; //0 = Undefined | 1 = Graphical | 2 = Console | 3 = Text | 4 = Web
+        applicationTypeBox.addItem("Undefined");
+        applicationTypeBox.addItem("Graphical");
+        applicationTypeBox.addItem("Console");
+        applicationTypeBox.addItem("Text");
+        applicationTypeBox.addItem("Web");
+
+        applicationTypeBox.setSelectedIndex(application.getApplicationType());
+        applicationTypeBox.updateUI();
+
+        //init application values
+        applicationRelativePath.setText(application.applicationRelativePath);
+        applicationAbsolutePath.setText(application.applicationAbsolutePath);
+
+        applicationImageRelativePath.setText(application.applicationImageRelativePath);
+        applicationImageAbsolutePath.setText(application.applicationImageAbsolutePath);
 
         browseApplication.addMouseListener(new MouseAdapter() {
             @Override
@@ -111,7 +128,20 @@ public class ApplicationSettings extends JFrame{
         });
     */
 
+        //delete later only test purposes
+        applicationRelativePath.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                application.applicationRelativePath = applicationRelativePath.getText();
+            }
+        });
+
+
+        applicationTypeBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                application.setApplicationType(applicationTypeBox.getSelectedIndex());
+            }
+        });
     }
-
-
 }

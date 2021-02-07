@@ -416,18 +416,64 @@ public class Main {
 
 
  */
+        //Create file structure if not exists
+        //WALLET/BURST
+        File burstDir = new File("PROJECT/APPLICATIONS/WALLET/BURST");
+        if(!burstDir.exists()){
+            burstDir.mkdirs();
+        }
+        //WALLET/PHOENIX
+        File phoenixDir = new File("PROJECT/APPLICATIONS/WALLET/PHOENIX");
+        if(!phoenixDir.exists()){
+            phoenixDir.mkdirs();
+        }
+        //EXCHANGE/BTDEX
+        File btdexDir = new File("PROJECT/APPLICATIONS/EXCHANGE/BTDEX");
+        if(!btdexDir.exists()){
+            btdexDir.mkdirs();
+        }
+        //MINER/SCAVENGER
+        File scavengerDir = new File("PROJECT/APPLICATIONS/MINER/SCAVENGER");
+        if(!scavengerDir.exists()){
+            scavengerDir.mkdirs();
+        }
+        //PLOTTER/TURBOPLOTTER
+        File turboplotterDir = new File("PROJECT/APPLICATIONS/PLOTTER/TURBOPLOTTER");
+        if(!turboplotterDir.exists()){
+            turboplotterDir.mkdirs();
+        }
+        //PLOTTER/ENGRAVER
+        File engraverDir = new File("PROJECT/APPLICATIONS/PLOTTER/ENGRAVER");
+        if(!engraverDir.exists()){
+            engraverDir.mkdirs();
+        }
+        //IMAGES
+        File imagesDir = new File("PROJECT/IMAGES");
+        if(!imagesDir.exists()){
+            imagesDir.mkdirs();
+        }
+        //ICONS
+        File iconsDir = new File("PROJECT/ICONS");
+        if(!iconsDir.exists()){
+            iconsDir.mkdirs();
+        }
+        //CONFIG
+        File configDir = new File("PROJECT/CONFIG");
+        if(!configDir.exists()){
+            configDir.mkdirs();
+        }
 
-        File burstDir = new File("./PROJECT/WALLET/BURST");
+        //File burstDir = new File("./PROJECT/WALLET/BURST");
 
-        File scavengerDir = new File("./PROJECT/MINER/SCAVENGER/");
-
+        //File scavengerDir = new File("./PROJECT/MINER/SCAVENGER/");
+/*
         File turboplotter = new File("./PROJECT/PLOTTER/TURBOPLOTTER/TurboPlotter.exe");
 
         astro.start_burst.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-/*
+
                 Desktop desktop = Desktop.getDesktop();
                 try {
                     desktop.open(burst_maria);
@@ -435,7 +481,7 @@ public class Main {
                     ioException.printStackTrace();
                 }
 
- */
+
 
                 try {
                     Runtime.getRuntime().exec("cmd.exe /c start startburst.bat", null, burstDir);
@@ -466,14 +512,14 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                /*
+
                 try {
                     Process process = new ProcessBuilder("D:\\Dev_tools\\ASTRO\\target\\plotter\\turboplotter\\TurboPlotter.exe").start();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
 
-                 */
+
 
                 Desktop desktop = Desktop.getDesktop();
                 try {
@@ -484,7 +530,7 @@ public class Main {
 
             }
         });
-
+    */
         astro.pack();
         //new BrowserFrame("http://openburstpool.ddns.net:8126/", useOsr, false);
     }

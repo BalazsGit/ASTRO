@@ -62,14 +62,21 @@ public class Application extends JFrame{
     public BufferedImage bufferedImage = null;
     public ImageIcon imageicon = null;
 
-    public int applicationType = 0; //0 = undefined | 1 = runnable | 2 = Console | 3 = text | 4 = web
+    public int applicationType = 0; //0 = Undefined | 1 = Graphical | 2 = Console | 3 = Text | 4 = Web
     public int state = 3; //0 = not running | 1 = running | 2 = stopped | 3 = empty
 
-    public void repaintSettingsPane(){
-
-        this.repaint();
-
+    public void setAppliactionFile(){
+        applicationFile = new File(applicationRelativePath);
     }
+
+    public void setApplicationType(int type){
+        applicationType = type;
+    }
+
+    public int getApplicationType(){
+        return applicationType;
+    }
+
 private void setApplicationIcon() {
     applicationDefaultImage = new File(applicationImageRelativePath);
     try {
@@ -104,10 +111,10 @@ private void setApplicationIcon() {
         //ImageIcon imageicon = new ImageIcon();
         //imageicon = null;
         imageicon = new ImageIcon();
-        applicationImageRelativePath = "./PROJECT/CONFIG/images/applicationImage.png";
+        applicationImageRelativePath = "PROJECT/IMAGES/applicationImage.png";
         applicationDefaultImage = new File(applicationImageRelativePath);
+        applicationImageAbsolutePath = applicationDefaultImage.getAbsolutePath();
         setApplicationIcon();
-
 
         //ImageIcon imageicon = new ImageIcon();
         FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
@@ -169,8 +176,6 @@ private void setApplicationIcon() {
         deleteButton.setIcon(flatTabbedPaneCloseIcon);
 
         color = UIManager.getColor ( "Panel.background" );
-
-
 
         cardPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -281,11 +286,47 @@ private void setApplicationIcon() {
 
                     applicationFile = new File(applicationRelativePath);
                     Desktop desktop = Desktop.getDesktop();
-                    try {
+                    switch (applicationType){
+                        case 1:
+                            try {
+                                desktop.open(applicationFile);
+                            } catch (Exception exception) {
+                                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Please check the application settings.\n" +
+                                    "Would you like to open application settings panel?", "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
+                                exception.printStackTrace();
+                                if (comfirmation == JOptionPane.YES_OPTION) {
+                                    JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
+                                    setApplicationIcon();
+                                    cardPanel.repaint();
+                                    cardPanel.revalidate();
+                                }
+                            }
+                            break;
+                        case 2:
+                            try {
+                                //windows console
+                                setAppliactionFile();
+                                Runtime.getRuntime().exec("cmd.exe /c start " + applicationFile.getName(), null, applicationFile.getParentFile());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                            break;
+                        default:
+                            try {
+                                desktop.open(applicationFile);
+                            } catch (Exception exception) {
+                                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Please check the application settings.\n" +
+                                    "Would you like to open application settings panel?", "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
+                                exception.printStackTrace();
+                                if (comfirmation == JOptionPane.YES_OPTION) {
+                                    JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
+                                    setApplicationIcon();
+                                    cardPanel.repaint();
+                                    cardPanel.revalidate();
+                                }
+                            }
+                            break;
 
-                        desktop.open(applicationFile);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
                     }
                 }
                 else{
