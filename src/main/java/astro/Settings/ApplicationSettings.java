@@ -14,12 +14,16 @@ public class ApplicationSettings extends JFrame {
     private JTextField applicationAbsolutePath;
     private JTextField applicationImageRelativePath;
     private JTextField applicationImageAbsolutePath;
-    private JPanel applicationPath;
-    private JPanel applicationImage;
+    public JPanel applicationPath;
+    public JPanel applicationImage;
     private JLabel browseApplication;
     private JLabel browseImage;
     private JComboBox applicationTypeBox;
+    private JPanel applicationPreviewPanel;
+    private JLabel applicationPreview;
+    private JPanel applicationImagePanel;
     public Application application;
+
 
     void repaintSettingsPane() {
 
@@ -27,8 +31,16 @@ public class ApplicationSettings extends JFrame {
 
     }
 
+    public void setApplication(Application application){
+        this.application = application;
+    }
+
     public ApplicationSettings(Application application) {
 
+        this.add(applicationSettings);
+        this.pack();
+
+        //this.application = new Application(application.applicationsPanel);
         this.application = application;
 
         //UIManager.getInsets("PopupMenu.borderInsets"), UIManager.getColor("PopupMenu.borderColor"));
@@ -48,12 +60,25 @@ public class ApplicationSettings extends JFrame {
         applicationTypeBox.setSelectedIndex(application.getApplicationType());
         applicationTypeBox.updateUI();
 
+        //application.setApplicationPreview();
+        applicationPreview.setIcon(application.applicationPreview);
+
+        //Application application1 = SerializationUtils.clone(application);
+        //Application application1 = new Application(applicationImagePanel);
+        //applicationPreview.add(application1.applicationPanel);
+
+        //applicationPreview.add(this.application.applicationPanel);
+        //applicationPreview.setVisible(true);
+
         //init application values
         applicationRelativePath.setText(application.applicationRelativePath);
         applicationAbsolutePath.setText(application.applicationAbsolutePath);
 
         applicationImageRelativePath.setText(application.applicationImageRelativePath);
         applicationImageAbsolutePath.setText(application.applicationImageAbsolutePath);
+
+        //this.pack();
+        //JOptionPane.showMessageDialog(application.applicationsPanel, applicationPath.getWidth() + " " + applicationPath.getHeight(), "Application Settings", JOptionPane.CLOSED_OPTION);
 
         browseApplication.addMouseListener(new MouseAdapter() {
             @Override
@@ -113,6 +138,32 @@ public class ApplicationSettings extends JFrame {
 
                     application.applicationImageRelativePath = relative;
                     applicationImageRelativePath.setText(relative);
+                    application.setApplicationIcon();
+                    //application.applicationImage.setIcon(application.imageicon);
+                    application.applicationPanel.repaint();
+                    application.applicationPanel.revalidate();
+/*
+                    Application applicationPreview = new Application(application.applicationsPanel);
+                    applicationPreviewPanel.add(applicationPreview.applicationPanel);
+                    //set applicationPrewiew as application
+
+                    applicationPreviewPanel.repaint();
+                    applicationPreviewPanel.revalidate();
+*/
+                    application.setApplicationPreview();
+                    application.applicationPanel.repaint();
+                    application.applicationPanel.revalidate();
+                    applicationPreview.setIcon(application.applicationPreview);
+                    //applicationPreview.setIcon(application.imageicon);
+                    applicationPreviewPanel.repaint();
+                    applicationPreviewPanel.revalidate();
+
+                    JOptionPane.showMessageDialog(application.applicationsPanel, applicationPath.getWidth() + " " + applicationPath.getHeight(), "Application Settings", JOptionPane.CLOSED_OPTION);
+
+
+
+
+                    //applicationImageLabel.setIcon(application.imageicon);
 
                 }
 

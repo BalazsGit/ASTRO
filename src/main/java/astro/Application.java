@@ -22,9 +22,9 @@ public class Application extends JFrame{
 
     public JPanel applicationPanel;
     private JPanel defaultBackground;
-    private JPanel applicationBackground;
+    public JPanel applicationBackground;
     private JPanel applicationMenu;
-    private JPanel cardPanel;
+    public JPanel cardPanel;
     private JLabel startButton;
     private JLabel stopButton;
     private JLabel deleteButton;
@@ -32,7 +32,7 @@ public class Application extends JFrame{
     private JPanel bottomMenu;
     private JLabel settingsButton;
     private JLabel applicationName;
-    private JLabel applicationImage;
+    public JLabel applicationImage;
     private JPanel namePanel;
     private JLabel img;
     private JMenu add;
@@ -40,7 +40,7 @@ public class Application extends JFrame{
     private JMenuItem newMenuItem;
     private JPanel menuPanel;
     private JLayeredPane jLayeredPanel;
-    private Component applicationsPanel;
+    public Component applicationsPanel;
     public int row;
     public int column;
     public int tab;
@@ -59,8 +59,11 @@ public class Application extends JFrame{
     public String applicationID;
     public ApplicationSettings applicationSettings;
 
+
+
     public BufferedImage bufferedImage = null;
     public ImageIcon imageicon = null;
+    public ImageIcon applicationPreview = null;
 
     public int applicationType = 0; //0 = Undefined | 1 = Graphical | 2 = Console | 3 = Text | 4 = Web
     public int state = 3; //0 = not running | 1 = running | 2 = stopped | 3 = empty
@@ -77,7 +80,8 @@ public class Application extends JFrame{
         return applicationType;
     }
 
-private void setApplicationIcon() {
+public void setApplicationIcon() {
+        pack();
     applicationDefaultImage = new File(applicationImageRelativePath);
     try {
         bufferedImage = ImageIO.read(applicationDefaultImage);
@@ -96,6 +100,44 @@ private void setApplicationIcon() {
     }
 }
 
+public void setApplicationPreview(){
+    pack();
+    Component c = applicationPanel;
+    BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    c.paint(im.getGraphics());
+   /*
+    try {
+        ImageIO.write(im, "PNG", new File("shot.png"));
+    } catch (IOException e) {
+        JOptionPane.showConfirmDialog(applicationPanel, e.toString(), "ATTENTION", JOptionPane.YES_NO_OPTION);
+        e.printStackTrace();
+    }
+
+    */
+    applicationPreview.setImage(im);
+}
+
+public ImageIcon getApplicationPreview(){
+        return applicationPreview;
+}
+
+    private void showApplicationSettings (){
+        setApplicationPreview();
+
+        Dimension d = new Dimension();
+        d.setSize(800 > 4 * applicationPanel.getWidth() ? 800 : 4 * applicationPanel.getWidth(), 600 > 3 * applicationPanel.getHeight() ? 600 : 3 * applicationPanel.getHeight());
+        applicationSettings.applicationSettings.setPreferredSize(d);
+
+        //put center of the screen and set components minimum size like application and others
+
+        //JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.getWidth() + " " + applicationSettings.getHeight(), "Application Settings", JOptionPane.CLOSED_OPTION);
+
+        JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
+
+        cardPanel.repaint();
+        cardPanel.revalidate();
+    }
+
     public Application(Component applicationsPanel){
 
         this.add(applicationPanel);
@@ -111,10 +153,12 @@ private void setApplicationIcon() {
         //ImageIcon imageicon = new ImageIcon();
         //imageicon = null;
         imageicon = new ImageIcon();
+        applicationPreview = new ImageIcon();
         applicationImageRelativePath = "PROJECT/IMAGES/applicationImage.png";
         applicationDefaultImage = new File(applicationImageRelativePath);
         applicationImageAbsolutePath = applicationDefaultImage.getAbsolutePath();
         setApplicationIcon();
+
 
         //ImageIcon imageicon = new ImageIcon();
         FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
@@ -150,7 +194,6 @@ private void setApplicationIcon() {
 
         applicationSettings = new ApplicationSettings(this);
 
-
         defaultBackground.setVisible(true);
         //applicationBackground.setVisible(true);
         applicationMenu.setVisible(false);
@@ -176,6 +219,8 @@ private void setApplicationIcon() {
         deleteButton.setIcon(flatTabbedPaneCloseIcon);
 
         color = UIManager.getColor ( "Panel.background" );
+
+        //setapplicationPreview();
 
         cardPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -295,10 +340,7 @@ private void setApplicationIcon() {
                                     "Would you like to open application settings panel?", "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
                                 exception.printStackTrace();
                                 if (comfirmation == JOptionPane.YES_OPTION) {
-                                    JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
-                                    setApplicationIcon();
-                                    cardPanel.repaint();
-                                    cardPanel.revalidate();
+                                    showApplicationSettings();
                                 }
                             }
                             break;
@@ -319,10 +361,7 @@ private void setApplicationIcon() {
                                     "Would you like to open application settings panel?", "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
                                 exception.printStackTrace();
                                 if (comfirmation == JOptionPane.YES_OPTION) {
-                                    JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
-                                    setApplicationIcon();
-                                    cardPanel.repaint();
-                                    cardPanel.revalidate();
+                                    showApplicationSettings();
                                 }
                             }
                             break;
@@ -332,10 +371,7 @@ private void setApplicationIcon() {
                 else{
                     int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "There is no application path added!\nWould you like to set the application path?", "ATTENTION", JOptionPane.YES_NO_OPTION);
                     if(comfirmation == JOptionPane.YES_OPTION){
-                        JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
-                        setApplicationIcon();
-                        cardPanel.repaint();
-                        cardPanel.revalidate();
+                        showApplicationSettings();
                     }
                     else{
                     }
@@ -397,11 +433,7 @@ private void setApplicationIcon() {
                 super.mouseExited(e);
 
                 settingsButton.setText(settings1);
-                JOptionPane.showMessageDialog(applicationsPanel, applicationSettings.applicationSettings, "Application Settings", JOptionPane.CLOSED_OPTION);
-                //save datas to database
-                setApplicationIcon();
-                cardPanel.repaint();
-                cardPanel.revalidate();
+                showApplicationSettings();
                 /*
                 if(comfirmation == JOptionPane.YES_OPTION){
                     applicationBackground.setVisible(true);
