@@ -138,7 +138,7 @@ public class ApplicationSettings extends JFrame {
 
                     application.applicationImageRelativePath = relative;
                     applicationImageRelativePath.setText(relative);
-                    application.setApplicationIcon();
+                    application.setApplicationImageIcon();
                     //application.applicationImage.setIcon(application.imageicon);
                     application.applicationPanel.repaint();
                     application.applicationPanel.revalidate();
@@ -158,7 +158,7 @@ public class ApplicationSettings extends JFrame {
                     applicationPreviewPanel.repaint();
                     applicationPreviewPanel.revalidate();
 
-                    JOptionPane.showMessageDialog(application.applicationsPanel, applicationPath.getWidth() + " " + applicationPath.getHeight(), "Application Settings", JOptionPane.CLOSED_OPTION);
+                    //JOptionPane.showMessageDialog(application.applicationsPanel, applicationPath.getWidth() + " " + applicationPath.getHeight(), "Application Settings", JOptionPane.CLOSED_OPTION);
 
 
 

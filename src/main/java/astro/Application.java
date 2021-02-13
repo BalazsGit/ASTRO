@@ -85,6 +85,7 @@ public class Application extends JFrame{
     }
 
     private void addApplication(){
+        setApplicationImageIcon();
         applicationBackground.setVisible(true);
         defaultBackground.setVisible(false);
         applicationImage.setIcon(imageicon);
@@ -96,7 +97,7 @@ public class Application extends JFrame{
     }
 
 
-public void setApplicationIcon() {
+public void setApplicationImageIcon() {
     pack();
     applicationDefaultImage = new File(applicationImageRelativePath);
     try {
@@ -110,11 +111,32 @@ public void setApplicationIcon() {
     //resize image
     if (bufferedImage != null) {
 
-        //applicationImagePanelAspectRatio = applicationImage.getWidth() / applicationImage.getHeight();
+        applicationImagePanelAspectRatio = (float)applicationImagePanel.getWidth() / (float)applicationImagePanel.getHeight();
 
-        //imageAspectRatio = bufferedImage.getWidth() / bufferedImage.getHeight();
+        JOptionPane.showConfirmDialog(applicationPanel,   "width: " + bufferedImage.getWidth() + " height: " + bufferedImage.getHeight(), "ATTENTION", JOptionPane.YES_NO_OPTION);
 
-        Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+
+        imageAspectRatio = (float)bufferedImage.getWidth() / (float)bufferedImage.getHeight();
+
+        Image dimg;
+
+        if(applicationImagePanelAspectRatio <= imageAspectRatio){
+            //fit image to applicationPanel width
+            dimg = bufferedImage.getScaledInstance(applicationImagePanel.getWidth(), (int)(applicationImagePanel.getWidth() / imageAspectRatio), Image.SCALE_SMOOTH);
+
+        }
+        else{
+            //fit image to applicationPanel height
+            JOptionPane.showConfirmDialog(applicationPanel,  "aspect ration: " + imageAspectRatio + " width: " + (int)(applicationImagePanel.getHeight() * imageAspectRatio) + " height: " + applicationImagePanel.getHeight(), "ATTENTION", JOptionPane.YES_NO_OPTION);
+
+            dimg = bufferedImage.getScaledInstance((int)(applicationImagePanel.getHeight() * imageAspectRatio), applicationImagePanel.getHeight(), Image.SCALE_SMOOTH);
+
+
+        }
+        JOptionPane.showConfirmDialog(applicationPanel, "width: " + applicationImagePanel.getWidth() + " height: " + applicationImagePanel.getHeight(), "ATTENTION", JOptionPane.YES_NO_OPTION);
+
+
+
         imageicon.setImage(dimg);
     } else {
         imageicon = null;
@@ -170,7 +192,7 @@ public ImageIcon getApplicationPreview(){
         applicationImageRelativePath = "PROJECT/IMAGES/applicationImage.png";
         applicationDefaultImage = new File(applicationImageRelativePath);
         applicationImageAbsolutePath = applicationDefaultImage.getAbsolutePath();
-        setApplicationIcon();
+        //setApplicationImageIcon();
 
 
         //ImageIcon imageicon = new ImageIcon();
