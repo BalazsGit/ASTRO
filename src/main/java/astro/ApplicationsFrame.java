@@ -233,6 +233,16 @@ public class ApplicationsFrame extends JFrame {
                 }
             }
         });
+
+        //change aapplicationTab
+        header.nameJLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mouseClicked(e);
+                mainFrame.tabbedApplications.setSelectedComponent(applicationsTab);
+            }
+        });
+
         /*
         //later need log press to modify application name
         header.applicationsFrameNameJLabel.addMouseListener(new MouseAdapter() {
