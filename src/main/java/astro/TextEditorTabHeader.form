@@ -23,7 +23,7 @@
         <properties>
           <horizontalAlignment value="2"/>
           <horizontalTextPosition value="2"/>
-          <text value="Label"/>
+          <text value="Text Editor"/>
         </properties>
       </component>
       <component id="92a7a" class="javax.swing.JLabel" binding="xButton">

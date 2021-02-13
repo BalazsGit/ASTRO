@@ -85,46 +85,47 @@ public class Main {
 
 */
     //never be the first tab
-    static void createNewBrowserTab(CefApp cefApp, MainFrame astro, String URL){
+    static void createNewBrowserTab(CefApp cefApp, MainFrame mainFrame, String URL){
 
-        BrowserTabHeader header = new BrowserTabHeader("Loading ...");
-        BrowserFrame browserFrame = new BrowserFrame(cefApp, astro, header, URL);
+        BrowserTabHeader header = new BrowserTabHeader();
+        BrowserFrame browserFrame = new BrowserFrame(cefApp, mainFrame, header, URL);
 
-        astro.tabbedBrowserPanel.insertTab("Loading ...",null, browserFrame.browserPanel,"tooltip", astro.tabbedBrowserPanel.getTabCount()-1);
-        astro.tabbedBrowserPanel.setTabComponentAt(astro.tabbedBrowserPanel.getTabCount()-2, header.headerPanel);
+        mainFrame.tabbedBrowserPanel.insertTab("Loading ...",null, browserFrame.browserPanel,"tooltip", mainFrame.tabbedBrowserPanel.getTabCount()-1);
+        mainFrame.tabbedBrowserPanel.setTabComponentAt(mainFrame.tabbedBrowserPanel.getTabCount()-2, header.headerPanel);
         //the new tab is the selected one
-        astro.tabbedBrowserPanel.setSelectedIndex(astro.tabbedBrowserPanel.getTabCount()-2);
-        browserFrame.browserTab = astro.tabbedBrowserPanel.getSelectedComponent();
+        mainFrame.tabbedBrowserPanel.setSelectedIndex(mainFrame.tabbedBrowserPanel.getTabCount()-2);
+        browserFrame.browserTab = mainFrame.tabbedBrowserPanel.getSelectedComponent();
 
     }
 
     //never be the first tab
-    static void createNewTextEditorTab(MainFrame astro, String URL){
+    static void createNewTextEditorTab(MainFrame mainFrame, String URL){
 
-        TextEditorTabHeader header = new TextEditorTabHeader("Loading ...");
-        TextEditor textEditor = new TextEditor(astro, header);
+        TextEditorTabHeader header = new TextEditorTabHeader();
+        TextEditor textEditor = new TextEditor(mainFrame, header);
 
-        astro.tabbedTextEditor.insertTab("Loading ...",null, textEditor.textEditorPanel,"tooltip", astro.tabbedTextEditor.getTabCount()-1);
+        mainFrame.tabbedTextEditor.insertTab("Loading ...",null, textEditor.textEditorPanel,"tooltip", mainFrame.tabbedTextEditor.getTabCount()-1);
         //astro.tabbedBrowserPanel.insertTab("Loading ...",null, browserUI,"tooltip", astro.tabbedBrowserPanel.getTabCount());
-        astro.tabbedTextEditor.setTabComponentAt(astro.tabbedTextEditor.getTabCount()-2, header.headerPanel);
+        mainFrame.tabbedTextEditor.setTabComponentAt(mainFrame.tabbedTextEditor.getTabCount()-2, header.headerPanel);
         //the new tab is the selected one
-        astro.tabbedTextEditor.setSelectedIndex(astro.tabbedTextEditor.getTabCount()-2);
-        textEditor.textEditorTab = astro.tabbedTextEditor.getSelectedComponent();
+        mainFrame.tabbedTextEditor.setSelectedIndex(mainFrame.tabbedTextEditor.getTabCount()-2);
+        textEditor.textEditorTab = mainFrame.tabbedTextEditor.getSelectedComponent();
 
     }
 
     //never be the first tab
-    static void createNewApplicationsTab(MainFrame astro){
+    static void createNewApplicationsTab(MainFrame mainFrame){
 
         ApplicationsTabHeader header = new ApplicationsTabHeader();
-        ApplicationsFrame applicationsFrame = new ApplicationsFrame(astro, header);
+        ApplicationsFrame applicationsFrame = new ApplicationsFrame(mainFrame, header);
 
-        astro.tabbedApplications.insertTab("Loading ...",null, applicationsFrame.applicationsPanel,"tooltip", astro.tabbedApplications.getTabCount()-1);
+        mainFrame.tabbedApplications.insertTab("Loading ...",null, applicationsFrame.applicationsPanel,"tooltip", mainFrame.tabbedApplications.getTabCount()-1);
         //astro.tabbedBrowserPanel.insertTab("Loading ...",null, browserUI,"tooltip", astro.tabbedBrowserPanel.getTabCount());
-        astro.tabbedApplications.setTabComponentAt(astro.tabbedApplications.getTabCount()-2, header.headerPanel);
+        mainFrame.tabbedApplications.setTabComponentAt(mainFrame.tabbedApplications.getTabCount()-2, header.headerPanel);
         //the new tab is the selected one
-        astro.tabbedApplications.setSelectedIndex(astro.tabbedApplications.getTabCount()-2);
-        applicationsFrame.applicationsTab = astro.tabbedApplications.getSelectedComponent();
+        mainFrame.tabbedApplications.setSelectedIndex(mainFrame.tabbedApplications.getTabCount()-2);
+        //applicationsTab = current applications tab
+        applicationsFrame.applicationsTab = mainFrame.tabbedApplications.getSelectedComponent();
 
     }
 

@@ -11,6 +11,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.metal.*;
 import javax.swing.text.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 
 import static astro.Main.browserFocus_;
 
@@ -19,7 +22,6 @@ public class TextEditor extends JFrame{
     public JPanel textEditorPanel;
     private JTextField absolutePathField;
     private JTextField relativePathField;
-    private JTree folderTree;
     private JTextPane textPane;
     private JLabel absolutePath;
     private JLabel relativePath;
@@ -28,6 +30,9 @@ public class TextEditor extends JFrame{
     private JPanel MenuBarPanel;
     public JEditorPane editorPanel;
     public JPanel menuBarPanel;
+
+    private DefaultMutableTreeNode root;
+    private DefaultTreeModel treeModel;
 
     public JMenuBar menuBar;
     public JMenu fileMenu;
@@ -73,6 +78,57 @@ public class TextEditor extends JFrame{
                 }
             });
 
+            //file browser
+            final JFileChooser jFileChooser = new JFileChooser("./");
+            jFileChooser.setControlButtonsAreShown(false);
+            jFileChooser.setDragEnabled(true);
+            folderPanel.add(jFileChooser);
+            jFileChooser.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
+                            // Set the label to the path of the selected directory
+                            File file = new File(jFileChooser.getSelectedFile().getAbsolutePath());
+
+                            absolutePathField.setText(file.getAbsolutePath());
+
+                            String path = file.getAbsolutePath();
+                            String base = "./";
+                            String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
+
+                            relativePathField.setText(relative);
+
+                            try {
+                                // String
+                                String s1 = "", sl = "";
+
+                                // File reader
+                                FileReader fr = new FileReader(file);
+
+                                // Buffered reader
+                                BufferedReader br = new BufferedReader(fr);
+
+                                // Initilize sl
+                                sl = br.readLine();
+
+                                // Take the input from the file
+                                while ((s1 = br.readLine()) != null) {
+                                    sl = sl + "\n" + s1;
+                                }
+
+                                // Set the text
+                                textPane.setText(sl);
+                            }
+                            catch (Exception evt) {
+                                JOptionPane.showMessageDialog(textPane, evt.getMessage());
+                            }
+                        }
+                        // If the user cancelled the operation
+                        else {
+                        }
+                    }
+            });
+            //end file browser
+
             absolutePathField.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
@@ -117,19 +173,19 @@ public class TextEditor extends JFrame{
                 public void actionPerformed(ActionEvent e) {
 
                     // Create an object of JFileChooser class
-                    JFileChooser j = new javax.swing.JFileChooser("./");
+                    JFileChooser jFileChooser = new javax.swing.JFileChooser("./");
 
                     // Invoke the showsOpenDialog function to show the save dialog
-                    int r = j.showOpenDialog(null);
+                    int r = jFileChooser.showOpenDialog(null);
 
                     // If the user selects a file
                     if (r == javax.swing.JFileChooser.APPROVE_OPTION) {
                         // Set the label to the path of the selected directory
-                        File fi = new File(j.getSelectedFile().getAbsolutePath());
+                        File file = new File(jFileChooser.getSelectedFile().getAbsolutePath());
 
-                        absolutePathField.setText(fi.getAbsolutePath());
+                        absolutePathField.setText(file.getAbsolutePath());
 
-                        String path = fi.getAbsolutePath();
+                        String path = file.getAbsolutePath();
                         String base = "./";
                         String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
 
@@ -140,7 +196,7 @@ public class TextEditor extends JFrame{
                             String s1 = "", sl = "";
 
                             // File reader
-                            FileReader fr = new FileReader(fi);
+                            FileReader fr = new FileReader(file);
 
                             // Buffered reader
                             BufferedReader br = new BufferedReader(fr);
@@ -162,7 +218,6 @@ public class TextEditor extends JFrame{
                     }
                     // If the user cancelled the operation
                     else {
-                        JOptionPane.showMessageDialog(textPane, "The user cancelled the operation!");
                     }
                 }
             });

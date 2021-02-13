@@ -80,6 +80,18 @@ public class Application extends JFrame{
         return applicationType;
     }
 
+    private void addApplication(){
+        applicationBackground.setVisible(true);
+        defaultBackground.setVisible(false);
+        applicationImage.setIcon(imageicon);
+    }
+
+    private void deleteApplication(){
+        applicationBackground.setVisible(false);
+        defaultBackground.setVisible(true);
+    }
+
+
 public void setApplicationIcon() {
         pack();
     applicationDefaultImage = new File(applicationImageRelativePath);
@@ -277,21 +289,18 @@ public ImageIcon getApplicationPreview(){
             }
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                super.mouseClicked(e);
                 //String a =  getClass().getClassLoader().getResource("./PROJECT/CONFIG/images/set_name1.png").toString();
                 //String a = imageicon.getClass().getResource("./").toString();
 
                 //JOptionPane.showConfirmDialog(applicationPanel, a, "ATTENTION", JOptionPane.YES_NO_OPTION);
 
-                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION", JOptionPane.YES_NO_OPTION);
-                if(comfirmation == JOptionPane.YES_OPTION){
-                    applicationBackground.setVisible(true);
-                    defaultBackground.setVisible(false);
-                    applicationImage.setIcon(imageicon);
+                int confirmation = JOptionPane.showConfirmDialog(applicationPanel, "Add new Application?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                if(confirmation == JOptionPane.YES_OPTION){
+                    addApplication();
                 }
                 else{
-                    defaultBackground.setVisible(true);
-                    applicationBackground.setVisible(false);
+                    deleteApplication();
                 }
                 //applicationBackground.setSize(100,100);
                 cardPanel.repaint();
@@ -315,6 +324,7 @@ public ImageIcon getApplicationPreview(){
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
+                //should change only size, or color, or position instead
                 startButton.setText(play1);
 
               /*  applicationMenu.setVisible(true);

@@ -10,11 +10,11 @@ public class TextEditorTabHeader extends JFrame{
     public JPanel headerPanel;
     public JLabel jLabel;
 
-    TextEditorTabHeader(String title) {
+    TextEditorTabHeader() {
 
         this.add(headerPanel);
         headerPanel.setVisible(true);
-        jLabel.setText(title);
+        jLabel.setText("Text Editor");
         FlatTabbedPaneCloseIcon flatTabbedPaneCloseIcon = new FlatTabbedPaneCloseIcon();
         xButton.setIcon(flatTabbedPaneCloseIcon);
 

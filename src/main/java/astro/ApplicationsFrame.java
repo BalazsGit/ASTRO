@@ -1,19 +1,13 @@
 package astro;
 
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
-import static astro.Main.*;
+import static astro.Main.browserFocus_;
 
 public class ApplicationsFrame extends JFrame {
 
@@ -24,6 +18,7 @@ public class ApplicationsFrame extends JFrame {
     public Component applicationsTab;
     public DefaultTableModel dtm;
     public GridLayout gridLayout;
+    public String applicationsFrameName = null;
 
     JPanel[][] applicationPanel;
     private int rowCount = 4;
@@ -32,10 +27,19 @@ public class ApplicationsFrame extends JFrame {
     private int index;
     private int tabCount;
 
+    void setApplicationsFrameName(String applicationsFrameName){
+        this.applicationsFrameName = applicationsFrameName;
+    }
+    public String getApplicationsFrameName(){
+        return this.applicationsFrameName;
+    }
+
     public ApplicationsFrame(MainFrame mainFrame, ApplicationsTabHeader header){
 
         //this.add(applicationsPanel);
         this.header = header;
+        //setter and getter creation
+        setApplicationsFrameName(header.nameTextField.getText());
 
         createApplicationsTable(rowCount, columnCount);
       //  Application application = new Application();
@@ -147,6 +151,20 @@ public class ApplicationsFrame extends JFrame {
             }
         });
 
+        header.nameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+
+                if (!browserFocus_) return;
+                browserFocus_ = false;
+                KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+
+                header.nameTextField.grabFocus();
+                header.nameTextField.requestFocus();
+            }
+        });
+
         header.xButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -169,12 +187,53 @@ public class ApplicationsFrame extends JFrame {
                     mainFrame.tabbedApplications.getSelectedComponent().requestFocus();
 
                 }
+            }
+        });
 
+        header.nameTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                header.nameJLabel.setText(header.nameTextField.getText());
+                setApplicationsFrameName(header.nameTextField.getText());
+                header.nameTextFieldJPanel.setVisible(false);
+                header.nameJLabelJPanel.setVisible(true);
 
             }
         });
 
+        header.nameJLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if (e.getClickCount() %2 == 0 && !e.isConsumed()) {
+                    e.consume();
+                    //handle double click event
+                    header.nameTextField.setText(header.nameJLabel.getText());
+                    header.nameTextFieldJPanel.setVisible(true);
+                    header.nameJLabelJPanel.setVisible(false);
+
+                }
+
+            }
+        });
+        /*
+        //later need log press to modify application name
+        header.applicationsFrameNameJLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                header.setApplicationsFrameNameJPanel.setVisible(true);
+                header.applicationsFrameNameJPanel.setVisible(false);
+            }
+        });
+
+         */
+
     }
+
+
 
     private void createApplicationsTable(int rowCount, int columnCount){
 

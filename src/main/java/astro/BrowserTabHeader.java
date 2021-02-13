@@ -15,11 +15,11 @@ public class BrowserTabHeader extends JFrame {
     public JLabel xButton;
 
 
-    BrowserTabHeader(String title) {
+    BrowserTabHeader() {
 
         //this.add(headerPanel);
         headerPanel.setVisible(true);
-        jLabel.setText(title);
+        jLabel.setText("Loading ...");
         FlatTabbedPaneCloseIcon flatTabbedPaneCloseIcon = new FlatTabbedPaneCloseIcon();
         xButton.setIcon(flatTabbedPaneCloseIcon);
 
