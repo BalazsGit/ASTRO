@@ -34,6 +34,7 @@ public class Application extends JFrame{
     private JLabel applicationName;
     public JLabel applicationImage;
     private JPanel namePanel;
+    private JPanel applicationImagePanel;
     private JLabel img;
     private JMenu add;
     private JButton closeButton;
@@ -58,6 +59,9 @@ public class Application extends JFrame{
     public File applicationDefaultImage;
     public String applicationID;
     public ApplicationSettings applicationSettings;
+
+    private float applicationImagePanelAspectRatio;
+    private float imageAspectRatio;
 
 
 
@@ -93,7 +97,7 @@ public class Application extends JFrame{
 
 
 public void setApplicationIcon() {
-        pack();
+    pack();
     applicationDefaultImage = new File(applicationImageRelativePath);
     try {
         bufferedImage = ImageIO.read(applicationDefaultImage);
@@ -105,6 +109,11 @@ public void setApplicationIcon() {
     //Image dimg = bufferedImage.getScaledInstance(applicationImage.getWidth(), applicationImage.getHeight(), Image.SCALE_SMOOTH);
     //resize image
     if (bufferedImage != null) {
+
+        //applicationImagePanelAspectRatio = applicationImage.getWidth() / applicationImage.getHeight();
+
+        //imageAspectRatio = bufferedImage.getWidth() / bufferedImage.getHeight();
+
         Image dimg = bufferedImage.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
         imageicon.setImage(dimg);
     } else {
@@ -113,19 +122,11 @@ public void setApplicationIcon() {
 }
 
 public void setApplicationPreview(){
+    //display application preview in settings panel
     pack();
     Component c = applicationPanel;
     BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
     c.paint(im.getGraphics());
-   /*
-    try {
-        ImageIO.write(im, "PNG", new File("shot.png"));
-    } catch (IOException e) {
-        JOptionPane.showConfirmDialog(applicationPanel, e.toString(), "ATTENTION", JOptionPane.YES_NO_OPTION);
-        e.printStackTrace();
-    }
-
-    */
     applicationPreview.setImage(im);
 }
 

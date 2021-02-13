@@ -190,6 +190,7 @@ public class ApplicationsFrame extends JFrame {
             }
         });
 
+        //save new application name
         header.nameTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,24 +199,38 @@ public class ApplicationsFrame extends JFrame {
                 setApplicationsFrameName(header.nameTextField.getText());
                 header.nameTextFieldJPanel.setVisible(false);
                 header.nameJLabelJPanel.setVisible(true);
-
             }
         });
 
+        //save new application name
+        header.nameTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                mainFrame.tabbedApplications.setSelectedComponent(applicationsTab);
+                if (e.getClickCount() %2 == 0 && !e.isConsumed()) {
+                    e.consume();
+                    //handle double click event
+                    header.nameJLabel.setText(header.nameTextField.getText());
+                    header.nameTextFieldJPanel.setVisible(false);
+                    header.nameJLabelJPanel.setVisible(true);
+                }
+            }
+        });
+
+        //change application name
         header.nameJLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                mainFrame.tabbedApplications.setSelectedComponent(applicationsTab);
                 if (e.getClickCount() %2 == 0 && !e.isConsumed()) {
                     e.consume();
                     //handle double click event
                     header.nameTextField.setText(header.nameJLabel.getText());
                     header.nameTextFieldJPanel.setVisible(true);
                     header.nameJLabelJPanel.setVisible(false);
-
                 }
-
             }
         });
         /*
@@ -228,7 +243,6 @@ public class ApplicationsFrame extends JFrame {
                 header.applicationsFrameNameJPanel.setVisible(false);
             }
         });
-
          */
 
     }
@@ -254,9 +268,5 @@ public class ApplicationsFrame extends JFrame {
                 */
             }
         }
-
     }
-
-
-
 }
