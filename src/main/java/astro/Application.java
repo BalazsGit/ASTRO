@@ -8,6 +8,8 @@ import util.FlatTabbedPaneAddIcon;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -66,6 +68,7 @@ public class Application extends JFrame{
 
 
     public BufferedImage bufferedImage = null;
+    private Image image = null;
     public ImageIcon imageicon = null;
     public ImageIcon applicationPreview = null;
 
@@ -95,52 +98,38 @@ public class Application extends JFrame{
         applicationBackground.setVisible(false);
         defaultBackground.setVisible(true);
     }
-
+public int getApplicationImagePanelHeight(){
+        //calculation of applicationImagePanel height
+      //return applicationPanel.getHeight() - applicationName.getHeight() - bottomMenu.getHeight();
+    return cardPanel.getHeight() - applicationName.getHeight() - bottomMenu.getHeight();
+}
 
 public void setApplicationImageIcon() {
     pack();
     applicationDefaultImage = new File(applicationImageRelativePath);
     try {
         bufferedImage = ImageIO.read(applicationDefaultImage);
-        //imageicon.setImage(bufferedImage);
     } catch (IOException ioException) {
         ioException.printStackTrace();
     }
-
-    //Image dimg = bufferedImage.getScaledInstance(applicationImage.getWidth(), applicationImage.getHeight(), Image.SCALE_SMOOTH);
     //resize image
     if (bufferedImage != null) {
-
-        applicationImagePanelAspectRatio = (float)applicationImagePanel.getWidth() / (float)applicationImagePanel.getHeight();
-
-        JOptionPane.showConfirmDialog(applicationPanel,   "width: " + bufferedImage.getWidth() + " height: " + bufferedImage.getHeight(), "ATTENTION", JOptionPane.YES_NO_OPTION);
-
-
+        applicationImagePanelAspectRatio = (float)applicationPanel.getWidth() / (float)getApplicationImagePanelHeight();
         imageAspectRatio = (float)bufferedImage.getWidth() / (float)bufferedImage.getHeight();
-
-        Image dimg;
-
         if(applicationImagePanelAspectRatio <= imageAspectRatio){
             //fit image to applicationPanel width
-            dimg = bufferedImage.getScaledInstance(applicationImagePanel.getWidth(), (int)(applicationImagePanel.getWidth() / imageAspectRatio), Image.SCALE_SMOOTH);
-
+            image = bufferedImage.getScaledInstance(applicationPanel.getWidth(), (int)(applicationPanel.getWidth() / imageAspectRatio), Image.SCALE_SMOOTH);
         }
         else{
             //fit image to applicationPanel height
-            JOptionPane.showConfirmDialog(applicationPanel,  "aspect ration: " + imageAspectRatio + " width: " + (int)(applicationImagePanel.getHeight() * imageAspectRatio) + " height: " + applicationImagePanel.getHeight(), "ATTENTION", JOptionPane.YES_NO_OPTION);
-
-            dimg = bufferedImage.getScaledInstance((int)(applicationImagePanel.getHeight() * imageAspectRatio), applicationImagePanel.getHeight(), Image.SCALE_SMOOTH);
-
-
+            image = bufferedImage.getScaledInstance((int)(getApplicationImagePanelHeight() * imageAspectRatio), getApplicationImagePanelHeight(), Image.SCALE_SMOOTH);
         }
-        JOptionPane.showConfirmDialog(applicationPanel, "width: " + applicationImagePanel.getWidth() + " height: " + applicationImagePanel.getHeight(), "ATTENTION", JOptionPane.YES_NO_OPTION);
-
-
-
-        imageicon.setImage(dimg);
+        imageicon.setImage(image);
     } else {
         imageicon = null;
     }
+    //redraw and align the image to the right position after click window resize button
+    applicationImagePanel.setSize(this.getWidth(), this.getHeight());
 }
 
 public void setApplicationPreview(){
@@ -560,6 +549,18 @@ public ImageIcon getApplicationPreview(){
 
                 }
 
+            }
+        });
+
+        applicationPanel.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent componentEvent) {
+                setApplicationImageIcon();
+                /*applicationPanel.repaint();
+                applicationPanel.revalidate();
+                applicationImagePanel.repaint();
+                applicationImage.repaint();
+
+                 */
             }
         });
 /*
