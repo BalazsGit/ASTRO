@@ -26,7 +26,8 @@ public class Main {
 
     static boolean browserFocus_ = true;
 
-    static PropertyService propertyService;
+    public static PropertyService propertyService;
+    public static String propertiesFileName = "astro.properties";
 
     //empty play icon
     static String play1 = "\u25B7"; //OK
@@ -131,30 +132,15 @@ public class Main {
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
 
-                String propertiesFileName = "astro.properties";
+
                 propertyService = new PropertyServiceImpl(propertiesFileName);
                 String theme = propertyService.getString(Props.theme);
 
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, propertiesFileName), 0, propertyService.getLong(Props.reload));
-
-        //UIManager settings
-        try {
+            //put to GUI settins later
+            //UIManager settings
             //set GUI theme
-            switch (theme){
-                case "FlatDarkLaf":
-                    UIManager.setLookAndFeel(new FlatDarkLaf());
-                    break;
-                case "FlatLightLaf":
-                    UIManager.setLookAndFeel(new FlatLightLaf());
-                    break;
-                case "ARC - Orange":
-                    UIManager.setLookAndFeel(new FlatArcOrangeIJTheme());
-                    break;
-                default:
-                    UIManager.setLookAndFeel(new FlatDarkLaf());
-                    break;
-            }
             //Font defaultFont
             Font defaultFont = UIManager.getDefaults().getFont("defaultFont");
 
@@ -168,9 +154,6 @@ public class Main {
             UIManager.put( "Table.showHorizontalLines", true );
             UIManager.put( "Table.showVerticalLines", true );
             UIManager.put( "SplitPaneDivider.gripDotCount", 0 );
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
         //fast up GUI
         System.setProperty("sun.java2d.noddraw", Boolean.TRUE.toString());
         setDefaultLookAndFeelDecorated(true);
@@ -188,7 +171,7 @@ public class Main {
         MainFrame astro = new MainFrame("ASTRO");
 
         astro.add(astro.mainPanel);
-
+/*
         switch (theme){
             case "FlatDarkLaf":
                 astro.themeBox.setSelectedIndex(0);
@@ -206,8 +189,8 @@ public class Main {
                 astro.themeBox.updateUI();
                 break;
         }
-
-        astro.themeBox.addItemListener(new ItemListener() {
+*/
+ /*       astro.themeBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
 
@@ -238,7 +221,7 @@ public class Main {
 
             }
         });
-
+    */
         FlatTabbedPaneAddIcon flatTabbedPaneAddIcon = new FlatTabbedPaneAddIcon();
 
         //Settings Tab
@@ -280,9 +263,15 @@ public class Main {
         //create new browserTab
         createNewBrowserTab(cefApp, astro, null);
 
+        //rerender all GUI
         astro.pack();
+        SwingUtilities.updateComponentTreeUI(astro);
 
         JButton b1=new JButton("1");
+
+        //set Gui from properties using GUISettings methods
+
+
         //main page
        /* CefBrowser browser;
         browser = client.createBrowser(propertyService.getString(Props.walletURL), false, false);

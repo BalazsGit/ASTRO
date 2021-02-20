@@ -1,7 +1,11 @@
 package astro;
 
+import config.Props;
+
 import javax.swing.*;
 import java.awt.event.*;
+
+import static astro.Main.propertyService;
 
 public class MainFrame extends JFrame {
 
@@ -45,9 +49,9 @@ public class MainFrame extends JFrame {
     private JPanel BRSAPI;
     private JPanel applicationsPanel;
     public JTabbedPane tabbedApplications;
-    private JLabel nightMode;
+    public JLabel isDarkThemeLabel;
     public JTabbedPane tabbedSettings;
-    public int light = 0;
+    //public Boolean isDarkTheme = true;
 
     //public CefBrowser browser;
 
@@ -68,25 +72,43 @@ public class MainFrame extends JFrame {
         this.setTitle(title);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+/*
         themeBox.addItem("FlatDarkLaf");
         themeBox.addItem("FlatLightLaf");
         themeBox.addItem("ARC - Orange");
 
+        isDarkTheme = propertyService.getBoolean(Props.isDarkTheme);
 
-        nightMode.addMouseListener(new MouseAdapter() {
+        if(isDarkTheme) {
+            //later set icon
+            isDarkThemeLabel.setText("DarkTheme");
+        }
+        else{
+            //later set icon
+            isDarkThemeLabel.setText("LightTheme");
+        }
+
+        isDarkThemeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                if (light == 0){
-                    light = 1;
+                if (isDarkTheme){
+                    isDarkTheme = false;
+                    propertyService.setProperty("isDarkTheme", "true");
+                    isDarkThemeLabel.setText("DarkTheme");
+                    UIManager.setLookAndFeel(darkThemesHashMap.get(propertyService.getString(Props.DarkTheme)).getClassName());
                 }
                 else{
-                    light = 0;
+                    isDarkTheme = true;
+                    propertyService.setProperty("isDarkTheme", "false");
+                    isDarkThemeLabel.setText("LightTheme");
+                    UIManager.setLookAndFeel(darkThemesHashMap.get(propertyService.getString(Props.DarkTheme)).getClassName());
                 }
+                SwingUtilities.updateComponentTreeUI(mainPanel);
 
             }
         });
+        */
     }
 }
