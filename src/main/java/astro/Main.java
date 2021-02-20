@@ -243,7 +243,7 @@ public class Main {
 
         //Settings Tab
         //add GUISettings form to GUISettings Panel
-        GUISettings guiSettings = new GUISettings();
+        GUISettings guiSettings = new GUISettings(astro);
         astro.tabbedSettings.insertTab("GUI",null, guiSettings.GUISettinsPanel,"tooltip", astro.tabbedSettings.getTabCount());
 
         //Text Editor Tab
