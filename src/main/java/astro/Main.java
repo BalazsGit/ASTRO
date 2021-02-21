@@ -24,23 +24,23 @@ public class Main {
     static boolean browserFocus_ = true;
 
     //WALLET/BURST
-    public static String  burstDirPath = "PROJECT/APPLICATIONS/WALLET/BURST";
+    public static String  burstDirPath = "PROJECT/APPLICATIONS/WALLET/BURST/";
     //WALLET/PHOENIX
-    public static String  phoenixDirPath = "PROJECT/APPLICATIONS/WALLET/PHOENIX";
+    public static String  phoenixDirPath = "PROJECT/APPLICATIONS/WALLET/PHOENIX/";
     //EXCHANGE/BTDEX
-    public static String  btdexDirPath = "PROJECT/APPLICATIONS/EXCHANGE/BTDEX";
+    public static String  btdexDirPath = "PROJECT/APPLICATIONS/EXCHANGE/BTDEX/";
     //MINER/SCAVENGER
-    public static String  scavengerDirPath = "PROJECT/APPLICATIONS/MINER/SCAVENGER";
+    public static String  scavengerDirPath = "PROJECT/APPLICATIONS/MINER/SCAVENGER/";
     //PLOTTER/TURBOPLOTTER
-    public static String  turboplotterDirPath = "PROJECT/APPLICATIONS/PLOTTER/TURBOPLOTTER";
+    public static String  turboplotterDirPath = "PROJECT/APPLICATIONS/PLOTTER/TURBOPLOTTER/";
     //PLOTTER/ENGRAVER
-    public static String  engraverDirPath = "PROJECT/APPLICATIONS/PLOTTER/ENGRAVER";
+    public static String  engraverDirPath = "PROJECT/APPLICATIONS/PLOTTER/ENGRAVER/";
     //IMAGES
-    public static String  imagesDirPath = "PROJECT/IMAGES";
+    public static String  imagesDirPath = "PROJECT/IMAGES/";
     //ICONS
-    public static String iconsDirPath = "PROJECT/ICONS";
+    public static String iconsDirPath = "PROJECT/ICONS/";
     //CONFIG
-    public static String configDirPath = "PROJECT/CONFIG";
+    public static String configDirPath = "PROJECT/CONFIG/";
 
     public static PropertyService propertyService;
     public static String propertiesFileName = "astro.properties";
@@ -149,10 +149,11 @@ public class Main {
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
 
 
-                propertyService = new PropertyServiceImpl(propertiesFileName);
+                propertyService = new PropertyServiceImpl(configDirPath + propertiesFileName);
+
 
                 Timer timer = new Timer();
-                timer.schedule(new Reload(propertyService, propertiesFileName), 0, propertyService.getLong(Props.reload));
+                timer.schedule(new Reload(propertyService, configDirPath + propertiesFileName), 0, propertyService.getLong(Props.reload));
             //put to GUI settins later
             //UIManager settings
             //set GUI theme

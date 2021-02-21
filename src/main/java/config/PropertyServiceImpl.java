@@ -27,12 +27,12 @@ public class PropertyServiceImpl implements PropertyService {
         properties = new Properties();
         this.fileName = fileName;
         try {
-            in = new FileInputStream("./PROJECT/CONFIG/" + fileName);
+            in = new FileInputStream(fileName);
             properties.load(in);
             conf = new PropertiesConfiguration();
             layout = new PropertiesConfigurationLayout();
             conf.setLayout(layout);
-            layout.load(conf, new FileReader("./PROJECT/CONFIG/" + fileName));
+            layout.load(conf, new FileReader(fileName));
         } catch (IOException e) {
             //logger.error("Could not load properties from " +  fileName, e);
        }  catch (ConfigurationException e) {
@@ -47,7 +47,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public void reload(String fileName){
         try {
-            properties.load(new FileInputStream("./PROJECT/CONFIG/" + fileName));
+            properties.load(new FileInputStream(fileName));
         } catch (IOException e) {
             //logger.error("Could not load properties from reload() " +  fileName, e);
         }
@@ -124,7 +124,7 @@ public class PropertyServiceImpl implements PropertyService {
     public void setProperty(String key, String value) {
         conf.setProperty(key, value);
         try {
-            layout.save(conf, new FileWriter("./PROJECT/CONFIG/" + fileName, false));
+            layout.save(conf, new FileWriter(fileName, false));
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }catch (IOException e) {
