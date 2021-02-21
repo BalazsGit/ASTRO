@@ -4,7 +4,7 @@ import config.PropertyService;
 
 import java.util.TimerTask;
 
-class Reload extends TimerTask {
+public class Reload extends TimerTask {
     PropertyService propertyService;
     String propertiesFileName;
     Reload(PropertyService propertyService, String propertiesFileName){

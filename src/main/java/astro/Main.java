@@ -1,8 +1,6 @@
 package astro;
 
 import astro.Settings.GUISettings;
-import com.formdev.flatlaf.*;
-import com.formdev.flatlaf.intellijthemes.*;
 import config.PropertyService;
 import config.PropertyServiceImpl;
 import config.Props;
@@ -14,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.Timer;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
@@ -25,6 +22,25 @@ import static javax.swing.JDialog.setDefaultLookAndFeelDecorated;
 public class Main {
 
     static boolean browserFocus_ = true;
+
+    //WALLET/BURST
+    public static String  burstDirPath = "PROJECT/APPLICATIONS/WALLET/BURST";
+    //WALLET/PHOENIX
+    public static String  phoenixDirPath = "PROJECT/APPLICATIONS/WALLET/PHOENIX";
+    //EXCHANGE/BTDEX
+    public static String  btdexDirPath = "PROJECT/APPLICATIONS/EXCHANGE/BTDEX";
+    //MINER/SCAVENGER
+    public static String  scavengerDirPath = "PROJECT/APPLICATIONS/MINER/SCAVENGER";
+    //PLOTTER/TURBOPLOTTER
+    public static String  turboplotterDirPath = "PROJECT/APPLICATIONS/PLOTTER/TURBOPLOTTER";
+    //PLOTTER/ENGRAVER
+    public static String  engraverDirPath = "PROJECT/APPLICATIONS/PLOTTER/ENGRAVER";
+    //IMAGES
+    public static String  imagesDirPath = "PROJECT/IMAGES";
+    //ICONS
+    public static String iconsDirPath = "PROJECT/ICONS";
+    //CONFIG
+    public static String configDirPath = "PROJECT/CONFIG";
 
     public static PropertyService propertyService;
     public static String propertiesFileName = "astro.properties";
@@ -134,7 +150,6 @@ public class Main {
 
 
                 propertyService = new PropertyServiceImpl(propertiesFileName);
-                String theme = propertyService.getString(Props.theme);
 
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, propertiesFileName), 0, propertyService.getLong(Props.reload));
@@ -227,7 +242,7 @@ public class Main {
         //Settings Tab
         //add GUISettings form to GUISettings Panel
         GUISettings guiSettings = new GUISettings(astro);
-        astro.tabbedSettings.insertTab("GUI",null, guiSettings.GUISettinsPanel,"tooltip", astro.tabbedSettings.getTabCount());
+        astro.tabbedSettings.insertTab("GUI",null, guiSettings.GUISettingsPanel,"tooltip", astro.tabbedSettings.getTabCount());
 
         //Text Editor Tab
         //add new textEditorTab button
@@ -387,9 +402,15 @@ public class Main {
 
         //bug: closing site:https://www.origo.hu/sport/galeria/20201230-laza-sara-salamo-isco-real-madrid-par-szexi-kepek-galeria.html
         //close the whole application
-        addWindowListener(new WindowAdapter() {
+        astro.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                //save isDarkTheme
+                if(guiSettings.getisDarkTheme() != propertyService.getBoolean(Props.isDarkTheme)){
+                    propertyService.setProperty("isDarkTheme", guiSettings.getisDarkTheme().toString());
+                }
+
+                //JOptionPane.showConfirmDialog(astro, guiSettings.getisDarkTheme().toString(), "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
                 cefApp.getInstance().dispose();
                 astro.dispose();
             }
@@ -408,47 +429,47 @@ public class Main {
  */
         //Create file structure if not exists
         //WALLET/BURST
-        File burstDir = new File("PROJECT/APPLICATIONS/WALLET/BURST");
+        File burstDir = new File(burstDirPath);
         if(!burstDir.exists()){
             burstDir.mkdirs();
         }
         //WALLET/PHOENIX
-        File phoenixDir = new File("PROJECT/APPLICATIONS/WALLET/PHOENIX");
+        File phoenixDir = new File(phoenixDirPath);
         if(!phoenixDir.exists()){
             phoenixDir.mkdirs();
         }
         //EXCHANGE/BTDEX
-        File btdexDir = new File("PROJECT/APPLICATIONS/EXCHANGE/BTDEX");
+        File btdexDir = new File(btdexDirPath);
         if(!btdexDir.exists()){
             btdexDir.mkdirs();
         }
         //MINER/SCAVENGER
-        File scavengerDir = new File("PROJECT/APPLICATIONS/MINER/SCAVENGER");
+        File scavengerDir = new File(scavengerDirPath);
         if(!scavengerDir.exists()){
             scavengerDir.mkdirs();
         }
         //PLOTTER/TURBOPLOTTER
-        File turboplotterDir = new File("PROJECT/APPLICATIONS/PLOTTER/TURBOPLOTTER");
+        File turboplotterDir = new File(turboplotterDirPath);
         if(!turboplotterDir.exists()){
             turboplotterDir.mkdirs();
         }
         //PLOTTER/ENGRAVER
-        File engraverDir = new File("PROJECT/APPLICATIONS/PLOTTER/ENGRAVER");
+        File engraverDir = new File(engraverDirPath);
         if(!engraverDir.exists()){
             engraverDir.mkdirs();
         }
         //IMAGES
-        File imagesDir = new File("PROJECT/IMAGES");
+        File imagesDir = new File(imagesDirPath);
         if(!imagesDir.exists()){
             imagesDir.mkdirs();
         }
         //ICONS
-        File iconsDir = new File("PROJECT/ICONS");
+        File iconsDir = new File(iconsDirPath);
         if(!iconsDir.exists()){
             iconsDir.mkdirs();
         }
         //CONFIG
-        File configDir = new File("PROJECT/CONFIG");
+        File configDir = new File(configDirPath);
         if(!configDir.exists()){
             configDir.mkdirs();
         }

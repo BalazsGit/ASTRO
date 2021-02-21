@@ -47,7 +47,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public void reload(String fileName){
         try {
-            properties.load(new FileInputStream(fileName));
+            properties.load(new FileInputStream("./PROJECT/CONFIG/" + fileName));
         } catch (IOException e) {
             //logger.error("Could not load properties from reload() " +  fileName, e);
         }

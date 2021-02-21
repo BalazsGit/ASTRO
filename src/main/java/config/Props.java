@@ -65,7 +65,6 @@ public class Props {
     public static final Prop<String> homePageURL = new Prop<>("homePageURL", "www.google.com");
     public static final Prop<String> searchEngineURL = new Prop<>("searchEngineURL", "www.google.com");
     //GUI
-    public static final Prop<String> theme = new Prop<>("theme", "FlatDarkLaf"); //delete later
     public static final Prop<String> LightTheme = new Prop<>("LightTheme", "Flat Light");
     public static final Prop<String> DarkTheme = new Prop<>("DarkTheme", "Flat Dark");
     public static final Prop<Boolean> isDarkTheme = new Prop<>("isDarkTheme", true);
