@@ -407,8 +407,16 @@ public class Main {
             @Override
             public void windowClosing(WindowEvent e) {
                 //save isDarkTheme
-                if(guiSettings.getisDarkTheme() != propertyService.getBoolean(Props.isDarkTheme)){
-                    propertyService.setProperty("isDarkTheme", guiSettings.getisDarkTheme().toString());
+                if(guiSettings.getIsDarkTheme() != propertyService.getBoolean(Props.isDarkTheme)){
+                    propertyService.setProperty("isDarkTheme", guiSettings.getIsDarkTheme().toString());
+                }
+                //save LightTheme
+                if(guiSettings.getLightTheme() != guiSettings.lightThemesList.getSelectedValue().toString()){
+                    propertyService.setProperty("LightTheme", guiSettings.lightThemesList.getSelectedValue().toString());
+                }
+                //save DarkTheme
+                if(guiSettings.getDarkTheme() != guiSettings.darkThemesList.getSelectedValue().toString()){
+                    propertyService.setProperty("DarkTheme", guiSettings.darkThemesList.getSelectedValue().toString());
                 }
 
                 //JOptionPane.showConfirmDialog(astro, guiSettings.getisDarkTheme().toString(), "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
