@@ -110,6 +110,14 @@ public class GUISettings extends JFrame {
         //propertyService.
         //propertyService = new PropertyServiceImpl(propertiesFileName);
 
+        //start Font settings
+
+
+
+
+        //end Font settings
+
+        //start GUI Themes settings
         flatAllIJThemes = new FlatAllIJThemes();
 
         DefaultListModel<String> lightListModel = new DefaultListModel<>();
@@ -180,7 +188,7 @@ public class GUISettings extends JFrame {
             //set defaults
         }
 
-        //set GUI from properties using GUISettings methods
+        //set GUI from properties
         if(isDarkTheme){
            try {
                UIManager.setLookAndFeel(darkThemesHashMap.get(darkTheme).getClassName());
@@ -272,7 +280,7 @@ public class GUISettings extends JFrame {
             //later set icon
             mainFrame.isDarkThemeLabel.setText("LightTheme");
         }
-
+        //change between LightTheme and DarkTheme
         mainFrame.isDarkThemeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -280,11 +288,9 @@ public class GUISettings extends JFrame {
                 //propertyService.reload(propertiesFileName);
                 if (isDarkTheme){
                     isDarkTheme = false;
-                    //propertyService.setProperty("isDarkTheme", "false");
                     mainFrame.isDarkThemeLabel.setText("LightTheme");
                     try {
                         UIManager.setLookAndFeel(lightThemesHashMap.get(lightThemesList.getSelectedValue()).getClassName());
-                        //UIManager.setLookAndFeel(lightThemesHashMap.get(propertyService.getString(Props.LightTheme)).getClassName());
                     } catch (ClassNotFoundException | InstantiationException
                         | IllegalAccessException | UnsupportedLookAndFeelException exception) {
                         exception.printStackTrace();
@@ -292,7 +298,6 @@ public class GUISettings extends JFrame {
                 }
                 else{
                     isDarkTheme = true;
-                    //propertyService.setProperty("isDarkTheme", "true");
                     mainFrame.isDarkThemeLabel.setText("DarkTheme");
                     try {
                         UIManager.setLookAndFeel(darkThemesHashMap.get(darkThemesList.getSelectedValue()).getClassName());
@@ -305,22 +310,6 @@ public class GUISettings extends JFrame {
                 SwingUtilities.updateComponentTreeUI(mainFrame);
             }
         });
-        /*
-        saveLightTheme.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                propertyService.setProperty("LightTheme", lightThemesHashMap.get(lightThemesList.getSelectedValue()).getName());
-            }
-        });
-        saveDarkTheme.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                propertyService.setProperty("DarkTheme", darkThemesHashMap.get(darkThemesList.getSelectedValue()).getName());
-            }
-        });
-         */
         restoreDefaultThemesLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -350,6 +339,7 @@ public class GUISettings extends JFrame {
                 SwingUtilities.updateComponentTreeUI(mainFrame);
             }
         });
+        //end GUI Themes settings
         SwingUtilities.updateComponentTreeUI(mainFrame);
     }
 }

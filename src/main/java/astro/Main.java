@@ -162,6 +162,9 @@ public class Main {
 
             Font userFont = new Font(propertyService.getString(Props.fontFamily), propertyService.getInt(Props.fontStyle), propertyService.getInt(Props.fontSize));
 
+            //Menu.opaque = false
+            //MenuItem.opaque = false
+
             UIManager.put( "defaultFont", userFont );
             UIManager.put( "TabbedPane.showTabSeparators", true );
             UIManager.put( "TabbedPane.scrollButtonsPolicy", "asNeededSingle" );
@@ -170,6 +173,7 @@ public class Main {
             UIManager.put( "Table.showHorizontalLines", true );
             UIManager.put( "Table.showVerticalLines", true );
             UIManager.put( "SplitPaneDivider.gripDotCount", 0 );
+            UIManager.put( "List.background", "@background" );
         //fast up GUI
         System.setProperty("sun.java2d.noddraw", Boolean.TRUE.toString());
         setDefaultLookAndFeelDecorated(true);
