@@ -1,19 +1,13 @@
 package astro;
 
-import org.cef.browser.CefBrowser;
-import org.cef.handler.CefFocusHandlerAdapter;
-
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.metal.*;
-import javax.swing.text.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 
 import static astro.Main.browserFocus_;
 
@@ -22,39 +16,47 @@ public class TextEditor extends JFrame{
     public JPanel textEditorPanel;
     private JTextField absolutePathField;
     private JTextField relativePathField;
-    private JTextPane textPane;
+    private JTextPane textPaneA;
     private JLabel absolutePath;
     private JLabel relativePath;
     private JButton copyAbsolutePath;
     private JButton copyRelativePath;
-    private JPanel MenuBarPanel;
+    private JPanel MenuBarPanelA;
     public JEditorPane editorPanel;
     public JPanel menuBarPanel;
 
     private DefaultMutableTreeNode root;
     private DefaultTreeModel treeModel;
 
-    public JMenuBar menuBar;
-    public JMenu fileMenu;
-    public JMenu editMenu;
-    public JMenu closeMenu;
-    private JMenuItem newMenuItem;
-    private JMenuItem openMenuItem;
-    private JMenuItem saveMenuItem;
-    private JMenuItem printMenuItem;
-    private JMenuItem cutMenuItem;
-    private JMenuItem copyMenuItem;
-    private JMenuItem pasteMenuItem;
-    private JMenuItem closeMenuItem;
+    public JMenuBar menuBarA;
+    public JMenu fileMenuA;
+    public JMenu editMenuA;
+    public JMenu closeMenuA;
+    private JMenuItem newMenuItemA;
+    private JMenuItem openMenuItemA;
+    private JMenuItem saveMenuItemA;
+    private JMenuItem printMenuItemA;
+    private JMenuItem cutMenuItemA;
+    private JMenuItem copyMenuItemA;
+    private JMenuItem pasteMenuItemA;
+    private JMenuItem closeMenuItemA;
     private JButton cutAbsolutePath;
     private JButton pasteAbsolutePath;
     private JButton cutRelativePath;
     private JButton pasteRelativePath;
     private JButton clearRelativePath;
     private JButton clearAbsolutePath;
-    private JPanel folderPanel;
+    private JPanel folderPanelA;
     private JPanel pathPanel;
+    private JPanel textPanelA;
+    private JTextPane textPaneB;
+    private JPanel MenuBarPanelB;
+    private JScrollPane JScrollPaneA;
+    private JScrollPane JScrollPaneB;
+    private JPanel textPanelB;
     private JPanel textPanel;
+    private JTabbedPane tabbedPane;
+    private JPanel folderPanelB;
 
     public Component textEditorTab;
     public MainFrame mainFrame;
@@ -64,7 +66,7 @@ public class TextEditor extends JFrame{
 
         public TextEditor(MainFrame mainFrame, TextEditorTabHeader header) {
 
-            textPane.addFocusListener(new FocusAdapter() {
+            textPaneA.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
                     super.focusGained(e);
@@ -73,8 +75,8 @@ public class TextEditor extends JFrame{
                     browserFocus_ = false;
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
 
-                    textPane.grabFocus();
-                    textPane.requestFocus();
+                    textPaneA.grabFocus();
+                    textPaneA.requestFocus();
                 }
             });
 
@@ -82,7 +84,7 @@ public class TextEditor extends JFrame{
             final JFileChooser jFileChooser = new JFileChooser("./");
             jFileChooser.setControlButtonsAreShown(false);
             jFileChooser.setDragEnabled(true);
-            folderPanel.add(jFileChooser);
+            folderPanelA.add(jFileChooser);
             jFileChooser.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
@@ -116,10 +118,10 @@ public class TextEditor extends JFrame{
                                 }
 
                                 // Set the text
-                                textPane.setText(sl);
+                                textPaneA.setText(sl);
                             }
                             catch (Exception evt) {
-                                JOptionPane.showMessageDialog(textPane, evt.getMessage());
+                                JOptionPane.showMessageDialog(textPaneA, evt.getMessage());
                             }
                         }
                         // If the user cancelled the operation
@@ -138,8 +140,8 @@ public class TextEditor extends JFrame{
                     browserFocus_ = false;
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
 
-                    textPane.grabFocus();
-                    textPane.requestFocus();
+                    textPaneA.grabFocus();
+                    textPaneA.requestFocus();
                 }
             });
 
@@ -152,23 +154,23 @@ public class TextEditor extends JFrame{
                     browserFocus_ = false;
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
 
-                    textPane.grabFocus();
-                    textPane.requestFocus();
+                    textPaneA.grabFocus();
+                    textPaneA.requestFocus();
                 }
             });
 
             // File Menu
-            newMenuItem.addActionListener(new ActionListener() {
+            newMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    textPane.setText("");
+                    textPaneA.setText("");
 
                 }
             });
 
-            //newMenuItem.addActionListener(this);
-            openMenuItem.addActionListener(new ActionListener() {
+            //newMenuItemA.addActionListener(this);
+            openMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
@@ -210,10 +212,10 @@ public class TextEditor extends JFrame{
                             }
 
                             // Set the text
-                            textPane.setText(sl);
+                            textPaneA.setText(sl);
                         }
                         catch (Exception evt) {
-                            JOptionPane.showMessageDialog(textPane, evt.getMessage());
+                            JOptionPane.showMessageDialog(textPaneA, evt.getMessage());
                         }
                     }
                     // If the user cancelled the operation
@@ -222,7 +224,7 @@ public class TextEditor extends JFrame{
                 }
             });
 
-            saveMenuItem.addActionListener(new ActionListener() {
+            saveMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
@@ -245,23 +247,23 @@ public class TextEditor extends JFrame{
                             BufferedWriter w = new BufferedWriter(wr);
 
                             // Write
-                            w.write(textPane.getText());
+                            w.write(textPaneA.getText());
 
                             w.flush();
                             w.close();
                         }
                         catch (Exception evt) {
-                            JOptionPane.showMessageDialog(textPane, evt.getMessage());
+                            JOptionPane.showMessageDialog(textPaneA, evt.getMessage());
                         }
                     }
                    // If the user cancelled the operation
                     else {
-                        JOptionPane.showMessageDialog(textPane, "The user cancelled the operation!");
+                        JOptionPane.showMessageDialog(textPaneA, "The user cancelled the operation!");
                     }
                 }
             });
 
-            printMenuItem.addActionListener(new ActionListener() {
+            printMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
@@ -270,46 +272,46 @@ public class TextEditor extends JFrame{
                         editorPanel.print();
                     }
                     catch (Exception evt) {
-                        JOptionPane.showMessageDialog(textPane, evt.getMessage());
+                        JOptionPane.showMessageDialog(textPaneA, evt.getMessage());
                     }
 
                 }
             });
 
             // Edit Menu
-            cutMenuItem.addActionListener(new ActionListener() {
+            cutMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    textPane.cut();
+                    textPaneA.cut();
 
                 }
             });
 
-            copyMenuItem.addActionListener(new ActionListener() {
+            copyMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    textPane.copy();
+                    textPaneA.copy();
 
                 }
             });
 
-            pasteMenuItem.addActionListener(new ActionListener() {
+            pasteMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    textPane.paste();
+                    textPaneA.paste();
 
                 }
             });
 
             // Close Menu
-            closeMenuItem.addActionListener(new ActionListener() {
+            closeMenuItemA.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    closeMenu.setVisible(false);
+                    closeMenuA.setVisible(false);
 
                 }
             });
