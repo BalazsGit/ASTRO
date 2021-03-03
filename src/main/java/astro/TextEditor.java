@@ -55,8 +55,13 @@ public class TextEditor extends JFrame{
     private JScrollPane JScrollPaneB;
     private JPanel textPanelB;
     private JPanel textPanel;
-    private JTabbedPane tabbedPane;
+    private JTabbedPane folderPanel;
     private JPanel folderPanelB;
+    private JPanel menuPanel;
+    private JLabel showHideBrowserPanel;
+    private JLabel singleDoubleView;
+    private JSplitPane JSplitFolderPanel;
+    private JSplitPane JSplitTextPanel;
 
     public Component textEditorTab;
     public MainFrame mainFrame;
@@ -203,7 +208,7 @@ public class TextEditor extends JFrame{
                             // Buffered reader
                             BufferedReader br = new BufferedReader(fr);
 
-                            // Initilize sl
+                            // Initialize sl
                             sl = br.readLine();
 
                             // Take the input from the file
@@ -432,6 +437,41 @@ public class TextEditor extends JFrame{
 
                 }
             });
+            showHideBrowserPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    super.mousePressed(e);
+                    if(folderPanel.isVisible()) {
+                        folderPanel.setVisible(false);
+                    }
+                    else {
+                        folderPanel.setVisible(true);
+                        JSplitFolderPanel.setDividerLocation(0.25);
+                    }
+                    textEditorPanel.repaint();
+                    textEditorPanel.revalidate();
+                }
+            });
+            singleDoubleView.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    super.mousePressed(e);
+                    if(textPanelB.isVisible()) {
+                        textPanelB.setVisible(false);
+                    }
+                    else {
+                        textPanelB.setVisible(true);
+                        textPanelB.requestFocus();
+                        JSplitTextPanel.setDividerLocation(0.5);
+                    }
+                    textEditorPanel.repaint();
+                    textEditorPanel.revalidate();
+                }
+            });
+            JSplitFolderPanel.setDividerLocation(0.25);
+            JSplitTextPanel.setDividerLocation(0.5);
+            textEditorPanel.repaint();
+            textEditorPanel.revalidate();
 
         }
 }

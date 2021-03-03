@@ -174,6 +174,20 @@ public class Main {
             UIManager.put( "Table.showVerticalLines", true );
             UIManager.put( "SplitPaneDivider.gripDotCount", 0 );
             UIManager.put( "List.background", "@background" );
+            //UIManager.put( "ToolBar.separatorSize", 1 );
+
+        //not working
+        /*
+            UIManager.put( "ToolBar.separatorWidth", 20 );
+        UIManager.put( "Separator.height", 20 );
+        UIManager.put( "Separator.stripeWidth", 20 );
+        UIManager.put( "Separator.stripeIndent", 20 );
+        UIManager.put( "ToolBar.gripColor", "@foreground" );
+        UIManager.put( "ToolBar.separatorColor", "$Separator.foreground" );
+
+         */
+        //end not working
+
         //fast up GUI
         System.setProperty("sun.java2d.noddraw", Boolean.TRUE.toString());
         setDefaultLookAndFeelDecorated(true);
@@ -410,19 +424,22 @@ public class Main {
         astro.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //save isDarkTheme
-                if(guiSettings.getIsDarkTheme() != propertyService.getBoolean(Props.isDarkTheme)){
-                    propertyService.setProperty("isDarkTheme", guiSettings.getIsDarkTheme().toString());
-                }
-                //save LightTheme
-                if(guiSettings.getLightTheme() != guiSettings.lightThemesList.getSelectedValue().toString()){
-                    propertyService.setProperty("LightTheme", guiSettings.lightThemesList.getSelectedValue().toString());
-                }
-                //save DarkTheme
-                if(guiSettings.getDarkTheme() != guiSettings.darkThemesList.getSelectedValue().toString()){
-                    propertyService.setProperty("DarkTheme", guiSettings.darkThemesList.getSelectedValue().toString());
-                }
+                try {
+                    //save isDarkTheme
+                    if (guiSettings.getIsDarkTheme() != propertyService.getBoolean(Props.isDarkTheme)) {
+                        propertyService.setProperty("isDarkTheme", guiSettings.getIsDarkTheme().toString());
+                    }
+                    //save LightTheme
+                    if (guiSettings.getLightTheme() != guiSettings.lightThemesList.getSelectedValue().toString()) {
+                        propertyService.setProperty("LightTheme", guiSettings.lightThemesList.getSelectedValue().toString());
+                    }
+                    //save DarkTheme
+                    if (guiSettings.getDarkTheme() != guiSettings.darkThemesList.getSelectedValue().toString()) {
+                        propertyService.setProperty("DarkTheme", guiSettings.darkThemesList.getSelectedValue().toString());
+                    }
+                } catch (Exception exception) {
 
+                }
                 //JOptionPane.showConfirmDialog(astro, guiSettings.getisDarkTheme().toString(), "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
                 cefApp.getInstance().dispose();
                 astro.dispose();

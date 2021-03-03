@@ -202,32 +202,32 @@
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.formdev/flatlaf-intellij-themes -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-intellij-themes</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-swingx</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-extras</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-jide-oss</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>

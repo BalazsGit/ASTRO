@@ -55,12 +55,12 @@
     <orderEntry type="library" name="Maven: asm:asm:3.0" level="project" />
     <orderEntry type="library" name="Maven: com.jgoodies:forms:1.1-preview" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.formdev:flatlaf:1.0-rc1" level="project" />
-    <orderEntry type="library" name="Maven: com.formdev:flatlaf-intellij-themes:1.0-rc1" level="project" />
-    <orderEntry type="library" name="Maven: com.formdev:flatlaf-swingx:1.0-rc1" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf-intellij-themes:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf-swingx:1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.swinglabs.swingx:swingx-all:1.6.5-1" level="project" />
-    <orderEntry type="library" name="Maven: com.formdev:flatlaf-extras:1.0-rc1" level="project" />
-    <orderEntry type="library" name="Maven: com.formdev:flatlaf-jide-oss:1.0-rc1" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf-extras:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf-jide-oss:1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.jidesoft:jide-oss:3.6.18" level="project" />
     <orderEntry type="library" name="Maven: com.formdev:svgSalamander:1.1.2.4" level="project" />
   </component>

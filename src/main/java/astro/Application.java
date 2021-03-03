@@ -132,7 +132,8 @@ public void setApplicationImageIcon() {
     applicationImagePanel.setSize(this.getWidth(), this.getHeight());
 }
 
-public void setApplicationPreview(){
+public void setApplicationPreview() {
+
     //display application preview in settings panel
     pack();
     Component c = applicationPanel;
@@ -141,16 +142,21 @@ public void setApplicationPreview(){
     applicationPreview.setImage(im);
 }
 
-public ImageIcon getApplicationPreview(){
+public ImageIcon getApplicationPreview() {
+
         return applicationPreview;
 }
 
-    private void showApplicationSettings (){
+    private void showApplicationSettings () {
+
         setApplicationPreview();
 
-        Dimension d = new Dimension();
-        d.setSize(800 > 4 * applicationPanel.getWidth() ? 800 : 4 * applicationPanel.getWidth(), 600 > 3 * applicationPanel.getHeight() ? 600 : 3 * applicationPanel.getHeight());
-        applicationSettings.applicationSettings.setPreferredSize(d);
+        // set applicationSettings Panel dimension
+        // min width 800px
+        // min height 600px
+        Dimension dimension = new Dimension();
+        dimension.setSize(800 > 4 * applicationPanel.getWidth() ? 800 : 4 * applicationPanel.getWidth(), 600 > 3 * applicationPanel.getHeight() ? 600 : 3 * applicationPanel.getHeight());
+        applicationSettings.applicationSettings.setPreferredSize(dimension);
 
         //put center of the screen and set components minimum size like application and others
 
@@ -376,6 +382,8 @@ public ImageIcon getApplicationPreview(){
                             }
                             break;
                         default:
+                            break;
+                            /*
                             try {
                                 desktop.open(applicationFile);
                             } catch (Exception exception) {
@@ -386,7 +394,8 @@ public ImageIcon getApplicationPreview(){
                                     showApplicationSettings();
                                 }
                             }
-                            break;
+
+                             */
 
                     }
                 }
