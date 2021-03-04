@@ -16,14 +16,20 @@ public class TextEditor extends JFrame{
     public JPanel textEditorPanel;
     private JTextField absolutePathField;
     private JTextField relativePathField;
-    private JTextPane textPaneA;
     private JLabel absolutePath;
     private JLabel relativePath;
     private JButton copyAbsolutePath;
     private JButton copyRelativePath;
-    private JPanel MenuBarPanelA;
-    public JEditorPane editorPanel;
     public JPanel menuBarPanel;
+    private JPanel MenuBarPanelA;
+    private JPanel pathPanel;
+    private JButton cutAbsolutePath;
+    private JButton pasteAbsolutePath;
+    private JButton cutRelativePath;
+    private JButton pasteRelativePath;
+    private JButton clearRelativePath;
+    private JButton clearAbsolutePath;
+
 
     private DefaultMutableTreeNode root;
     private DefaultTreeModel treeModel;
@@ -40,28 +46,27 @@ public class TextEditor extends JFrame{
     private JMenuItem copyMenuItemA;
     private JMenuItem pasteMenuItemA;
     private JMenuItem closeMenuItemA;
-    private JButton cutAbsolutePath;
-    private JButton pasteAbsolutePath;
-    private JButton cutRelativePath;
-    private JButton pasteRelativePath;
-    private JButton clearRelativePath;
-    private JButton clearAbsolutePath;
-    private JPanel folderPanelA;
-    private JPanel pathPanel;
-    private JPanel textPanelA;
-    private JTextPane textPaneB;
-    private JPanel MenuBarPanelB;
-    private JScrollPane JScrollPaneA;
-    private JScrollPane JScrollPaneB;
-    private JPanel textPanelB;
-    private JPanel textPanel;
+
+
     private JTabbedPane folderPanel;
+    private JScrollPane JScrollFolderPaneA;
+    private JScrollPane JScrollFolderPaneB;
+    private JPanel folderPanelA;
     private JPanel folderPanelB;
+    private JPanel textPanel;
+    public JPanel textPanelA;
+    public JPanel textPanelB;
+    private JTextPane textPaneB;
+    private JTextPane textPaneA;
+    private JScrollPane JScrollTextPaneA;
+    private JScrollPane JScrollTextPaneB;
     private JPanel menuPanel;
+    private JPanel MenuBarPanelB;
+
     private JLabel showHideBrowserPanel;
     private JLabel singleDoubleView;
-    private JSplitPane JSplitFolderPanel;
-    private JSplitPane JSplitTextPanel;
+    public JSplitPane JSplitFolderTextPanel;
+    public JSplitPane JSplitTextPanel;
 
     public Component textEditorTab;
     public MainFrame mainFrame;
@@ -69,7 +74,15 @@ public class TextEditor extends JFrame{
     public int index = -1;
     public int tableCount = 0;
 
+    public void setJSplitPanelDividers() {
+        JSplitFolderTextPanel.setDividerLocation(0.25);
+        JSplitTextPanel.setDividerLocation(0.5);
+    }
+
         public TextEditor(MainFrame mainFrame, TextEditorTabHeader header) {
+
+            this.add(textEditorPanel);
+            this.pack();
 
             textPaneA.addFocusListener(new FocusAdapter() {
                 @Override
@@ -87,6 +100,7 @@ public class TextEditor extends JFrame{
 
             //file browser
             final JFileChooser jFileChooser = new JFileChooser("./");
+            //jFileChooser.setPreferredSize(new Dimension(100, getHeight()));
             jFileChooser.setControlButtonsAreShown(false);
             jFileChooser.setDragEnabled(true);
             folderPanelA.add(jFileChooser);
@@ -114,7 +128,7 @@ public class TextEditor extends JFrame{
                                 // Buffered reader
                                 BufferedReader br = new BufferedReader(fr);
 
-                                // Initilize sl
+                                // Initialize sl
                                 sl = br.readLine();
 
                                 // Take the input from the file
@@ -274,7 +288,7 @@ public class TextEditor extends JFrame{
 
                     try {
                         // print the file
-                        editorPanel.print();
+                        textPaneA.print();
                     }
                     catch (Exception evt) {
                         JOptionPane.showMessageDialog(textPaneA, evt.getMessage());
@@ -443,35 +457,34 @@ public class TextEditor extends JFrame{
                     super.mousePressed(e);
                     if(folderPanel.isVisible()) {
                         folderPanel.setVisible(false);
+                        JSplitFolderTextPanel.setDividerLocation(0);
                     }
                     else {
                         folderPanel.setVisible(true);
-                        JSplitFolderPanel.setDividerLocation(0.25);
                     }
-                    textEditorPanel.repaint();
-                    textEditorPanel.revalidate();
+                    setJSplitPanelDividers();
+
                 }
             });
+
             singleDoubleView.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     super.mousePressed(e);
                     if(textPanelB.isVisible()) {
                         textPanelB.setVisible(false);
+                        folderPanel.remove(JScrollFolderPaneB);
                     }
                     else {
                         textPanelB.setVisible(true);
-                        textPanelB.requestFocus();
-                        JSplitTextPanel.setDividerLocation(0.5);
+                        folderPanel.add(JScrollFolderPaneB);
+                        folderPanelB.setVisible(true);
+                        folderPanel.setTitleAt(1,"Browser B");
                     }
-                    textEditorPanel.repaint();
-                    textEditorPanel.revalidate();
+                    setJSplitPanelDividers();
+
                 }
             });
-            JSplitFolderPanel.setDividerLocation(0.25);
-            JSplitTextPanel.setDividerLocation(0.5);
-            textEditorPanel.repaint();
-            textEditorPanel.revalidate();
 
         }
 }

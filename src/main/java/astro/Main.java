@@ -128,6 +128,13 @@ public class Main {
         mainFrame.tabbedTextEditor.setSelectedIndex(mainFrame.tabbedTextEditor.getTabCount()-2);
         textEditor.textEditorTab = mainFrame.tabbedTextEditor.getSelectedComponent();
 
+        mainFrame.pack();
+        textEditor.setJSplitPanelDividers();
+        //mainFrame.pack();
+        //JOptionPane.showMessageDialog(textEditor.textEditorPanel, textEditor.textEditorPanel.getWidth() + " " + textEditor.textPanelA.getHeight() + " " + textEditor.textPanelB.getHeight(), "Application Settings", JOptionPane.CLOSED_OPTION);
+
+        //textEditor.JSplitFolderTextPanel.setDividerLocation(0.25);
+        //textEditor.JSplitTextPanel.setDividerLocation(0.5);
     }
 
     //never be the first tab
@@ -147,7 +154,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
-
 
                 propertyService = new PropertyServiceImpl(configDirPath + propertiesFileName);
 
@@ -275,7 +281,7 @@ public class Main {
         createNewTextEditorTab(astro, null);
 
         //Applications Tab
-        //add new applicatinsTab button
+        //add new applicationsTab button
         JLabel newApplicationsTabButton = new JLabel();
         newApplicationsTabButton.setIcon(flatTabbedPaneAddIcon);
         astro.tabbedApplications.insertTab("+",null, null,"tooltip", astro.tabbedApplications.getTabCount());
@@ -297,7 +303,7 @@ public class Main {
         //create new browserTab
         createNewBrowserTab(cefApp, astro, null);
 
-        //rerender all GUI
+        //render all GUI
         astro.pack();
         SwingUtilities.updateComponentTreeUI(astro);
 

@@ -75,7 +75,7 @@ public class Application extends JFrame{
     public int applicationType = 0; //0 = Undefined | 1 = Graphical | 2 = Console | 3 = Text | 4 = Web
     public int state = 3; //0 = not running | 1 = running | 2 = stopped | 3 = empty
 
-    public void setAppliactionFile(){
+    public void setApplicationFile(){
         applicationFile = new File(applicationRelativePath);
     }
 
@@ -375,7 +375,7 @@ public ImageIcon getApplicationPreview() {
                         case 2:
                             try {
                                 //windows console
-                                setAppliactionFile();
+                                setApplicationFile();
                                 Runtime.getRuntime().exec("cmd.exe /c start " + applicationFile.getName(), null, applicationFile.getParentFile());
                             } catch (IOException ex) {
                                 ex.printStackTrace();

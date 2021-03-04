@@ -148,13 +148,15 @@
           </component>
         </children>
       </grid>
-      <splitpane id="a1da5" binding="JSplitFolderPanel">
+      <splitpane id="a1da5" binding="JSplitFolderTextPanel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <continuousLayout value="false"/>
+        </properties>
         <border type="none"/>
         <children>
           <tabbedpane id="872ea" binding="folderPanel">
@@ -164,25 +166,39 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="7697d" binding="folderPanelA" layout-manager="CardLayout" hgap="0" vgap="0">
+              <scrollpane id="61926" binding="JScrollFolderPaneA">
                 <constraints>
                   <tabbedpane title="Browser A"/>
                 </constraints>
-                <properties>
-                  <preferredSize width="100" height="-1"/>
-                </properties>
+                <properties/>
                 <border type="none"/>
-                <children/>
-              </grid>
-              <grid id="f5fd5" binding="folderPanelB" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+                <children>
+                  <grid id="7697d" binding="folderPanelA" layout-manager="CardLayout" hgap="0" vgap="0">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                </children>
+              </scrollpane>
+              <scrollpane id="ab8a1" binding="JScrollFolderPaneB">
                 <constraints>
                   <tabbedpane title="Browser B"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
-                <children/>
-              </grid>
+                <children>
+                  <grid id="f5fd5" binding="folderPanelB" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints/>
+                    <properties/>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                </children>
+              </scrollpane>
             </children>
           </tabbedpane>
           <grid id="d0306" binding="textPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -304,7 +320,7 @@
                           </grid>
                         </children>
                       </grid>
-                      <scrollpane id="76f56" binding="JScrollPaneA">
+                      <scrollpane id="76f56" binding="JScrollTextPaneA">
                         <constraints>
                           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -313,7 +329,9 @@
                         <children>
                           <component id="af188" class="javax.swing.JTextPane" binding="textPaneA">
                             <constraints/>
-                            <properties/>
+                            <properties>
+                              <preferredSize width="-1" height="-1"/>
+                            </properties>
                           </component>
                         </children>
                       </scrollpane>
@@ -336,7 +354,7 @@
                         <border type="none"/>
                         <children/>
                       </grid>
-                      <scrollpane id="3d621" binding="JScrollPaneB">
+                      <scrollpane id="3d621" binding="JScrollTextPaneB">
                         <constraints>
                           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -345,7 +363,9 @@
                         <children>
                           <component id="eecd2" class="javax.swing.JTextPane" binding="textPaneB">
                             <constraints/>
-                            <properties/>
+                            <properties>
+                              <preferredSize width="-1" height="-1"/>
+                            </properties>
                           </component>
                         </children>
                       </scrollpane>
