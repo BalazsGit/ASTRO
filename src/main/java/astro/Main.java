@@ -1,6 +1,8 @@
 package astro;
 
 import astro.Settings.GUISettings;
+import astro.TextEditor.TextEditor;
+import astro.TextEditor.TextEditorTabHeader;
 import config.PropertyService;
 import config.PropertyServiceImpl;
 import config.Props;
@@ -14,14 +16,13 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.Timer;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import static javax.swing.JDialog.setDefaultLookAndFeelDecorated;
 
 
 
 public class Main {
 
-    static boolean browserFocus_ = true;
+    public static boolean browserFocus_ = true;
 
     //WALLET/BURST
     public static String  burstDirPath = "PROJECT/APPLICATIONS/WALLET/BURST/";
