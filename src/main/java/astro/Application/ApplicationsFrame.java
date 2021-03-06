@@ -1,4 +1,6 @@
-package astro;
+package astro.Application;
+
+import astro.MainFrame;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

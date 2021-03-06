@@ -1,4 +1,4 @@
-package astro;
+package astro.Browser;
 
 import com.formdev.flatlaf.icons.FlatTabbedPaneCloseIcon;
 import com.jgoodies.forms.layout.CellConstraints;
@@ -15,7 +15,7 @@ public class BrowserTabHeader extends JFrame {
     public JLabel xButton;
 
 
-    BrowserTabHeader() {
+    public BrowserTabHeader() {
 
         //this.add(headerPanel);
         headerPanel.setVisible(true);

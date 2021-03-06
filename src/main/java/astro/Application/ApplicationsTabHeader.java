@@ -1,4 +1,4 @@
-package astro;
+package astro.Application;
 
 import com.formdev.flatlaf.icons.FlatTabbedPaneCloseIcon;
 

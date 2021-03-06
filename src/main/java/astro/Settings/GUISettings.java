@@ -1,26 +1,14 @@
 package astro.Settings;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 import astro.MainFrame;
-import astro.Reload;
 import com.formdev.flatlaf.intellijthemes.*;
-import config.PropertyService;
-import config.PropertyServiceImpl;
 import config.Props;
 
-import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import static astro.Main.propertiesFileName;
 import static astro.Main.propertyService;
 
 public class GUISettings extends JFrame {

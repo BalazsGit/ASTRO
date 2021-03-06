@@ -1,4 +1,4 @@
-package astro;
+package astro.Application;
 
 import astro.Settings.ApplicationSettings;
 import com.formdev.flatlaf.icons.*;
@@ -233,7 +233,7 @@ public ImageIcon getApplicationPreview() {
         FlatMenuArrowIcon flatMenuArrowIcon = new FlatMenuArrowIcon();
         FlatMenuItemArrowIcon flatMenuItemArrowIcon = new FlatMenuItemArrowIcon();
         FlatWindowCloseIcon flatWindowCloseIcon = new FlatWindowCloseIcon();
-        FlatTreeClosedIcon flatTreeClosedIconn = new FlatTreeClosedIcon();
+        FlatTreeClosedIcon flatTreeClosedIcon = new FlatTreeClosedIcon();
         FlatInternalFrameCloseIcon flatInternalFrameCloseIcon = new FlatInternalFrameCloseIcon();
         FlatCheckBoxMenuItemIcon flatCheckBoxMenuItemIcon = new FlatCheckBoxMenuItemIcon();
         FlatTabbedPaneCloseIcon flatTabbedPaneCloseIcon = new FlatTabbedPaneCloseIcon();

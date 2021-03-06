@@ -1,5 +1,9 @@
 package astro;
 
+import astro.Application.ApplicationsFrame;
+import astro.Application.ApplicationsTabHeader;
+import astro.Browser.BrowserFrame;
+import astro.Browser.BrowserTabHeader;
 import astro.Settings.GUISettings;
 import astro.TextEditor.TextEditor;
 import astro.TextEditor.TextEditorTabHeader;
@@ -9,6 +13,7 @@ import config.Props;
 import org.cef.CefApp;
 import org.cef.CefSettings;
 import util.FlatTabbedPaneAddIcon;
+import util.Reload;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,29 +52,29 @@ public class Main {
     public static String propertiesFileName = "astro.properties";
 
     //empty play icon
-    static String play1 = "\u25B7"; //OK
+    public static String play1 = "\u25B7"; //OK
 
     //filled play icon
-    static String play2 = "\u25B6"; //OK
+    public static String play2 = "\u25B6"; //OK
 
     //empty stop icon
-    static String stop1 = "\u25FB"; //OK
+    public static String stop1 = "\u25FB"; //OK
 
     //filled stop icon
-    static String stop2 = "\u25FC"; //OK
+    public static String stop2 = "\u25FC"; //OK
 
     //settings icon ☰
-    static String settings1 = "\u2630"; //OK
+    public static String settings1 = "\u2630"; //OK
 
     //settings icon Ⅲ
-    static String settings2 = "\u2162";
+    public static String settings2 = "\u2162";
 
     //close icon
     static String close1 = "\u2715"; //OK
     static String close2 = "\u274C"; //OK
 
     //plus icon
-    static String plus1 = "\uFF0B"; //OK
+    public static String plus1 = "\uFF0B"; //OK
     static String plus2 = "\uFE62"; //same
     static String plus3 = "\u2795"; //OK
     static String plus4 = "\u2795"; //OK very good
@@ -81,7 +86,7 @@ public class Main {
     //arrow right "\u276F"
     static String arrowRight1 = "\u2771"; //OK
     static String arrowRight2 = "\u2796\u25B6"; //OK
-    static String arrowRight3 = "\u279C"; //OK best
+    public static String arrowRight3 = "\u279C"; //OK best
     static String arrowRight4 = "\u2794"; //OK
 
     //vertical separator line
@@ -103,7 +108,7 @@ public class Main {
 
 */
     //never be the first tab
-    static void createNewBrowserTab(CefApp cefApp, MainFrame mainFrame, String URL){
+    public static void createNewBrowserTab(CefApp cefApp, MainFrame mainFrame, String URL){
 
         BrowserTabHeader header = new BrowserTabHeader();
         BrowserFrame browserFrame = new BrowserFrame(cefApp, mainFrame, header, URL);
@@ -161,7 +166,7 @@ public class Main {
 
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, configDirPath + propertiesFileName), 0, propertyService.getLong(Props.reload));
-            //put to GUI settins later
+            //put to GUI settings later
             //UIManager settings
             //set GUI theme
             //Font defaultFont

@@ -1,5 +1,6 @@
-package astro;
+package astro.Browser;
 
+import astro.MainFrame;
 import config.Props;
 import org.cef.CefApp;
 import org.cef.CefClient;
@@ -139,7 +140,7 @@ public class BrowserFrame extends JFrame {
                 } else {
                     //color change later
                     //set urlField to the entered URL
-                    //urlField.setText(broserFrameURL);
+                    //urlField.setText(browserFrameURL);
                     //urlField.setText("Loading ...");
                     header.jLabel.setText("Loading ...");
                 }
