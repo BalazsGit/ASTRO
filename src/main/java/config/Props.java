@@ -71,7 +71,7 @@ public class Props {
     public static final Prop<String> fontFamily = new Prop<>("fontFamily", "Segeo UI");
     public static final Prop<Integer> fontStyle = new Prop<>("fontStyle", 0);
     public static final Prop<Integer> fontSize = new Prop<>("fontSize", 12);
-
+    public static final Prop<Boolean> textEditorDoubleSideView = new Prop<>("textEditorDoubleSideView", false);
 
 
 

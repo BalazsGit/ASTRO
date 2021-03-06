@@ -1,6 +1,7 @@
 package astro.TextEditor;
 
 import astro.MainFrame;
+import config.Props;
 
 import java.awt.*;
 import javax.swing.*;
@@ -12,6 +13,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+
+import static astro.Main.propertyService;
 
 public class TextEditor extends JFrame{
 
@@ -45,17 +48,38 @@ public class TextEditor extends JFrame{
     public int index = -1;
     public int tableCount = 0;
 
+    private Boolean textEditorDoubleSideView;
+
     public void setJSplitPanelDividers() {
         JSplitFolderTextPanel.setDividerLocation(0.25);
         JSplitTextPanel.setDividerLocation(0.5);
     }
 
+    public void setTextEditorDoubleSideView(Boolean view) {
+        // true - double side view
+        // false - single side view
 
+        if(view) {
+            textPanelB.setVisible(true);
+            folderPanel.add(JScrollFolderPaneB);
+            folderPanelB.setVisible(true);
+            folderPanel.setTitleAt(1,"Browser B");
+        }
+        else {
+            textPanelB.setVisible(false);
+            folderPanel.remove(JScrollFolderPaneB);
+        }
+        setJSplitPanelDividers();
+        textEditorDoubleSideView = view;
+    }
 
         public TextEditor(MainFrame mainFrame, TextEditorTabHeader header) {
 
             this.add(textEditorPanel);
             this.pack();
+
+            textEditorDoubleSideView = propertyService.getBoolean(Props.textEditorDoubleSideView);
+            setTextEditorDoubleSideView(textEditorDoubleSideView);
 
             TextPanelContent textPanelContentA = new TextPanelContent();
             TextPanelContent textPanelContentB = new TextPanelContent();
@@ -65,10 +89,6 @@ public class TextEditor extends JFrame{
 
             FolderPanelContent folderPanelContentA = new FolderPanelContent(folderPanelA, textPanelContentA);
             FolderPanelContent folderPanelContentB = new FolderPanelContent(folderPanelB, textPanelContentB);
-
-
-
-            textEditorPanel.setVisible(true);
 
             mainFrame.tabbedTextEditor.addChangeListener(new ChangeListener() {
                 @Override
@@ -127,18 +147,7 @@ public class TextEditor extends JFrame{
                 @Override
                 public void mousePressed(MouseEvent e) {
                     super.mousePressed(e);
-                    if(textPanelB.isVisible()) {
-                        textPanelB.setVisible(false);
-                        folderPanel.remove(JScrollFolderPaneB);
-                    }
-                    else {
-                        textPanelB.setVisible(true);
-                        folderPanel.add(JScrollFolderPaneB);
-                        folderPanelB.setVisible(true);
-                        folderPanel.setTitleAt(1,"Browser B");
-                    }
-                    setJSplitPanelDividers();
-
+                    setTextEditorDoubleSideView(!textEditorDoubleSideView);
                 }
             });
 
