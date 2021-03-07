@@ -4,7 +4,7 @@ import com.formdev.flatlaf.icons.FlatTabbedPaneCloseIcon;
 
 import javax.swing.*;
 
-public class ApplicationsTabHeader {
+public class ApplicationsTabHeader extends JFrame{
 
     public JPanel headerPanel;
     public JLabel xButton;

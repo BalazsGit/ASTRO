@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-import static astro.Main.browserFocus_;
+//import static astro.Main.browserFocus_;
 
 public class ApplicationsFrame extends JFrame {
 
@@ -30,7 +30,9 @@ public class ApplicationsFrame extends JFrame {
     private int tabCount;
 
     void setApplicationsFrameName(String applicationsFrameName){
+
         this.applicationsFrameName = applicationsFrameName;
+
     }
     public String getApplicationsFrameName(){
         return this.applicationsFrameName;
@@ -44,7 +46,7 @@ public class ApplicationsFrame extends JFrame {
         setApplicationsFrameName(header.nameTextField.getText());
 
         createApplicationsTable(rowCount, columnCount);
-      //  Application application = new Application();
+      // Application application = new Application();
 
         //JButton b1=new JButton("1");
         //applicationContainer1.add(application.applicationPanel);
@@ -132,11 +134,11 @@ public class ApplicationsFrame extends JFrame {
         //applicationsPanel.add(gridLayout);
       /*
         dtm = (DefaultTableModel) applicationsTable.getModel();
-        dtm.setRowCount(4); // instead you can use your textfiled value here
+        dtm.setRowCount(4); // instead you can use your textfield value here
         dtm.setColumnCount(6);
        */
         //dtm.setRowCount(Integer.parseInt((txtFieldName.getText()));
-        //tabel1.setModel(dtm);
+        //table1.setModel(dtm);
 
         //applicationsTable.setDropMode();
         //applicationsTable.row
@@ -154,16 +156,37 @@ public class ApplicationsFrame extends JFrame {
         });
 
         header.nameTextField.addFocusListener(new FocusAdapter() {
+            /*
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
 
                 if (!browserFocus_) return;
                 browserFocus_ = false;
-                KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-
+                //KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                //JOptionPane.showConfirmDialog(applicationsPanel, "pina ", "ATTENTION", JOptionPane.YES_NO_OPTION);
                 header.nameTextField.grabFocus();
                 header.nameTextField.requestFocus();
+            }
+             */
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                header.nameJLabel.setText(header.nameTextField.getText());
+                setApplicationsFrameName(header.nameTextField.getText());
+                header.nameTextFieldJPanel.setVisible(false);
+                header.nameJLabelJPanel.setVisible(true);
+            }
+        });
+
+        //fos
+        applicationsPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                applicationsPanel.requestFocusInWindow();
+                applicationsPanel.requestFocus();
+
             }
         });
 
@@ -229,14 +252,20 @@ public class ApplicationsFrame extends JFrame {
                 if (e.getClickCount() %2 == 0 && !e.isConsumed()) {
                     e.consume();
                     //handle double click event
+
                     header.nameTextField.setText(header.nameJLabel.getText());
                     header.nameTextFieldJPanel.setVisible(true);
                     header.nameJLabelJPanel.setVisible(false);
+
+                    header.nameTextField.grabFocus();
+                    header.nameTextField.requestFocus();
+
                 }
+
             }
         });
 
-        //change aapplicationTab
+        //change applicationTab
         header.nameJLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -258,8 +287,6 @@ public class ApplicationsFrame extends JFrame {
          */
 
     }
-
-
 
     private void createApplicationsTable(int rowCount, int columnCount){
 

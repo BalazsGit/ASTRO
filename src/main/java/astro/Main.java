@@ -27,7 +27,7 @@ import static javax.swing.JDialog.setDefaultLookAndFeelDecorated;
 
 public class Main {
 
-    public static boolean browserFocus_ = true;
+    //public static boolean browserFocus_ = true;
 
     //WALLET/BURST
     public static String  burstDirPath = "PROJECT/APPLICATIONS/WALLET/BURST/";

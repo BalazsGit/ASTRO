@@ -8,7 +8,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.*;
 
-import static astro.Main.browserFocus_;
+//import static astro.Main.browserFocus_;
 
 public class TextPanelContent extends JFrame{
     public JPanel textPanelContent;
@@ -44,7 +44,7 @@ public class TextPanelContent extends JFrame{
     public TextPanelContent(){
 
         this.add(textPanelContent);
-
+/*
         textPane.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -86,7 +86,7 @@ public class TextPanelContent extends JFrame{
                 textPane.requestFocus();
             }
         });
-
+*/
         // File Menu
         newMenuItem.addActionListener(new ActionListener() {
             @Override

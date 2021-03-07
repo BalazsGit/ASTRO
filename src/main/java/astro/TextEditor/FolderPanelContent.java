@@ -49,6 +49,7 @@ public class FolderPanelContent {
 
             // Set the text
             textPanelContent.textPane.setText(sl);
+            jFileChooser.setSelectedFile(file);
         }
         catch (Exception evt) {
             JOptionPane.showMessageDialog(textPanelContent.textPane, evt.getMessage());
@@ -96,7 +97,6 @@ public class FolderPanelContent {
 
                     File file = new File(jFileChooserPopup.getSelectedFile().getAbsolutePath());
                     loadText(file);
-                    jFileChooser.setSelectedFile(file);
 
                 }
                 // If the user cancelled the operation

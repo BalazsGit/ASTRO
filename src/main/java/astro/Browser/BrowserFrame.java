@@ -53,7 +53,7 @@ public class BrowserFrame extends JFrame {
     public int index = -1;
     public int tabCount = 0;
 
-    public String broserFrameURL;
+    public String browserFrameURL;
 
 
 
@@ -93,20 +93,21 @@ public class BrowserFrame extends JFrame {
 
 
         //forward.setFont(forward.getFont().deriveFont(20f));
-        broserFrameURL = URL;
+        browserFrameURL = URL;
 
         if (URL != null) {
-            urlField.setText(broserFrameURL);
+            urlField.setText(browserFrameURL);
             browser = client.createBrowser(URL, false, false);
         } else {
-            broserFrameURL = propertyService.getString(Props.startPageURL);
-            urlField.setText(broserFrameURL);
-            browser = client.createBrowser(broserFrameURL, false, false);
+            browserFrameURL = propertyService.getString(Props.startPageURL);
+            urlField.setText(browserFrameURL);
+            browser = client.createBrowser(browserFrameURL, false, false);
         }
         browserUI = browser.getUIComponent();
         browserDisplay.add(browserUI);
 
         //open link in new tab instead of new window
+        /*
         client.addLifeSpanHandler(new CefLifeSpanHandlerAdapter() {
             @Override
             public boolean onBeforePopup(CefBrowser browser, CefFrame frame, String target_url, String target_frame_name) {
@@ -115,6 +116,7 @@ public class BrowserFrame extends JFrame {
                 return true;
             }
         });
+        */
 
 
         //header = new BrowserTabHeader("X");
@@ -131,12 +133,12 @@ public class BrowserFrame extends JFrame {
                 if (!isLoading) {
                     // The page has finished loading.
                     // Do something with |url|
-                    broserFrameURL = browser.getURL();
+                    browserFrameURL = browser.getURL();
                     //set urlField to the loaded URL
-                    urlField.setText(broserFrameURL);
+                    urlField.setText(browserFrameURL);
                     //set tab title to tab URL
                     //mainFrame.tabbedBrowserPanel.setTitleAt(index, URL);
-                    header.jLabel.setText(broserFrameURL);
+                    header.jLabel.setText(browserFrameURL);
                 } else {
                     //color change later
                     //set urlField to the entered URL
@@ -186,7 +188,7 @@ public class BrowserFrame extends JFrame {
         });
 
         /*solution to give the focus to another instance from browser*/
-
+/*
         urlField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -215,8 +217,15 @@ public class BrowserFrame extends JFrame {
                 browserFocus_ = false;
             }
         });
-
+*/
         /* END */
+
+        client.addFocusHandler(new CefFocusHandlerAdapter() {
+            @Override
+            public void onGotFocus(CefBrowser browser) {
+                KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+            }
+        });
 
         backward.addMouseListener(new MouseAdapter() {
             @Override
@@ -225,7 +234,7 @@ public class BrowserFrame extends JFrame {
               //browser.replaceMisspelling();
 
                 browser.goBack();
-                //broserFrameURL = browser.getURL();
+                //browserFrameURL = browser.getURL();
 
             }
         });
@@ -235,7 +244,7 @@ public class BrowserFrame extends JFrame {
             public void mousePressed(MouseEvent e) {
 
                 browser.goForward();
-                //broserFrameURL = browser.getURL();
+                //browserFrameURL = browser.getURL();
 
             }
         });

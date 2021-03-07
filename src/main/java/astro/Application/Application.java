@@ -364,10 +364,10 @@ public ImageIcon getApplicationPreview() {
                             try {
                                 desktop.open(applicationFile);
                             } catch (Exception exception) {
-                                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Please check the application settings.\n" +
+                                int confirmation = JOptionPane.showConfirmDialog(applicationPanel, "Please check the application settings.\n" +
                                     "Would you like to open application settings panel?", "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
                                 exception.printStackTrace();
-                                if (comfirmation == JOptionPane.YES_OPTION) {
+                                if (confirmation == JOptionPane.YES_OPTION) {
                                     showApplicationSettings();
                                 }
                             }
@@ -400,8 +400,8 @@ public ImageIcon getApplicationPreview() {
                     }
                 }
                 else{
-                    int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "There is no application path added!\nWould you like to set the application path?", "ATTENTION", JOptionPane.YES_NO_OPTION);
-                    if(comfirmation == JOptionPane.YES_OPTION){
+                    int confirmation = JOptionPane.showConfirmDialog(applicationPanel, "There is no application path added!\nWould you like to set the application path?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                    if(confirmation == JOptionPane.YES_OPTION){
                         showApplicationSettings();
                     }
                     else{
@@ -466,7 +466,7 @@ public ImageIcon getApplicationPreview() {
                 settingsButton.setText(settings1);
                 showApplicationSettings();
                 /*
-                if(comfirmation == JOptionPane.YES_OPTION){
+                if(confirmation == JOptionPane.YES_OPTION){
                     applicationBackground.setVisible(true);
                     defaultBackground.setVisible(false);
                     applicationImage.setIcon(imageicon);
@@ -479,6 +479,7 @@ public ImageIcon getApplicationPreview() {
 */
             }
         });
+
 /*
         //add new application card
         addButton.addMouseListener(new MouseAdapter() {
@@ -570,6 +571,16 @@ public ImageIcon getApplicationPreview() {
                 applicationImage.repaint();
 
                  */
+            }
+        });
+
+        //fos
+        cardPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                cardPanel.grabFocus();
+                cardPanel.requestFocus();
             }
         });
 /*
