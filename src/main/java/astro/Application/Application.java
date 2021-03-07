@@ -387,10 +387,10 @@ public ImageIcon getApplicationPreview() {
                             try {
                                 desktop.open(applicationFile);
                             } catch (Exception exception) {
-                                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Please check the application settings.\n" +
+                                int confirmation = JOptionPane.showConfirmDialog(applicationPanel, "Please check the application settings.\n" +
                                     "Would you like to open application settings panel?", "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
                                 exception.printStackTrace();
-                                if (comfirmation == JOptionPane.YES_OPTION) {
+                                if (confirmation == JOptionPane.YES_OPTION) {
                                     showApplicationSettings();
                                 }
                             }
@@ -548,9 +548,9 @@ public ImageIcon getApplicationPreview() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                int comfirmation = JOptionPane.showConfirmDialog(applicationPanel, "Are you sure to delete this application from the database?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+                int confirmation = JOptionPane.showConfirmDialog(applicationPanel, "Are you sure to delete this application from the database?", "ATTENTION", JOptionPane.YES_NO_OPTION);
 
-                if(comfirmation == JOptionPane.YES_OPTION){
+                if(confirmation == JOptionPane.YES_OPTION){
 
                     //If  delete application, than set applicationType = 0
                     applicationType = 0;
@@ -574,12 +574,10 @@ public ImageIcon getApplicationPreview() {
             }
         });
 
-        //fos
         cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
 
-                cardPanel.grabFocus();
                 cardPanel.requestFocus();
             }
         });

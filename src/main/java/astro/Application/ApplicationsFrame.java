@@ -20,7 +20,7 @@ public class ApplicationsFrame extends JFrame {
     public Component applicationsTab;
     public DefaultTableModel dtm;
     public GridLayout gridLayout;
-    public String applicationsFrameName = null;
+    public String applicationsFrameName = "Applications";
 
     JPanel[][] applicationPanel;
     private int rowCount = 4;
@@ -29,9 +29,20 @@ public class ApplicationsFrame extends JFrame {
     private int index;
     private int tabCount;
 
+    private void editApplicationsFrameName(){
+
+        header.nameTextField.setText(header.nameJLabel.getText());
+        header.nameTextFieldJPanel.setVisible(true);
+        header.nameJLabelJPanel.setVisible(false);
+        header.nameTextField.requestFocus();
+    }
+
     void setApplicationsFrameName(String applicationsFrameName){
 
         this.applicationsFrameName = applicationsFrameName;
+        header.nameJLabel.setText(applicationsFrameName);
+        header.nameTextFieldJPanel.setVisible(false);
+        header.nameJLabelJPanel.setVisible(true);
 
     }
     public String getApplicationsFrameName(){
@@ -43,7 +54,7 @@ public class ApplicationsFrame extends JFrame {
         //this.add(applicationsPanel);
         this.header = header;
         //setter and getter creation
-        setApplicationsFrameName(header.nameTextField.getText());
+        setApplicationsFrameName(applicationsFrameName);
 
         createApplicationsTable(rowCount, columnCount);
       // Application application = new Application();
@@ -92,7 +103,7 @@ public class ApplicationsFrame extends JFrame {
 
 
         dtm = (DefaultTableModel) applicationsTable.getModel();
-        dtm.setRowCount(4); // instead you can use your textfiled value here
+        dtm.setRowCount(4); // instead you can use your textfield value here
         dtm.setColumnCount(6);
         applicationsTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         applicationsTable.setModel(dtm);
@@ -156,7 +167,7 @@ public class ApplicationsFrame extends JFrame {
         });
 
         header.nameTextField.addFocusListener(new FocusAdapter() {
-            /*
+    /*
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
@@ -164,7 +175,6 @@ public class ApplicationsFrame extends JFrame {
                 if (!browserFocus_) return;
                 browserFocus_ = false;
                 //KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-                //JOptionPane.showConfirmDialog(applicationsPanel, "pina ", "ATTENTION", JOptionPane.YES_NO_OPTION);
                 header.nameTextField.grabFocus();
                 header.nameTextField.requestFocus();
             }
@@ -172,19 +182,15 @@ public class ApplicationsFrame extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                header.nameJLabel.setText(header.nameTextField.getText());
+
                 setApplicationsFrameName(header.nameTextField.getText());
-                header.nameTextFieldJPanel.setVisible(false);
-                header.nameJLabelJPanel.setVisible(true);
             }
         });
 
-        //fos
         applicationsPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
 
-                applicationsPanel.requestFocusInWindow();
                 applicationsPanel.requestFocus();
 
             }
@@ -220,10 +226,7 @@ public class ApplicationsFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                header.nameJLabel.setText(header.nameTextField.getText());
                 setApplicationsFrameName(header.nameTextField.getText());
-                header.nameTextFieldJPanel.setVisible(false);
-                header.nameJLabelJPanel.setVisible(true);
             }
         });
 
@@ -236,9 +239,7 @@ public class ApplicationsFrame extends JFrame {
                 if (e.getClickCount() %2 == 0 && !e.isConsumed()) {
                     e.consume();
                     //handle double click event
-                    header.nameJLabel.setText(header.nameTextField.getText());
-                    header.nameTextFieldJPanel.setVisible(false);
-                    header.nameJLabelJPanel.setVisible(true);
+                    setApplicationsFrameName(header.nameTextField.getText());
                 }
             }
         });
@@ -252,14 +253,7 @@ public class ApplicationsFrame extends JFrame {
                 if (e.getClickCount() %2 == 0 && !e.isConsumed()) {
                     e.consume();
                     //handle double click event
-
-                    header.nameTextField.setText(header.nameJLabel.getText());
-                    header.nameTextFieldJPanel.setVisible(true);
-                    header.nameJLabelJPanel.setVisible(false);
-
-                    header.nameTextField.grabFocus();
-                    header.nameTextField.requestFocus();
-
+                    editApplicationsFrameName();
                 }
 
             }
