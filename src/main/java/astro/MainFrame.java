@@ -29,28 +29,31 @@ public class MainFrame extends JFrame {
     public JFrame frame;
 
     public JPanel mainPanel;
-    public JPanel topPanel;
-    public JPanel rightPanel;
-    public JPanel bottomPanel;
-    public JPanel centerPanel;
     //public JTextField urlField;
     public JButton start_scavenger;
     public JButton start_turboplotter;
     public JButton start_burst;
-    public JTabbedPane tabbedPane;
     public JComboBox themeBox;
-    public JPanel settingsPanel;
-    public JPanel textEditorPanel;
     public JPanel textEditor1;
     public JTabbedPane tabbedTextEditor;
-    private JPanel browserPanel;
     public JTabbedPane tabbedBrowserPanel;
-    private JPanel BRSAPIPanel;
-    private JPanel BRSAPI;
-    private JPanel applicationsPanel;
     public JTabbedPane tabbedApplications;
     public JLabel isDarkThemeLabel;
     public JTabbedPane tabbedSettings;
+    private JPanel mainCardPanel;
+    private JPanel topPanel;
+    private JPanel centerPanel;
+    private JTabbedPane tabbedPane;
+    private JPanel browserPanel;
+    private JPanel applicationsPanel;
+    private JPanel textEditorPanel;
+    private JPanel settingsPanel;
+    private JPanel BRSAPIPanel;
+    private JPanel BRSAPI;
+    private JPanel bottomPanel;
+    private JPanel rightPanel;
+    private JPanel loadingPagePanel;
+    private JPanel lockScreenPanel;
     //public Boolean isDarkTheme = true;
 
     //public CefBrowser browser;
@@ -62,7 +65,10 @@ public class MainFrame extends JFrame {
 
     public MainFrame(String title) {
 
-        //this.add(mainPanel);
+        this.add(mainCardPanel);
+        mainCardPanel.add(mainPanel);
+        mainCardPanel.add(loadingPagePanel);
+        mainCardPanel.add(lockScreenPanel);
 
         //urlField.setText("Loading ...");
         //urlField.setFocusable(true);

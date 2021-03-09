@@ -216,7 +216,7 @@ public class Main {
 
         MainFrame astro = new MainFrame("ASTRO");
 
-        astro.add(astro.mainPanel);
+        //astro.add(astro.mainPanel);
 /*
         switch (theme){
             case "FlatDarkLaf":
@@ -436,6 +436,8 @@ public class Main {
         astro.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                //JOptionPane.showConfirmDialog(astro, "Want to Exit?", "Exit", JOptionPane.YES_NO_OPTION);
+                astro.requestFocus();
                 try {
                     //save isDarkTheme
                     if (guiSettings.getIsDarkTheme() != propertyService.getBoolean(Props.isDarkTheme)) {
@@ -450,11 +452,12 @@ public class Main {
                         propertyService.setProperty("DarkTheme", guiSettings.darkThemesList.getSelectedValue().toString());
                     }
                 } catch (Exception exception) {
-
+                    JOptionPane.showMessageDialog(astro, "error: " + exception, "title", 1);
                 }
-                //JOptionPane.showConfirmDialog(astro, guiSettings.getisDarkTheme().toString(), "Application Launch ERROR", JOptionPane.YES_NO_OPTION);
-                cefApp.getInstance().dispose();
-                astro.dispose();
+
+                    cefApp.getInstance().dispose();
+                    astro.dispose();
+
             }
 
         });
