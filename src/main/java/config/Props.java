@@ -73,6 +73,11 @@ public class Props {
     public static final Prop<Integer> fontSize = new Prop<>("fontSize", 12);
     public static final Prop<Boolean> textEditorDoubleSideView = new Prop<>("textEditorDoubleSideView", false);
 
+    // Database
+    public static final Prop<String> dbUrl = new Prop<>("dbUrl", "");
+    public static final Prop<String> dbUsername = new Prop<>("dbUsername", "");
+    public static final Prop<String> dbPassword = new Prop<>("dbPassword", "");
+
 
 
   //  public static final Prop<Integer> limit = new Prop<>("limit", 10);

@@ -1,12 +1,12 @@
 package astro;
 
-import astro.Application.ApplicationsFrame;
-import astro.Application.ApplicationsTabHeader;
-import astro.Browser.BrowserFrame;
-import astro.Browser.BrowserTabHeader;
-import astro.Settings.GUISettings;
-import astro.TextEditor.TextEditor;
-import astro.TextEditor.TextEditorTabHeader;
+import astro.application.ApplicationsFrame;
+import astro.application.ApplicationsTabHeader;
+import astro.browser.BrowserFrame;
+import astro.browser.BrowserTabHeader;
+import astro.settings.GUISettings;
+import astro.texteditor.TextEditor;
+import astro.texteditor.TextEditorTabHeader;
 import config.PropertyService;
 import config.PropertyServiceImpl;
 import config.Props;
