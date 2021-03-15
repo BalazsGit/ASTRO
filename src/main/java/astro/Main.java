@@ -4,6 +4,7 @@ import astro.application.ApplicationsFrame;
 import astro.application.ApplicationsTabHeader;
 import astro.browser.BrowserFrame;
 import astro.browser.BrowserTabHeader;
+import astro.database.Database;
 import astro.settings.GUISettings;
 import astro.texteditor.TextEditor;
 import astro.texteditor.TextEditorTabHeader;
@@ -166,6 +167,7 @@ public class Main {
 
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, configDirPath + propertiesFileName), 0, propertyService.getLong(Props.reload));
+                //Database database = new Database();
             //put to GUI settings later
             //UIManager settings
             //set GUI theme
@@ -300,6 +302,7 @@ public class Main {
 
         //Browser Tab
         //add new browserTab button
+
         JLabel newBrowserTabButton = new JLabel();
         newBrowserTabButton.setIcon(flatTabbedPaneAddIcon);
         astro.tabbedBrowserPanel.insertTab("+",null, null,"tooltip", astro.tabbedBrowserPanel.getTabCount());
