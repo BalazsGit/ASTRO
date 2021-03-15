@@ -4,6 +4,9 @@
 
 package org.cef.browser;
 
+import org.cef.CefClient;
+import org.cef.OS;
+import org.cef.callback.CefDragData;
 import com.jogamp.nativewindow.NativeSurface;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
@@ -15,9 +18,6 @@ import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.GLBuffers;
 
-import org.cef.CefClient;
-import org.cef.OS;
-import org.cef.callback.CefDragData;
 import org.cef.handler.CefRenderHandler;
 import org.cef.handler.CefScreenInfo;
 

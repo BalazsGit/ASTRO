@@ -486,7 +486,7 @@ class CefMenuModel_N extends CefNativeAdapter implements CefMenuModel {
 
     @Override
     public boolean getAccelerator(int command_id, IntRef key_code, BoolRef shift_pressed,
-            BoolRef ctrl_pressed, BoolRef alt_pressed) {
+                                  BoolRef ctrl_pressed, BoolRef alt_pressed) {
         try {
             return N_GetAccelerator(getNativeRef(null), command_id, key_code, shift_pressed,
                     ctrl_pressed, alt_pressed);

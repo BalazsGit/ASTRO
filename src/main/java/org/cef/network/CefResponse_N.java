@@ -5,7 +5,7 @@
 package org.cef.network;
 
 import org.cef.callback.CefNative;
-import org.cef.handler.CefLoadHandler.ErrorCode;
+import org.cef.handler.CefLoadHandler;
 
 import java.util.Map;
 
@@ -56,7 +56,7 @@ class CefResponse_N extends CefResponse implements CefNative {
     }
 
     @Override
-    public ErrorCode getError() {
+    public CefLoadHandler.ErrorCode getError() {
         try {
             return N_GetError(N_CefHandle);
         } catch (UnsatisfiedLinkError ule) {
@@ -66,7 +66,7 @@ class CefResponse_N extends CefResponse implements CefNative {
     }
 
     @Override
-    public void setError(ErrorCode errorCode) {
+    public void setError(CefLoadHandler.ErrorCode errorCode) {
         try {
             N_SetError(N_CefHandle, errorCode);
         } catch (UnsatisfiedLinkError ule) {
@@ -171,8 +171,8 @@ class CefResponse_N extends CefResponse implements CefNative {
     private final native static CefResponse_N N_Create();
     private final native void N_Dispose(long self);
     private final native boolean N_IsReadOnly(long self);
-    private final native ErrorCode N_GetError(long self);
-    private final native void N_SetError(long self, ErrorCode errorCode);
+    private final native CefLoadHandler.ErrorCode N_GetError(long self);
+    private final native void N_SetError(long self, CefLoadHandler.ErrorCode errorCode);
     private final native int N_GetStatus(long self);
     private final native void N_SetStatus(long self, int status);
     private final native String N_GetStatusText(long self);

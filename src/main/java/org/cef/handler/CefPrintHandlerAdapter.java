@@ -5,10 +5,10 @@
 package org.cef.handler;
 
 import org.cef.browser.CefBrowser;
+import org.cef.misc.CefPrintSettings;
 import org.cef.callback.CefNativeAdapter;
 import org.cef.callback.CefPrintDialogCallback;
 import org.cef.callback.CefPrintJobCallback;
-import org.cef.misc.CefPrintSettings;
 
 import java.awt.Dimension;
 

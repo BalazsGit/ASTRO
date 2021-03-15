@@ -31,7 +31,7 @@ import static tests.junittests.TestSetupContext.debugPrint;
 
 // Base class for browsers that run tests.
 class TestFrame extends JFrame implements CefLifeSpanHandler, CefLoadHandler, CefRequestHandler,
-                                          CefResourceRequestHandler {
+        CefResourceRequestHandler {
     private static final long serialVersionUID = -5570653778104813836L;
     private boolean isClosed_ = false;
     private CountDownLatch countdown_ = new CountDownLatch(1);

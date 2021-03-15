@@ -10,7 +10,6 @@ import org.cef.callback.CefAuthCallback;
 import org.cef.callback.CefRequestCallback;
 import org.cef.misc.BoolRef;
 import org.cef.network.CefRequest;
-import org.cef.network.CefURLRequest;
 
 /**
  * Implement this interface to handle events related to browser requests. The methods of this class
@@ -45,7 +44,7 @@ public interface CefRequestHandler {
      * @return True to cancel the navigation or false to continue.
      */
     boolean onBeforeBrowse(CefBrowser browser, CefFrame frame, CefRequest request,
-            boolean user_gesture, boolean is_redirect);
+                           boolean user_gesture, boolean is_redirect);
 
     /**
      * Called on the UI thread before OnBeforeBrowse in certain limited cases

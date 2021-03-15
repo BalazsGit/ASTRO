@@ -6,8 +6,8 @@ package org.cef.handler;
 
 import org.cef.browser.CefBrowser;
 import org.cef.callback.CefBeforeDownloadCallback;
-import org.cef.callback.CefDownloadItem;
 import org.cef.callback.CefDownloadItemCallback;
+import org.cef.callback.CefDownloadItem;
 
 /**
  * Implement this interface to handle file downloads. The methods of this class
@@ -26,7 +26,7 @@ public interface CefDownloadHandler {
      * @param callback start the download by calling the Continue method
      */
     public void onBeforeDownload(CefBrowser browser, CefDownloadItem downloadItem,
-            String suggestedName, CefBeforeDownloadCallback callback);
+                                 String suggestedName, CefBeforeDownloadCallback callback);
 
     /**
      * Called when a download's status or progress information has been updated.

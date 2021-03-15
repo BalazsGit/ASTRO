@@ -4,7 +4,6 @@
 
 package org.cef.network;
 
-import org.cef.callback.CefNative;
 import org.cef.callback.CefWebPluginInfoVisitor;
 import org.cef.callback.CefWebPluginUnstableCallback;
 

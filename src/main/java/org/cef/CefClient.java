@@ -32,17 +32,12 @@ import org.cef.handler.CefLifeSpanHandler;
 import org.cef.handler.CefLoadHandler;
 import org.cef.handler.CefRenderHandler;
 import org.cef.handler.CefRequestHandler;
-import org.cef.handler.CefResourceHandler;
 import org.cef.handler.CefResourceRequestHandler;
 import org.cef.handler.CefScreenInfo;
 import org.cef.handler.CefWindowHandler;
 import org.cef.misc.BoolRef;
-import org.cef.misc.StringRef;
 import org.cef.network.CefRequest;
 import org.cef.network.CefRequest.TransitionType;
-import org.cef.network.CefResponse;
-import org.cef.network.CefURLRequest;
-import org.cef.network.CefWebPluginInfo;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -56,8 +51,6 @@ import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Vector;
-
-import javax.swing.SwingUtilities;
 
 /**
  * Client that owns a browser and renderer.
@@ -99,7 +92,7 @@ public class CefClient extends CefClientHandler
      * The CTOR is only accessible within this package.
      * Use CefApp.createClient() to create an instance of
      * this class.
-     * @see org.cef.CefApp.createClient()
+     * @see CefApp.createClient()
      */
     CefClient() throws UnsatisfiedLinkError {
         super();

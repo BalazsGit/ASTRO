@@ -5,20 +5,18 @@
 package org.cef.browser;
 
 import org.cef.CefClient;
-import org.cef.browser.CefRequestContext;
 import org.cef.callback.CefDragData;
-import org.cef.callback.CefNativeAdapter;
 import org.cef.callback.CefPdfPrintCallback;
+import org.cef.misc.CefPdfPrintSettings;
+import org.cef.callback.CefNativeAdapter;
 import org.cef.callback.CefRunFileDialogCallback;
 import org.cef.callback.CefStringVisitor;
 import org.cef.handler.CefClientHandler;
 import org.cef.handler.CefDialogHandler.FileDialogMode;
 import org.cef.handler.CefRenderHandler;
 import org.cef.handler.CefWindowHandler;
-import org.cef.misc.CefPdfPrintSettings;
 import org.cef.network.CefRequest;
 
-import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;

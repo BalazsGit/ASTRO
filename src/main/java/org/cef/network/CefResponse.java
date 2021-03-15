@@ -4,7 +4,7 @@
 
 package org.cef.network;
 
-import org.cef.handler.CefLoadHandler.ErrorCode;
+import org.cef.handler.CefLoadHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,12 +45,12 @@ public abstract class CefResponse {
     /**
      * Get the response error code. Returns ERR_NONE if there was no error.
      */
-    public abstract ErrorCode getError();
+    public abstract CefLoadHandler.ErrorCode getError();
 
     /**
      * Get the response error code. Returns ERR_NONE if there was no error.
      */
-    public abstract void setError(ErrorCode errorCode);
+    public abstract void setError(CefLoadHandler.ErrorCode errorCode);
 
     /**
      * Get the response status code.

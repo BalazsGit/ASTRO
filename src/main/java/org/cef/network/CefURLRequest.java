@@ -4,8 +4,8 @@
 
 package org.cef.network;
 
+import org.cef.handler.CefLoadHandler;
 import org.cef.callback.CefURLRequestClient;
-import org.cef.handler.CefLoadHandler.ErrorCode;
 
 /**
  * Class used to make a URL request. URL requests are not associated with a
@@ -73,7 +73,7 @@ public abstract class CefURLRequest {
      * Returns the request error if status is UR_CANCELED or UR_FAILED, or 0
      * otherwise.
      */
-    public abstract ErrorCode getRequestError();
+    public abstract CefLoadHandler.ErrorCode getRequestError();
 
     /**
      * Returns the response, or NULL if no response information is available.

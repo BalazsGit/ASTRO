@@ -4,10 +4,10 @@
 
 package org.cef;
 
+import astro.astro.util.CefLibPath;
 import org.cef.callback.CefSchemeHandlerFactory;
 import org.cef.handler.CefAppHandler;
 import org.cef.handler.CefAppHandlerAdapter;
-import util.CefLibPath;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

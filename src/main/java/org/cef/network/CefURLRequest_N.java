@@ -5,8 +5,8 @@
 package org.cef.network;
 
 import org.cef.callback.CefNative;
+import org.cef.handler.CefLoadHandler;
 import org.cef.callback.CefURLRequestClient;
-import org.cef.handler.CefLoadHandler.ErrorCode;
 
 class CefURLRequest_N extends CefURLRequest implements CefNative {
     // Used internally to store a pointer to the CEF object.
@@ -72,7 +72,7 @@ class CefURLRequest_N extends CefURLRequest implements CefNative {
     }
 
     @Override
-    public ErrorCode getRequestError() {
+    public CefLoadHandler.ErrorCode getRequestError() {
         try {
             return N_GetRequestError(N_CefHandle);
         } catch (UnsatisfiedLinkError ule) {
@@ -103,7 +103,7 @@ class CefURLRequest_N extends CefURLRequest implements CefNative {
     private final native void N_Create(CefRequest request, CefURLRequestClient client);
     private final native void N_Dispose(long self);
     private final native Status N_GetRequestStatus(long self);
-    private final native ErrorCode N_GetRequestError(long self);
+    private final native CefLoadHandler.ErrorCode N_GetRequestError(long self);
     private final native CefResponse N_GetResponse(long self);
     private final native void N_Cancel(long self);
 }

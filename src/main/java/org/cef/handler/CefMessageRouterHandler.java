@@ -29,7 +29,7 @@ public interface CefMessageRouterHandler extends CefNative {
      *         callback.
      */
     public boolean onQuery(CefBrowser browser, CefFrame frame, long queryId, String request,
-            boolean persistent, CefQueryCallback callback);
+                           boolean persistent, CefQueryCallback callback);
 
     /**
      * Called when a pending JavaScript query is canceled.

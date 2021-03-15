@@ -46,8 +46,8 @@ public interface CefJSDialogHandler {
      * application will use a custom dialog.
      */
     public boolean onJSDialog(CefBrowser browser, String origin_url, JSDialogType dialog_type,
-            String message_text, String default_prompt_text, CefJSDialogCallback callback,
-            BoolRef suppress_message);
+                              String message_text, String default_prompt_text, CefJSDialogCallback callback,
+                              BoolRef suppress_message);
 
     /**
      * Called to run a dialog asking the user if they want to leave a page. Return

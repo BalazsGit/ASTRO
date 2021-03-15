@@ -6,7 +6,6 @@ package org.cef.handler;
 
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
-import org.cef.handler.CefResourceRequestHandler;
 import org.cef.misc.BoolRef;
 import org.cef.network.CefRequest;
 import org.cef.network.CefWebPluginInfo;
@@ -52,6 +51,6 @@ public interface CefRequestContextHandler {
      * @return A CefResourceRequestHandler instance or null.
      */
     CefResourceRequestHandler getResourceRequestHandler(CefBrowser browser, CefFrame frame,
-            CefRequest request, boolean isNavigation, boolean isDownload, String requestInitiator,
-            BoolRef disableDefaultHandling);
+                                                        CefRequest request, boolean isNavigation, boolean isDownload, String requestInitiator,
+                                                        BoolRef disableDefaultHandling);
 }

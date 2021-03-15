@@ -20,7 +20,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.squareup.retrofit2:converter-gson:2.4.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.squareup.retrofit2:adapter-rxjava2:2.4.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.bouncycastle:bcprov-jdk15on:1.60" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.h2database:h2:1.4.200" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.200" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.0-alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.jogamp.jogl:jogl-all:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.jogamp.gluegen:gluegen-rt:2.3.2" level="project" />

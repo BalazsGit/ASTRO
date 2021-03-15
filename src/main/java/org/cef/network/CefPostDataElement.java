@@ -97,11 +97,11 @@ public abstract class CefPostDataElement {
         if (mimeType != null) {
             if (mimeType.startsWith("text/"))
                 asText = true;
-            else if (mimeType.startsWith("application/xml"))
+            else if (mimeType.startsWith("astro/astro/application/xml"))
                 asText = true;
-            else if (mimeType.startsWith("application/xhtml"))
+            else if (mimeType.startsWith("astro/astro/application/xhtml"))
                 asText = true;
-            else if (mimeType.startsWith("application/x-www-form-urlencoded"))
+            else if (mimeType.startsWith("astro/astro/application/x-www-form-urlencoded"))
                 asText = true;
         }
 

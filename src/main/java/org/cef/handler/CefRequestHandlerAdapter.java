@@ -8,10 +8,8 @@ import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
 import org.cef.callback.CefAuthCallback;
 import org.cef.callback.CefRequestCallback;
-import org.cef.handler.CefLoadHandler.ErrorCode;
 import org.cef.misc.BoolRef;
 import org.cef.network.CefRequest;
-import org.cef.network.CefURLRequest;
 
 /**
  * An abstract adapter class for receiving browser request events.
@@ -21,7 +19,7 @@ import org.cef.network.CefURLRequest;
 public abstract class CefRequestHandlerAdapter implements CefRequestHandler {
     @Override
     public boolean onBeforeBrowse(CefBrowser browser, CefFrame frame, CefRequest request,
-            boolean user_gesture, boolean is_redirect) {
+                                  boolean user_gesture, boolean is_redirect) {
         return false;
     }
 
@@ -51,8 +49,8 @@ public abstract class CefRequestHandlerAdapter implements CefRequestHandler {
     }
 
     @Override
-    public boolean onCertificateError(CefBrowser browser, ErrorCode cert_error, String request_url,
-            CefRequestCallback callback) {
+    public boolean onCertificateError(CefBrowser browser, CefLoadHandler.ErrorCode cert_error, String request_url,
+                                      CefRequestCallback callback) {
         return false;
     }
 

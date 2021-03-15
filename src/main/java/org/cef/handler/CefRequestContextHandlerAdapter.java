@@ -24,8 +24,8 @@ public abstract class CefRequestContextHandlerAdapter implements CefRequestConte
 
     @Override
     public CefResourceRequestHandler getResourceRequestHandler(CefBrowser browser, CefFrame frame,
-            CefRequest request, boolean isNavigation, boolean isDownload, String requestInitiator,
-            BoolRef disableDefaultHandling) {
+                                                               CefRequest request, boolean isNavigation, boolean isDownload, String requestInitiator,
+                                                               BoolRef disableDefaultHandling) {
         return null;
     }
 }

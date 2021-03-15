@@ -5,8 +5,8 @@
 package org.cef.network;
 
 import org.cef.callback.CefCompletionCallback;
-import org.cef.callback.CefCookieVisitor;
 import org.cef.callback.CefNative;
+import org.cef.callback.CefCookieVisitor;
 
 import java.util.Vector;
 

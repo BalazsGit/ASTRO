@@ -18,7 +18,7 @@ public abstract class CefMessageRouterHandlerAdapter
         extends CefNativeAdapter implements CefMessageRouterHandler {
     @Override
     public boolean onQuery(CefBrowser browser, CefFrame frame, long queryId, String request,
-            boolean persistent, CefQueryCallback callback) {
+                           boolean persistent, CefQueryCallback callback) {
         return false;
     }
 
