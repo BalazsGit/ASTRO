@@ -15,8 +15,8 @@ public class Database {
     static final String DB_URL = Main.propertyService.getString(Props.dbUrl); //"jdbc:h2:~/test";
 
     //  Database credentials
-    static final String USER = "astro/astro/mainframe";
-    static final String PASS = "";
+    static final String USER = Main.propertyService.getString(Props.dbUsername);;
+    static final String PASS = Main.propertyService.getString(Props.dbPassword);;
 
     static Connection conn = null;
     static Statement stmt = null;
