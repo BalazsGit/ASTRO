@@ -1,5 +1,6 @@
 package astro.astro.application;
 
+import astro.astro.Main;
 import astro.astro.mainframe.MainFrame;
 
 import javax.swing.*;
@@ -290,6 +291,16 @@ public class ApplicationsFrame extends JFrame {
 
     private void createApplicationsTable(int rowCount, int columnCount){
 
+        //create application frame table
+        String sql = "CREATE TABLE   REGISTRATION " +
+                "(id INTEGER not NULL, " +
+                " first VARCHAR(255), " +
+                " last VARCHAR(255), " +
+                " age INTEGER, " +
+                " PRIMARY KEY ( id ))";
+
+        Main.database.executeSql(sql);
+
         GridLayout gridLayout = new GridLayout(rowCount,columnCount);
         applicationsPanel.setLayout(gridLayout);
         //applicationPanel = new JPanel[rowCount][columnCount];
@@ -297,9 +308,20 @@ public class ApplicationsFrame extends JFrame {
             for(int j = 0; j < columnCount; j++) {
 
                 Application application = new Application(applicationsPanel);
+
                 application.row = i;
                 application.column = j;
                 applicationsPanel.add(application.applicationPanel);
+
+                //create application field within application frame table
+                sql = "CREATE TABLE   REGISTRATION " +
+                        "(id INTEGER not NULL, " +
+                        " first VARCHAR(255), " +
+                        " last VARCHAR(255), " +
+                        " age INTEGER, " +
+                        " PRIMARY KEY ( id ))";
+
+                Main.database.executeSql(sql);
                /* applicationPanel[i][j] = new JPanel();
                 applicationPanel[i][j].setLayout(new CardLayout());
                 applicationsPanel.add(applicationPanel[i][j]);

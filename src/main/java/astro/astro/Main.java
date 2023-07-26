@@ -51,6 +51,8 @@ public class Main {
     public static PropertyService propertyService;
     public static String propertiesFileName = "astro.properties";
 
+    public static Database database;
+
     //empty play icon
     public static String play1 = "\u25B7"; //OK
 
@@ -163,10 +165,11 @@ public class Main {
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
 
                 propertyService = new PropertyServiceImpl(configDirPath + propertiesFileName);
+                database = new Database();
 
                 Timer timer = new Timer();
                 timer.schedule(new Reload(propertyService, configDirPath + propertiesFileName), 0, propertyService.getLong(Props.reload));
-                Database database = new Database();
+
             //put to GUI settings later
             //UIManager settings
             //set GUI theme
@@ -216,9 +219,6 @@ public class Main {
         cefApp.startup(args);
 
         MainFrame astro = new MainFrame("ASTRO");
-
-        JOptionPane.showMessageDialog(astro.mainPanel, "pina", "Application Settings", JOptionPane.CLOSED_OPTION);
-
 
         //astro.add(astro.mainPanel);
 /*
@@ -460,6 +460,7 @@ public class Main {
                     JOptionPane.showMessageDialog(astro, "error: " + exception, "title", 1);
                 }
 
+                    database.closeDB();
                     cefApp.getInstance().dispose();
                     astro.dispose();
 

@@ -21,6 +21,28 @@ public class Database {
     static Connection conn = null;
     static Statement stmt = null;
 
+    public void executeSql(String sql) {
+
+        //STEP 3: Execute a query
+        System.out.println("Creating table in given database...");
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void closeDB(){
+        // STEP 4: Clean-up environment
+        try {
+            stmt.close();
+            conn.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public Database() {
         try {
             // STEP 1: Register JDBC driver
@@ -29,7 +51,7 @@ public class Database {
             //STEP 2: Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
+/*
             //STEP 3: Execute a query
             System.out.println("Creating table in given database...");
             stmt = conn.createStatement();
@@ -41,17 +63,17 @@ public class Database {
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");
+*/
 
-            // STEP 4: Clean-up environment
-            stmt.close();
-            conn.close();
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
             //Handle errors for Class.forName
             e.printStackTrace();
-        } finally {
+        }
+        /*
+        finally {
             //finally block used to close resources
             try {
                 if (stmt != null) stmt.close();
@@ -63,6 +85,7 @@ public class Database {
                 se.printStackTrace();
             } //end finally try
         } //end try
+    */
     }
 }
 
